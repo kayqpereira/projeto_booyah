@@ -34,7 +34,7 @@ class ClienteController
             $mes = $data_dividida[1];
             $ano = $data_dividida[2];
 
-            return $dataFormatada = $ano.'-'.$mes.'-'.$dia;
+            return $ano . '-' . $mes . '-' . $dia;
         }
 
         $cli->nome          = $_POST["nome"];
