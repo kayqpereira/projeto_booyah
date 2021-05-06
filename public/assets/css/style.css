@@ -76,22 +76,20 @@
     border-color: var(--blue);
 }
 
-input ~ i.form__icon{
+.form__icon{
     position: absolute;
     top: 50%;
-    right: calc(.375em + .1875rem);
-    
     transform: translateY(-50%);
     cursor: text;
 }
 
+input ~ i.form__icon{
+    right: calc(.375em + .1875rem);
+
+}
+
 select ~ i.form__icon{
-    position: absolute;
-    top: 50%;
     right: 1.75rem;
-    
-    transform: translateY(-50%);
-    cursor: text;
 }
 
 .form__icon > svg{
@@ -131,10 +129,7 @@ select ~ i.form__icon{
 }
 
 
-.custom-select.is-invalid{
-    background: url(../images/select.svg) right .75rem center/8px 10px no-repeat !important;
-}
-
+.custom-select.is-invalid,
 .custom-select.is-valid{
     background: url(../images/select.svg) right .75rem center/8px 10px no-repeat !important;
 }
