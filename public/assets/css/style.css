@@ -17,7 +17,7 @@
     background-color: var(--bg-form);
     padding: 2rem;
     width: 100%;
-    max-width: 950px;
+    max-width: 900px;
 }
 
 .register-form > .row:not(:last-child){
@@ -62,7 +62,6 @@
     position: relative;
     height: 2.575rem;
 }
-
 
 .form__input{
     position: absolute;
@@ -170,40 +169,6 @@ span[class^="error-"].is-active{
 .btn-primary:focus{
     box-shadow: none;
 }
-
-.loading{
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-
-    display: none;
-    justify-content: center;
-    align-items: center;
-
-    overflow: hidden;
-
-    background-color: rgba(0, 0, 0, 0.1);
-    z-index: 10;
-}
-
-.loading div{
-    height: 4rem;
-    width: 4rem;
-
-    border: .6rem solid rgb(248, 248, 248);
-    border-radius: 50%;
-    border-top-color: var(--blue);
-    animation: loading .4s infinite linear;
-}
-
-@keyframes loading {
-    to{
-        transform: rotate(360deg);
-    }
-}
-
 
 @media screen and (max-width: 767px){
     html{

@@ -17,7 +17,7 @@ const validate = {
             setMessage(error, cpf);
             return false;
         } else if (!validaCPF(cpf)) {
-            let error = "Por favor, informe um CPF que seja válido.";
+            let error = "Por favor, informe um CPF válido.";
             setMessage(error, cpf);
             return false;
         } else {
@@ -68,7 +68,7 @@ const validate = {
     telefone(telefone) {
         if (telefone.value != "") {
             if (!validaTelefone(telefone.value)) {
-                let error = "Telefone inválido, por favor, digite o seu DDD junto número.";
+                let error = "Telefone inválido, por favor, digite o DDD junto número.";
                 setMessage(error, telefone);
                 return false;
             } else {
@@ -93,7 +93,7 @@ const validate = {
             setMessage(error, celular);
             return false;
         } else if (!validaCelular(celular.value)) {
-            let error = "Número de celular inválido, por favor, digite o seu DDD junto número.";
+            let error = "Número de celular inválido, por favor, digite o DDD junto número.";
             setMessage(error, celular);
             return false;
         } else {

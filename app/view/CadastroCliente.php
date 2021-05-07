@@ -313,7 +313,7 @@
                                 <div id="access-email" class="form__input-group">
                                     <label class="form__label" for="email">E-mail:</label>
                                     <div class="form__input-container">
-                                        <input class="form__input form-control" maxlength="80" type="email" id="email" name="email">
+                                        <input class="form__input form-control" autocomplete="email" maxlength="80" type="email" id="email" name="email">
                                         <i class="form__icon form__icon-invalid">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                                                 <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
@@ -331,7 +331,7 @@
                                 <div id="access-email-confirm" class="form__input-group">
                                     <label class="form__label" for="email_confirm">Confirmar e-mail:</label>
                                     <div class="form__input-container">
-                                        <input class="form__input form-control" maxlength="80" type="email" id="email_confirm" name="email">
+                                        <input class="form__input form-control" autocomplete="email" maxlength="80" type="email" id="email_confirm" name="email">
                                         <i class="form__icon form__icon-invalid">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                                                 <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
@@ -351,7 +351,7 @@
                                 <div id="access-senha" class="form__input-group">
                                     <label class="form__label" for="senha">Senha:</label>
                                     <div class="form__input-container">
-                                        <input class="form__input form-control" maxlength="100" type="password" id="senha" name="senha">
+                                        <input class="form__input form-control" autocomplete="new-password" maxlength="100" type="password" id="senha" name="senha">
                                         <i class="form__icon form__icon-invalid">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                                                 <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
@@ -369,7 +369,7 @@
                                 <div id="access-senha-confirm" class="form__input-group">
                                     <label class="form__label" for="senha_confirm">Confirmar senha:</label>
                                     <div class="form__input-container">
-                                        <input class="form__input form-control" maxlength="100" type="password" id="senha_confirm" name="senha">
+                                        <input class="form__input form-control" autocomplete="new-password" maxlength="100" type="password" id="senha_confirm" name="senha">
                                         <i class="form__icon form__icon-invalid">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                                                 <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
@@ -396,10 +396,6 @@
             </div>
         </form>
     </main>
-
-    <div class="loading">
-        <div></div>
-    </div>
 
     <!-- JQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
