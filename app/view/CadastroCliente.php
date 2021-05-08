@@ -18,7 +18,7 @@
     <main class="container-fluid">
         <form action="index.php?classe=ClienteController&metodo=cadastrarCliente" method="post" onsubmit="return validaForm()" novalidate id="register-form " class="register-form container">
             <div class="row justify-content-center">
-                <div class="col-11 col-md-6 form__fields-container form__fields-container-personal">
+                <div class="col-12 col-md-6 form__fields-container form__fields-container-personal">
                     <fieldset class="form__fields">
                         <legend class="form__title">Dados Pessoais</legend>
 
@@ -132,7 +132,7 @@
                     </fieldset>
                 </div>
 
-                <div class="col-11 col-md-6 form__fields-container form__fields-container-address">
+                <div class="col-12 col-md-6 form__fields-container form__fields-container-address">
                     <fieldset class="form__fields">
                         <legend class="form__title">Dados de Endereço</legend>
 
@@ -254,7 +254,7 @@
                                 <div id="address-estado" class="form__input-group">
                                     <label class="form__label" for="estado">Estado:</label>
                                     <div class="form__input-container">
-                                        <select class="form__input custom-select form-control" id="estado" name="estado">
+                                        <select class="form__input form-control" id="estado" name="estado">
                                             <option selected disabled value="">---</option>
                                             <option value="Acre">AC</option>
                                             <option value="Alagoas">AL</option>
@@ -304,7 +304,7 @@
             </div>
 
             <div class="row justify-content-center mt-sm-4">
-                <div class="col-11 col-md-12 form__fields-container form__fields-container-access">
+                <div class="col-12 form__fields-container form__fields-container-access">
                     <fieldset class="form__fields">
                         <legend class="form__title">Dados de Acesso</legend>
 
