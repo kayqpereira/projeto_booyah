@@ -68,7 +68,7 @@ const validate = {
     telefone(telefone) {
         if (telefone.value != "") {
             if (!validaTelefone(telefone.value)) {
-                let error = "Telefone inválido, por favor, digite o DDD junto número.";
+                let error = "Telefone inválido, por favor, digite o DDD junto com número.";
                 setMessage(error, telefone);
                 return false;
             } else {
@@ -93,7 +93,7 @@ const validate = {
             setMessage(error, celular);
             return false;
         } else if (!validaCelular(celular.value)) {
-            let error = "Número de celular inválido, por favor, digite o DDD junto número.";
+            let error = "Número de celular inválido, por favor, digite o DDD + nono dígito + número.";
             setMessage(error, celular);
             return false;
         } else {
@@ -279,7 +279,13 @@ const validate = {
 document.querySelectorAll(".form-control").forEach(field => {
     const id = field.id;
 
-    if ((id == "nome") || (id == "sobrenome") || (id == "bairro") || (id == "endereco") || (id == "numero") || (id == "cidade") || (id == "estado")) {
+    if ((id == "nome") || 
+        (id == "sobrenome") ||
+        (id == "bairro") ||
+        (id == "endereco") ||
+        (id == "numero") ||
+        (id == "cidade") ||
+        (id == "estado")) {
         field.addEventListener("blur", event => {
             event.target = validate["padrao"](event.target);
         }, false);
