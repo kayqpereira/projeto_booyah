@@ -135,7 +135,7 @@
                         <div id="personal-data_nasc" class="form__input-group">
                             <label class="form__label" for="data_nasc">Data de nascimento:</label>
                             <div class="form__input-container">
-                                <input class="form__input form-control" value="<?php echo formatarData($dados->data_nasc,"BR"); ?>" data-mask="data" maxlength="10" type="text" id="data_nasc" name="data_nasc">
+                                <input class="form__input form-control" value="<?php echo formatarData($dados->data_nasc, "BR"); ?>" data-mask="data" maxlength="10" type="text" id="data_nasc" name="data_nasc">
                                 <i class="form__icon form__icon-invalid">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                                         <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
@@ -322,13 +322,18 @@
 
             <div class="row justify-content-center mt-4">
                 <div class="col-auto">
-                    <input type="submit" class="btn btn-primary" value="Salvar Alteração">
+                    <button type="submit" class="btn btn-primary">
+                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="save" class="svg-inline--fa fa-save fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 448 512">
+                            <path fill="currentColor" d="M433.941 129.941l-83.882-83.882A48 48 0 0 0 316.118 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V163.882a48 48 0 0 0-14.059-33.941zM224 416c-35.346 0-64-28.654-64-64 0-35.346 28.654-64 64-64s64 28.654 64 64c0 35.346-28.654 64-64 64zm96-304.52V212c0 6.627-5.373 12-12 12H76c-6.627 0-12-5.373-12-12V108c0-6.627 5.373-12 12-12h228.52c3.183 0 6.235 1.264 8.485 3.515l3.48 3.48A11.996 11.996 0 0 1 320 111.48z"></path>
+                        </svg>
+                        Salvar Alteração
+                    </button>
                 </div>
             </div>
         </form>
     </main>
 
-    
+
 
     <!-- Scripts -->
     <script src="assets/js/validate-form.js"></script>
