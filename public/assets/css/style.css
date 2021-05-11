@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 :root{
-    --bg-register: #eff3f7;/*#f5f5f7;*/
-    --bg-form: #eff3f7;
+    --bg-register: #f5f5f7;/*#eff3f7;*/
+    --bg-form: rgb(245, 245, 247);
     --bg-form_row: #ffffff;
     --bg-form_fieldset: #ffffff;
 }
@@ -13,6 +13,7 @@ main.container-fluid{
     padding: 0;
 }
 
+.update-registration,
 .register-form{
     background-color: var(--bg-form);
     padding: 2rem 1.75rem;
@@ -20,9 +21,12 @@ main.container-fluid{
     max-width: 900px;
 }
 
-.register-form > .row:not(:last-child){
+.update-registration .row:not(:last-child),
+.register-form .row:not(:last-child){
     background-color: var(--bg-form_row);
-    border-radius: .25rem;
+    border-radius: .5rem;
+    box-shadow:  0 0 10px 0 rgba(80, 80, 80, 0.1);
+    -webkit-box-shadow: 0 0 10px rgba(80, 80, 80, 0.1);
 }
 
 .form__fields-container{
@@ -62,7 +66,7 @@ main.container-fluid{
 
 .form__input-container{
     position: relative;
-    height: 2.575rem;
+    height: 2.75rem;
 }
 
 .form__input{
@@ -157,13 +161,13 @@ span[class^="error-"].is-active{
 }
 
 .btn-primary{
-    padding: .5rem 1rem;
-    font-weight: 500;
+    padding: .6rem 1rem;
+    font-weight: 400;
 }
 
 .btn:focus,
 .btn-primary:focus{
-    box-shadow: none;
+    box-shadow: none !important;
 }
 
 @media screen and (max-width: 767px){
@@ -172,6 +176,7 @@ span[class^="error-"].is-active{
         font-size: .95rem;
     }
 
+    .update-registration,
     .register-form{
         max-width: 475px;
     }
@@ -187,28 +192,34 @@ span[class^="error-"].is-active{
     .form__fields-container-address{
         margin-top: 0;
     }
-
+    
     .form__link-style{
         font-size: .85rem;
     }
 }
 
 @media screen and (max-width: 576px){
-
+    
     html{
         font-size: .9rem;
     }
 
+    .update-registration,
     .register-form{
         max-width: 400px;
     }
 
-    .register-form > .row:nth-child(1){
-        border-radius: .25rem .25rem 0 0;
+    .update-registration,
+    .register-form > .row:not(:last-child){
+        box-shadow: none;
     }
-
+    
+    .register-form > .row:nth-child(1){
+        border-radius: .5rem .5rem 0 0;
+    }
+    
     .register-form > .row:nth-child(2){
-        border-radius: 0 0 .25rem .25rem;
+        border-radius: 0 0 .5rem .5rem;
     }
 
     .form__fields-container{
