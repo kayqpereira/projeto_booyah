@@ -315,9 +315,8 @@
                             </div>
                             <span class="error-estado"></span>
                         </div>
+                    </fieldset>
                 </div>
-                </fieldset>
-            </div>
             </div>
 
             <div class="row justify-content-center mt-4">
@@ -332,8 +331,6 @@
             </div>
         </form>
     </main>
-
-
 
     <!-- Scripts -->
     <script src="assets/js/validate-form.js"></script>

@@ -23,6 +23,7 @@ class Cliente
     private $endereco;
 
 
+    // Get and Set
     function __get($atributo)
     {
         return $this->$atributo;
@@ -38,6 +39,7 @@ class Cliente
         include_once "Conexao.php";
     }
 
+    // Verifica se o CEP está cadastrado no Banco
     function buscarCep()
     {
         // Conexao com o Banco
@@ -85,7 +87,7 @@ class Cliente
     // Método para cadastrar os dados pessoais
     function cadastrarCliente()
     {
-        // Coneexão com o Banco
+        // Conexão com o Banco
         $con = Conexao::conectar();
 
         // Comando SQL

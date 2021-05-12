@@ -14,22 +14,23 @@ class ClienteController
         $cli->cod_cliente = 4;
         $dados = $cli->buscarCliente();
 
+        // Formata a data no padrão BR(00/00/0000) ou EUA(0000-00-00)
         function formatarData($data, $padrao)
         {
             if ($padrao === "EUA") {
-                $data_dividida = explode("/", $data);
+                $dataDividida = explode("/", $data);
 
-                $dia = $data_dividida[0];
-                $mes = $data_dividida[1];
-                $ano = $data_dividida[2];
+                $dia = $dataDividida[0];
+                $mes = $dataDividida[1];
+                $ano = $dataDividida[2];
 
                 return $ano . "-" . $mes . "-" . $dia;
             } else {
-                $data_dividida = explode("-", $data);
+                $dataDividida = explode("-", $data);
 
-                $ano = $data_dividida[0];
-                $mes = $data_dividida[1];
-                $dia = $data_dividida[2];
+                $ano = $dataDividida[0];
+                $mes = $dataDividida[1];
+                $dia = $dataDividida[2];
 
                 return $dia . "/" . $mes . "/" . $ano;
             }

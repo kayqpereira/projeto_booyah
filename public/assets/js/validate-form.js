@@ -279,7 +279,7 @@ const validate = {
 document.querySelectorAll(".form-control").forEach(field => {
     const id = field.id;
 
-    if ((id == "nome") || 
+    if ((id == "nome") ||
         (id == "sobrenome") ||
         (id == "bairro") ||
         (id == "endereco") ||
