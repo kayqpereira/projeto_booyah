@@ -139,7 +139,7 @@
                         <div id="address-cep" class="form__input-group">
                             <label class="form__label" for="cep">CEP:</label>
                             <div class="form__link">
-                                <a class="form__link-style"  title="Buscar CEP no Correios" href="https://buscacepinter.correios.com.br/app/endereco/index.php?t" target="_blank">Não sei meu CEP</a>
+                                <a class="form__link-style" title="Buscar CEP no Correios" href="https://buscacepinter.correios.com.br/app/endereco/index.php?t" target="_blank">Não sei meu CEP</a>
                             </div>
                             <div class="form__input-container">
                                 <input class="form__input form-control" data-mask="cep" maxlength="9" type="text" id="cep" name="cep">
