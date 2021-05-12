@@ -1,12 +1,12 @@
 const validate = {
     padrao(element) {
-        element.value = trim(element.value)
+        element.value = trim(element.value);
         if (element.value == "") {
             let error = "Este campo é obrigatório.";
-            setMessage(error, element)
+            setMessage(error, element);
             return false;
         } else {
-            setMessage("", element)
+            setMessage("", element);
             return true;
         }
     },
@@ -26,8 +26,9 @@ const validate = {
         }
 
         function validaCPF(strCPF) {
-            var Soma;
-            var Resto;
+            let Soma,
+                Resto;
+                
             Soma = 0;
 
             strCPF = strCPF.value.replace(/\D/g, "");
@@ -46,7 +47,7 @@ const validate = {
                 strCPF == "99999999999")
                 return false;
 
-            for (i = 1; i <= 9; i++)
+            for (let i = 1; i <= 9; i++)
                 Soma = Soma + parseInt(strCPF.substring(i - 1, i)) * (11 - i);
             Resto = (Soma * 10) % 11;
             if ((Resto == 10) || (Resto == 11))
@@ -54,7 +55,7 @@ const validate = {
             if (Resto != parseInt(strCPF.substring(9, 10)))
                 return false;
             Soma = 0;
-            for (i = 1; i <= 10; i++)
+            for (let i = 1; i <= 10; i++)
                 Soma = Soma + parseInt(strCPF.substring(i - 1, i)) * (12 - i);
             Resto = (Soma * 10) % 11;
             if ((Resto == 10) || (Resto == 11))
@@ -76,14 +77,14 @@ const validate = {
                 return true;
             }
         } else {
-            error = "nulo"
+            let error = "nulo";
             setMessage(error, telefone);
             return true;
         }
 
         function validaTelefone(telefone) {
-            const re = new RegExp('^\\(((1[1-9])|([2-9][0-9]))\\) (([2-5]{1}[0-9]{3}-[0-9]{4}))$');
-            return re.test(telefone);;
+            const re = new RegExp("^\\(((1[1-9])|([2-9][0-9]))\\) (([2-5]{1}[0-9]{3}-[0-9]{4}))$");
+            return re.test(telefone);
         }
     },
 
@@ -102,8 +103,8 @@ const validate = {
         }
 
         function validaCelular(celular) {
-            const re = new RegExp('^\\(((1[1-9])|([2-9][0-9]))\\) (([5-9]{1}[0-9]{4}-[0-9]{4}))$');
-            return re.test(celular);;
+            const re = new RegExp("^\\(((1[1-9])|([2-9][0-9]))\\) (([5-9]{1}[0-9]{4}-[0-9]{4}))$");
+            return re.test(celular);
         }
     },
 
@@ -142,7 +143,7 @@ const validate = {
             mesNasc = +mesNasc;
             diaNasc = +diaNasc;
 
-            quantosAnos = anoAtual - anoNasc;
+            let quantosAnos = anoAtual - anoNasc;
 
             if (mesAtual < mesNasc || mesAtual == mesNasc && diaAtual < diaNasc) {
                 quantosAnos--;
@@ -155,7 +156,7 @@ const validate = {
         function validaData(dataNascimento) {
             const dataNasc = dataNascimento.value;
 
-            const re = /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]|(?:Jan|Mar|May|Jul|Aug|Oct|Dec)))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2]|(?:Jan|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec))\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)(?:0?2|(?:Feb))\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9]|(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep))|(?:1[0-2]|(?:Oct|Nov|Dec)))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/
+            const re = /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]|(?:Jan|Mar|May|Jul|Aug|Oct|Dec)))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2]|(?:Jan|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec))\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)(?:0?2|(?:Feb))\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9]|(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep))|(?:1[0-2]|(?:Oct|Nov|Dec)))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/;
 
             if (!re.test(dataNasc)) {
                 return false;
@@ -166,8 +167,8 @@ const validate = {
                 mes = dataDividida[1],
                 ano = dataDividida[2];
 
-            dataAtual = new Date();
-            data = new Date(ano, mes - 1, dia);
+            let dataAtual = new Date(),
+                data = new Date(ano, mes - 1, dia);
 
             if (data.getTime() > dataAtual.getTime()) {
                 return false;
@@ -206,14 +207,14 @@ const validate = {
     email(email) {
         if (email.value == "") {
             let error = "Por favor, digite o seu e-mail.";
-            setMessage(error, email)
+            setMessage(error, email);
             return false;
         } else if (!validaEmail(email)) {
             let error = "Formato de email inválido, por favor, informe um email válido.";
-            setMessage(error, email)
+            setMessage(error, email);
             return false;
         } else {
-            setMessage("", email)
+            setMessage("", email);
             return true;
         }
 
@@ -226,14 +227,14 @@ const validate = {
     email_confirm(email) {
         if (email.value == "") {
             let error = "Por favor, digite o seu e-mail.";
-            setMessage(error, email)
+            setMessage(error, email);
             return false;
         } else if (email.value != document.getElementById("email").value) {
             let error = "Os emails informados não correspondem, por favor, digite-os novamente.";
-            setMessage(error, email)
+            setMessage(error, email);
             return false;
         } else {
-            setMessage("", email)
+            setMessage("", email);
             return true;
         }
     },
@@ -242,14 +243,14 @@ const validate = {
         const msgSenha = "A senha deve conter no mínimo 8 dígitos, um número, uma letra minúscula, uma letra minúscula e um carácter especial, ex: $#%.";
         if (senha.value == "") {
             let error = "Por favor, digite uma senha.";
-            setMessage(error, senha)
+            setMessage(error, senha);
             return false;
         } else if (!validaSenha(senha.value)) {
             let error = msgSenha;
-            setMessage(error, senha)
+            setMessage(error, senha);
             return false;
         } else {
-            setMessage("", senha)
+            setMessage("", senha);
             return true;
         }
 
@@ -274,7 +275,7 @@ const validate = {
             return true;
         }
     }
-}
+};
 
 document.querySelectorAll(".form-control").forEach(field => {
     const id = field.id;
@@ -297,6 +298,7 @@ document.querySelectorAll(".form-control").forEach(field => {
 });
 
 
+// eslint-disable-next-line no-unused-vars
 function validaForm() {
     if (!validate["padrao"](document.getElementById("nome"))) {
         document.getElementById("nome").focus();

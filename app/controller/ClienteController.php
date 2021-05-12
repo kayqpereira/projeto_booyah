@@ -1,4 +1,5 @@
 <?php
+
 class ClienteController
 {
     function abrir_cadastro()
