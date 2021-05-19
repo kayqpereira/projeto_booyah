@@ -2,9 +2,8 @@
 
 class HomeController
 {
-    function abrir_home()
+    function abrirHome()
     {
-        //incluir o arquivo home
         include_once "view/Home.php";
     }
 }

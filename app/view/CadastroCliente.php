@@ -8,13 +8,11 @@
     <title>Cadastro de Usuários</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-
     <!-- Styles CSS -->
     <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
 </head>
 
 <body>
-
     <main class="container-fluid">
         <form action="index.php?classe=ClienteController&metodo=cadastrarCliente" method="post" onsubmit="return validaForm()" novalidate id="register-form " class="register-form container">
             <div class="row justify-content-center">
@@ -62,6 +60,7 @@
                             <label class="form__label" for="cpf">CPF:</label>
                             <div class="form__input-container">
                                 <input class="form__input form-control" autocomplete="off" data-mask="cpf" maxlength="14" type="text" id="cpf" name="cpf">
+                                <div class="load"></div>
                                 <i class="form__icon form__icon-invalid">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                                         <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
@@ -143,6 +142,7 @@
                             </div>
                             <div class="form__input-container">
                                 <input class="form__input form-control" data-mask="cep" maxlength="9" type="text" id="cep" name="cep">
+                                <div class="load"></div>
                                 <i class="form__icon form__icon-invalid">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                                         <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
@@ -255,34 +255,35 @@
                                     <label class="form__label" for="estado">Estado:</label>
                                     <div class="form__input-container">
                                         <select class="form__input form-control" id="estado" name="estado">
-                                            <option selected disabled value="">---</option>
-                                            <option value="Acre">AC</option>
-                                            <option value="Alagoas">AL</option>
-                                            <option value="Amapá">AP</option>
-                                            <option value="Amazonas">AM</option>
-                                            <option value="Bahia">BA</option>
-                                            <option value="Ceará">CE</option>
-                                            <option value="Distrito Federal">DF</option>
-                                            <option value="Espírito Santo">ES</option>
-                                            <option value="Goiás">GO</option>
-                                            <option value="Maranhão">MA</option>
-                                            <option value="Mato Grosso">MT</option>
-                                            <option value="Mato Grosso do Sul">MS</option>
-                                            <option value="Minas Gerais">MG</option>
-                                            <option value="Pará">PA</option>
-                                            <option value="Paraíba">PB</option>
-                                            <option value="Paraná">PR</option>
-                                            <option value="Pernambuco">PE</option>
-                                            <option value="Piauí">PI</option>
-                                            <option value="Rio de Janeiro">RJ</option>
-                                            <option value="Rio Grande do Norte">RN</option>
-                                            <option value="Rio Grande do Sul">RS</option>
-                                            <option value="Rondônia">RO</option>
-                                            <option value="Roraima">RR</option>
-                                            <option value="Santa Catarina">SC</option>
-                                            <option value="São Paulo">SP</option>
-                                            <option value="Sergipe">SE</option>
-                                            <option value="Tocantins">TO</option>
+                                            <option value="" selected>---</option>
+                                            <option value="AC">AC</option>
+                                            <option value="AL">AL</option>
+                                            <option value="AP">AP</option>
+                                            <option value="AM">AM</option>
+                                            <option value="BA">BA</option>
+                                            <option value="CE">CE</option>
+                                            <option value="DF">DF</option>
+                                            <option value="ES">ES</option>
+                                            <option value="GO">GO</option>
+                                            <option value="MA">MA</option>
+                                            <option value="MS">MS</option>
+                                            <option value="MT">MT</option>
+                                            <option value="MG">MG</option>
+                                            <option value="PA">PA</option>
+                                            <option value="PB">PB</option>
+                                            <option value="PR">PR</option>
+                                            <option value="PE">PE</option>
+                                            <option value="PI">PI</option>
+                                            <option value="RJ">RJ</option>
+                                            <option value="RN">RN</option>
+                                            <option value="RS">RS</option>
+                                            <option value="RO">RO</option>
+                                            <option value="RR">RR</option>
+                                            <option value="SC">SC</option>
+                                            <option value="SP">SP</option>
+                                            <option value="SE">SE</option>
+                                            <option value="TO">TO</option>
+                                        </select>
                                         </select>
                                         <i class="form__icon form__icon-invalid">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
@@ -314,6 +315,7 @@
                                     <label class="form__label" for="email">E-mail:</label>
                                     <div class="form__input-container">
                                         <input class="form__input form-control" autocomplete="email" maxlength="80" type="email" id="email" name="email">
+                                        <div class="load"></div>
                                         <i class="form__icon form__icon-invalid">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                                                 <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
@@ -391,15 +393,17 @@
 
             <div class="row justify-content-center mt-4">
                 <div class="col-auto">
+                    <input type="button" class="btn btn-outline-danger" value="Cancelar" onclick="goBack();">
                     <input type="submit" class="btn btn-primary" value="Criar Conta">
                 </div>
             </div>
         </form>
     </main>
 
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <!-- Scripts -->
-    <script src="assets/js/validate-form.js"></script>
-    <script src="assets/js/masks.js"></script>
+    <script src="assets/js/main.js"></script>
 </body>
 
 </html>

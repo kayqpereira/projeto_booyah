@@ -11,8 +11,8 @@
 <body>
     <h1>Página Inicial</h1>
     <ul>
-        <li><a href="index.php?classe=ClienteController&metodo=abrir_cadastro">Cadastrar cliente</a><br /></li>
-        <li><a href="index.php?classe=ClienteController&metodo=abrir_atualizacao">Atualizar cliente</a><br /></li>
+        <li><a href="index.php?classe=ClienteController&metodo=abrirCadastro">Cadastrar cliente</a><br /></li>
+        <!-- <li><a href="index.php?classe=ClienteController&metodo=abrirAtualizacao">Atualizar cliente</a><br /></li> -->
     </ul>
 </body>
 

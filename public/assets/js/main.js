@@ -1,7 +1,81 @@
+// Mascara dos campos ex: (00) 00000-0000
+const masks = {
+    string(value) {
+        return value
+            .replace(/[^a-záàâãéèêíïóôõöúçñ ]/gi, "");
+    },
+
+    cpf(value) {
+        return value
+            .replace(/\D+/g, "")
+            .replace(/(\d{3})(\d)/, "$1.$2")
+            .replace(/(\d{3})(\d)/, "$1.$2")
+            .replace(/(\d{3})(\d{1,2})/, "$1-$2")
+            .replace(/(-\d{2})\d+?$/, "$1");
+    },
+
+    telefone(value) {
+        return value
+            .replace(/\D+/g, "")
+            .replace(/(\d{2})(\d)/, "($1) $2")
+            .replace(/(\d{4})(\d)/, "$1-$2")
+            .replace(/(-\d{4})\d+?$/, "$1");
+    },
+
+    celular(value) {
+        return value
+            .replace(/\D+/g, "")
+            .replace(/(\d{2})(\d)/, "($1) $2")
+            .replace(/(\d{4})(\d)/, "$1-$2")
+            .replace(/(\d{4})-(\d)(\d{4})/, "$1$2-$3")
+            .replace(/(-\d{4})\d+?$/, "$1");
+    },
+
+    data(value) {
+        return value
+            .replace(/\D+/g, "")
+            .replace(/(\d{2})(\d)/, "$1/$2")
+            .replace(/(\d{2})(\d)/, "$1/$2")
+            .replace(/(\/\d{4})\d+?$/, "$1");
+    },
+
+    cep(value) {
+        return value
+            .replace(/\D+/g, "")
+            .replace(/(\d{5})(\d)/, "$1-$2")
+            .replace(/(-\d{3})\d+?$/, "$1");
+    },
+}
+
+// Adicionando as mascaras aos campos
+document.querySelectorAll("input").forEach($input => {
+
+    if ($input.dataset.mask) {
+        const field = $input.dataset.mask;
+
+        $input.addEventListener("input", event => {
+            event.target.value = masks[field](event.target.value);
+        }, false);
+    }
+})
+
+
+const msgSenha = "A senha deve conter no mínimo 8 dígitos, um número, uma letra minúscula, uma letra minúscula e um carácter especial, ex: $#%.";
+
+function validaSenha(senha) {
+    const re = /^(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,}$/gm;
+    return re.test(senha);
+}
+
+function validaEmail(email) {
+    const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return re.test(email.value);
+}
+
 const validate = {
     padrao(element) {
         element.value = trim(element.value);
-        if (element.value == "") {
+        if (element.value === "") {
             let error = "Este campo é obrigatório.";
             setMessage(error, element);
             return false;
@@ -21,19 +95,40 @@ const validate = {
             setMessage(error, cpf);
             return false;
         } else {
-            setMessage("", cpf);
+            $(document).ready(function () {
+                load(cpf, "open");
+
+                $.ajax({
+                    url: "index.php?classe=ClienteController&metodo=verificaCpfCadastrado",
+                    type: "POST",
+                    data: { "cpf": cpf.value },
+                    dataType: "json",
+
+                    success: function (dados) {
+                        let msg = dados.cpf;
+                        setMessage(msg, cpf);
+                    },
+
+                    error: function () {
+                        alert("Erro na requisição");
+                    },
+
+                    complete: function () {
+                        load(cpf, "close");
+                    }
+                });
+            });
             return true;
         }
 
         function validaCPF(strCPF) {
-            let Soma,
+            var Soma,
                 Resto;
-                
+
             Soma = 0;
 
             strCPF = strCPF.value.replace(/\D/g, "");
 
-            console.log(strCPF);
             if (strCPF.length != 11 ||
                 strCPF == "00000000000" ||
                 strCPF == "11111111111" ||
@@ -69,7 +164,7 @@ const validate = {
     telefone(telefone) {
         if (telefone.value != "") {
             if (!validaTelefone(telefone.value)) {
-                let error = "Telefone inválido, por favor, digite o DDD junto com número.";
+                let error = "Telefone inválido, por favor, digite o DDD junto com o número.";
                 setMessage(error, telefone);
                 return false;
             } else {
@@ -152,7 +247,6 @@ const validate = {
             return quantosAnos < 0 ? 0 : quantosAnos;
         }
 
-
         function validaData(dataNascimento) {
             const dataNasc = dataNascimento.value;
 
@@ -182,16 +276,64 @@ const validate = {
     },
 
     cep(cep) {
-        if (cep.value == "") {
+        const cepValue = cep.value.replace(/\D/g, "");
+
+        if (cepValue == "") {
             let error = "Este campo é obrigatório.";
             setMessage(error, cep);
             return false;
-        } else if (cep.value.length < 9) {
+        } else if (cepValue.length < 8) {
             let error = "Por favor, informe um CEP que seja válido.";
             setMessage(error, cep);
             return false;
         } else {
-            setMessage("", cep);
+            $(document).ready(function () {
+                setMessage("nulo", cep);
+                load(cep, "open");
+
+                let url = "https://viacep.com.br/ws/" + cep.value + "/json";
+
+                $.ajax({
+                    url: url,
+                    type: "GET",
+                    dataType: "json",
+
+                    success: function (dados) {
+                        if (dados.erro) {
+                            return false;
+                        }
+
+                        if (dados.uf !== "") {
+                            $("#estado").val(dados.uf);
+                            validate["padrao"](document.getElementById("estado"))
+                        }
+
+                        if (dados.localidade !== "") {
+                            $("#cidade").val(dados.localidade);
+                            validate["padrao"](document.getElementById("cidade"))
+                        }
+
+                        if (dados.logradouro !== "") {
+                            $("#endereco").val(dados.logradouro);
+                            validate["padrao"](document.getElementById("endereco"))
+                        }
+
+                        if (dados.bairro !== "") {
+                            $("#bairro").val(dados.bairro);
+                            validate["padrao"](document.getElementById("bairro"))
+                        }
+                    },
+
+                    error: function () {
+                        alert("Erro na requisição");
+                    },
+
+                    complete: function () {
+                        load(cep, "close");
+                        setMessage("", cep);
+                    }
+                });
+            });        
             return true;
         }
     },
@@ -214,13 +356,34 @@ const validate = {
             setMessage(error, email);
             return false;
         } else {
-            setMessage("", email);
-            return true;
-        }
+            $(document).ready(function () {
+                setMessage("nulo", email);
+                load(email, "open");
 
-        function validaEmail(email) {
-            const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-            return re.test(email.value);
+                $.ajax({
+                    url: "index.php?classe=ClienteController&metodo=verificaEmailCadastrado",
+                    type: "POST",
+                    data: { "email": email.value },
+                    dataType: "json",
+
+                    success: function (dados) {
+                        if (dados.email != "") {
+                            setMessage(dados.email, email);
+                            return false;
+                        }
+                        setMessage(dados.email, email);
+                    },
+
+                    error: function () {
+                        alert("Erro na requisição");
+                    },
+
+                    complete: function (dados) {
+                        load(email, "close");
+                    }
+                });
+            });
+            return true;
         }
     },
 
@@ -229,8 +392,12 @@ const validate = {
             let error = "Por favor, digite o seu e-mail.";
             setMessage(error, email);
             return false;
+        } else if (!validaEmail(email)) {
+            let error = "Formato de email inválido, por favor, informe um email válido.";
+            setMessage(error, email);
+            return false;
         } else if (email.value != document.getElementById("email").value) {
-            let error = "Os emails informados não correspondem, por favor, digite-os novamente.";
+            let error = "Os emails não correspondem, por favor, digite-os novamente.";
             setMessage(error, email);
             return false;
         } else {
@@ -240,7 +407,6 @@ const validate = {
     },
 
     senha(senha) {
-        const msgSenha = "A senha deve conter no mínimo 8 dígitos, um número, uma letra minúscula, uma letra minúscula e um carácter especial, ex: $#%.";
         if (senha.value == "") {
             let error = "Por favor, digite uma senha.";
             setMessage(error, senha);
@@ -253,12 +419,6 @@ const validate = {
             setMessage("", senha);
             return true;
         }
-
-        function validaSenha(senha) {
-            const re = /^(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,}$/gm;
-            return re.test(senha);
-        }
-
     },
 
     senha_confirm(senha) {
@@ -277,6 +437,7 @@ const validate = {
     }
 };
 
+// Adiciona o evento change e um função correspondente a todos os campos 
 document.querySelectorAll(".form-control").forEach(field => {
     const id = field.id;
 
@@ -287,18 +448,17 @@ document.querySelectorAll(".form-control").forEach(field => {
         (id == "numero") ||
         (id == "cidade") ||
         (id == "estado")) {
-        field.addEventListener("blur", event => {
+        field.addEventListener("change", event => {
             event.target = validate["padrao"](event.target);
         }, false);
     } else {
-        field.addEventListener("blur", event => {
+        field.addEventListener("change", event => {
             event.target = validate[id](event.target);
         }, false);
     }
 });
 
 
-// eslint-disable-next-line no-unused-vars
 function validaForm() {
     if (!validate["padrao"](document.getElementById("nome"))) {
         document.getElementById("nome").focus();
@@ -379,7 +539,6 @@ function validaForm() {
         document.getElementById("senha_confirm").focus();
         return false;
     }
-
 }
 
 function setMessage(error, field) {
@@ -403,4 +562,18 @@ function setMessage(error, field) {
 
 function trim(str) {
     return str.replace(/^\s+|\s+$/g, "");
+}
+
+function goBack() {
+    window.history.back();
+}
+
+function load(field, action) {
+    let load = field.parentNode.querySelector("div.load");
+
+    if (action === "open") {
+        load.classList.add("is-rotating");
+    } else {
+        load.classList.remove("is-rotating");
+    }
 }

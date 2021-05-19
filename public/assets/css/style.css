@@ -66,13 +66,13 @@ main.container-fluid{
 
 .form__input-container{
     position: relative;
-    height: 2.75rem;
+    height: 2.65rem;
 }
 
 .form__input{
     position: absolute;
     height: 100%;
-    border: 1px solid #dadadb;
+    border: 1px solid #dbdada;
     padding-top: .475rem !important; 
     padding-bottom: .475rem !important;
 }
@@ -160,8 +160,9 @@ span[class^="error-"].is-active{
     color: var(--blue);
 }
 
-.btn-primary{
-    padding: .6rem 1rem;
+.btn{
+    margin: 0 .1rem !important;
+    padding: .4rem .8rem;
     font-weight: 400;
 }
 
@@ -169,6 +170,38 @@ span[class^="error-"].is-active{
 .btn-primary:focus{
     box-shadow: none !important;
 }
+
+.load{
+    display: none;
+    position: absolute;
+    top: calc(75% - 20px);
+    right: calc(.375em + .1875rem);
+
+    height: 20px;
+    width: 20px;
+
+    border: .27rem solid #e6e6e6;
+    border-top-color: transparent;
+    border-radius: 50%;
+}
+
+.is-rotating{
+    animation: is-rotating .9s infinite linear;
+}
+
+.load.is-rotating{
+    display: block;
+}
+
+@keyframes is-rotating{
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
 
 @media screen and (max-width: 767px){
     
@@ -191,10 +224,6 @@ span[class^="error-"].is-active{
     
     .form__fields-container-address{
         margin-top: 0;
-    }
-    
-    .form__link-style{
-        font-size: .85rem;
     }
 }
 

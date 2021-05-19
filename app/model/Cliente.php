@@ -23,8 +23,6 @@ class Cliente
     private $bairro;
     private $endereco;
 
-
-    // Get and Set
     function __get($atributo)
     {
         return $this->$atributo;
@@ -36,12 +34,11 @@ class Cliente
 
     function __construct()
     {
-        //incluindo classe de conexão
         include_once "Conexao.php";
     }
 
     // Verifica se o CEP está cadastrado no Banco
-    function buscarCep()
+    function verificaCepCadastrado()
     {
         $con = Conexao::conectar();
 
@@ -54,7 +51,7 @@ class Cliente
     }
 
     // Método cadastrar dados pessoais
-    function cadastrarEndereco()
+    function cadastrarEnderecoDoCliente()
     {
         $con = Conexao::conectar();
 
@@ -73,10 +70,8 @@ class Cliente
         return $con->lastInsertId();
     }
 
-
-
     // Método para cadastrar os dados pessoais
-    function cadastrarCliente()
+    function cadastrarDadosPessoaisCliente()
     {
         $con = Conexao::conectar();
 
@@ -99,8 +94,8 @@ class Cliente
         $cmd->execute();
     }
 
-    // Método para atualizar os dados do cliente
-    function buscarCliente()
+    // Busca os dados do cliente
+    function buscarDadosDoCliente()
     {
         $con = Conexao::conectar();
 
@@ -114,8 +109,8 @@ class Cliente
         return $cmd->fetch(PDO::FETCH_OBJ);
     }
 
-    // Método para atualizar os dados pessoais do cliente
-    function atualizarCliente()
+    // Atualizar os dados pessoais do cliente
+    function atualizarDadosPessoaisDoCliente()
     {
         $con = Conexao::conectar();
 
@@ -130,7 +125,7 @@ class Cliente
         email           = :email,
         complemento     = :complemento,
         numero          = :numero
-        WHERE  cod_cliente = :cod_cliente");
+        WHERE cod_cliente = :cod_cliente");
 
         $cmd->bindParam(":cod_cliente",     $this->cod_cliente);
         $cmd->bindParam(":cod_endereco",    $this->cod_endereco);
@@ -145,5 +140,37 @@ class Cliente
         $cmd->bindParam(":email",           $this->email);
 
         $cmd->execute();
+    }
+
+    // Verifica se o email já foi cadastrado
+    function verificaEmailCadastrado()
+    {
+        $con = Conexao::conectar();
+
+        $cmd = $con->prepare("SELECT * FROM tbclientes WHERE email = :email");
+        $cmd->bindParam(":email", $this->email);
+
+        $cmd->execute();
+
+        if ($cmd->rowCount() <= 0) {
+            return false;
+        }
+        return true;
+    }
+
+    // Verifica se o CPF já foi cadastrado
+    function verificaCpfCadastrado()
+    {
+        $con = Conexao::conectar();
+
+        $cmd = $con->prepare("SELECT * FROM tbclientes WHERE cpf = :cpf");
+        $cmd->bindParam(":cpf", $this->cpf);
+
+        $cmd->execute();
+
+        if ($cmd->rowCount() <= 0) {
+            return false;
+        }
+        return true;
     }
 }
