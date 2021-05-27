@@ -2,42 +2,43 @@
 
 class ClienteController
 {
-    function abrirCadastro()
+    public function abrirCadastro()
     {
         include_once "../app/view/CadastroCliente.php";
     }
 
-    function abrirAtualizacao()
+    public function abrirAtualizacao()
     {
         include "../app/model/Cliente.php";
         $cli = new Cliente();
 
-        $cli->cod_cliente = 4;
-        $dados = $cli->buscarDadosDoCliente();
+        $cli->cod_cliente = 10;
+        $dadosCli = $cli->buscarDadosDoCliente();
 
         include_once "../app/view/AtualizarCliente.php";
     }
 
-    function cadastrarCliente()
+    public function cadastrarCliente()
     {
         include "../app/model/Cliente.php";
         $cli = new Cliente();
 
-        // Verifica se o CEP já foi cadastrado 
-        $cli->cep = $_POST["cep"];
-        $dados = $cli->verificaCepCadastrado();
+        include "../app/model/Endereco.php";
+        $end = new Endereco();
 
-        if (!empty($dados)) {
-            // Se foi, então pega o código do endereço para vincular ao cliente
-            $cli->cod_endereco = $dados->cod_endereco;
+        $end->cep       = $_POST["cep"];
+        $end->estado    = $_POST["estado"];
+        $end->cidade    = $_POST["cidade"];
+        $end->bairro    = $_POST["bairro"];
+        $end->endereco  = $_POST["endereco"];
+
+        // Verifica se o endereço já foi cadastrado 
+        $dadosEnd = $end->verificarEnderecoCadastrado();
+
+        if (!empty($dadosEnd)) {
+            $cli->cod_endereco = $dadosEnd->cod_endereco;
         } else {
-            $cli->cep       = $_POST["cep"];
-            $cli->estado    = $_POST["estado"];
-            $cli->cidade    = $_POST["cidade"];
-            $cli->bairro    = $_POST["bairro"];
-            $cli->endereco  = $_POST["endereco"];
-
-            $cli->cod_endereco = $cli->cadastrarEnderecoDoCliente();
+            $cli->cod_endereco = $end->cadastrarEndereco();
         }
 
         $cli->nome          = $_POST["nome"];
@@ -51,32 +52,83 @@ class ClienteController
         $cli->numero        = $_POST["numero"];
         $cli->complemento   = $_POST["complemento"];
 
-        $cli->cadastrarDadosPessoaisCliente();
-
-        echo "<script>
-                alert(\"Dados gravados com sucesso!\");
-                window.location=\"index.php?classe=ClienteController&metodo=abrirCadastro\";
+        if ($cli->verificaCpf()) {
+            echo "<body></body>
+            <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css'>
+            <script src='https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js'></script>
+            <script src='//cdn.jsdelivr.net/npm/sweetalert2@10'></script>
+            <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'O CPF $cli->cpf já está cadastrado em nosso sistema!',
+                onClose: () => {
+                    window.history.back();
+                }
+            });
             </script>";
+            return false;
+        }
+
+        if ($cli->verificaEmail()) {
+            echo "<body></body>
+            <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css'>
+            <script src='https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js'></script>
+            <script src='//cdn.jsdelivr.net/npm/sweetalert2@10'></script>
+            <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'O E-mail $cli->email já está cadastrado em nosso sistema!',
+                onClose: () => {
+                    window.history.back();
+                }
+            });
+            </script>";
+            return false;
+        }
+
+        $cli->cadastrarDadosPessoais();
+
+        echo "<body></body>
+        <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css'>
+        <script src='https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js'></script>
+        <script src='//cdn.jsdelivr.net/npm/sweetalert2@10'></script>
+        <script>
+        Swal.fire({
+            title:'Cadastro concluído com sucesso!',
+            type:'success',
+            icon:'success',
+            showConfirmButton:false,
+            timer:2000,
+            onClose: () => {
+                window.location='index.php?classe=ClienteController&metodo=abrirCadastro';
+            }
+        });
+        </script>";
     }
 
-    function atualizarCliente()
+    public function atualizarCliente()
     {
         include "../app/model/Cliente.php";
         $cli = new Cliente();
 
-        $cli->cep = $_POST["cep"];
-        $dados = $cli->verificaCepCadastrado();
+        include "../app/model/Endereco.php";
+        $end = new Endereco();
 
-        if (!empty($dados)) {
-            $cli->cod_endereco = $dados->cod_endereco;
+        $end->cep       = $_POST["cep"];
+        $end->estado    = $_POST["estado"];
+        $end->cidade    = $_POST["cidade"];
+        $end->bairro    = $_POST["bairro"];
+        $end->endereco  = $_POST["endereco"];
+
+        // Verifica se o endereço já foi cadastrado 
+        $dadosEnd = $end->verificarEnderecoCadastrado();
+
+        if (!empty($dadosEnd)) {
+            $cli->cod_endereco = $dadosEnd->cod_endereco;
         } else {
-            $cli->cep       = $_POST["cep"];
-            $cli->estado    = $_POST["estado"];
-            $cli->cidade    = $_POST["cidade"];
-            $cli->bairro    = $_POST["bairro"];
-            $cli->endereco  = $_POST["endereco"];
-
-            $cli->cod_endereco = $cli->cadastrarEnderecoDoCliente();
+            $cli->cod_endereco = $end->cadastrarEndereco();
         }
 
         $cli->cod_cliente   = $_POST["cod_cliente"];
@@ -89,17 +141,69 @@ class ClienteController
         $cli->email         = $_POST["email"];
         $cli->numero        = $_POST["numero"];
         $cli->complemento   = $_POST["complemento"];
+        // Nova Senha
+        if (!empty($_POST["senha"])) {
+            $cli->senha     = hash("sha512", $_POST["senha"]);
+        }
 
-        $cli->atualizarDadosPessoaisDoCliente();
-
-        echo "<script>
-                alert('Dados atualizados com sucesso!');
-                window.location='index.php?classe=ClienteController&metodo=abrirAtualizacao';
+        if ($cli->verificaCpf()) {
+            echo "<body></body>
+            <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css'>
+            <script src='https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js'></script>
+            <script src='//cdn.jsdelivr.net/npm/sweetalert2@10'></script>
+            <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'O CPF $cli->cpf já está cadastrado em nosso sistema!',
+                onClose: () => {
+                    window.history.back();
+                }
+            });
             </script>";
+            return false;
+        }
+
+        if ($cli->verificaEmail()) {
+            echo "<body></body>
+            <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css'>
+            <script src='https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js'></script>
+            <script src='//cdn.jsdelivr.net/npm/sweetalert2@10'></script>
+            <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'O E-mail $cli->email já está cadastrado em nosso sistema!',
+                onClose: () => {
+                    window.history.back();
+                }
+            });
+            </script>";
+            return false;
+        }
+
+        $cli->atualizarDadosPessoais();
+
+        echo "<body></body>
+        <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css'>
+        <script src='https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js'></script>
+        <script src='//cdn.jsdelivr.net/npm/sweetalert2@10'></script>
+        <script>
+        Swal.fire({
+            title:'Dados alterados com sucesso!',
+            type:'success',
+            icon:'success',
+            showConfirmButton:false,
+            timer:2000,
+            onClose: () => {
+                window.location='index.php?classe=ClienteController&metodo=abrirAtualizacao';
+            }
+        });
+        </script>";
     }
 
     // Formata a data no padrão BR(00/00/0000) ou EUA(0000-00-00)
-    function formatarData(string $data, string $padrao)
+    public function formatarData(string $data, string $padrao)
     {
         if ($padrao === "EUA") {
             $dataDividida = explode("/", $data);
@@ -120,37 +224,55 @@ class ClienteController
         }
     }
 
-    // Verifica se o CPF já foi cadastrado no Banco
-    function verificaCpfCadastrado()
+    // Verifica se o CPF já foi cadastrado
+    public function verificaCpf()
     {
+        header("Content-Type: application/json");
         if (isset($_POST["cpf"])) {
             include "../app/model/Cliente.php";
             $cli = new Cliente();
 
-            $cli->cpf = $_POST["cpf"];
-            $existe = $cli->verificaCpfCadastrado();
+            if (isset($_POST["cod_cliente"])) {
+                $cli->cod_cliente = $_POST["cod_cliente"];
+                $cli->cpf         = $_POST["cpf"];
+            } else {
+                $cli->cpf         = $_POST["cpf"];
+            }
+
+            $existe = $cli->verificaCpf();
 
             if ($existe)
-                echo json_encode(array("cpf" => "Ops! Este CPF já está cadastrado em nosso sistema."));
+                echo json_encode(array("erro" => "Ops! Este CPF já está cadastrado em nosso sistema."));
             else
-                echo json_encode(array("cpf" => ""));
+                echo json_encode(array("erro" => ""));
         }
     }
 
-    // Verifica se o email já foi cadastrado no Banco
-    function verificaEmailCadastrado()
+    // Verifica se o email já foi cadastrado
+    public function verificaEmail()
     {
         if (isset($_POST["email"])) {
             include "../app/model/Cliente.php";
             $cli = new Cliente();
 
-            $cli->email = $_POST["email"];
-            $existe = $cli->verificaEmailCadastrado();
+            if (isset($_POST["cod_cliente"])) {
+                $cli->cod_cliente = $_POST["cod_cliente"];
+                $cli->email       = $_POST["email"];
 
-            if ($existe)
+                $existe = $cli->verificaEmail();
+            } else {
+                $cli->email       = $_POST["email"];
+
+                $existe = $cli->verificaEmail();
+            }
+
+            if ($existe) {
                 echo json_encode(array("email" => "Ops! Este email já está cadastrado em nosso sistema."));
-            else
+                return false;
+            } else {
                 echo json_encode(array("email" => ""));
+                return true;
+            }
         }
     }
 }

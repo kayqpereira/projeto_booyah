@@ -59,7 +59,6 @@ document.querySelectorAll("input").forEach($input => {
     }
 })
 
-
 const msgSenha = "A senha deve conter no mínimo 8 dígitos, um número, uma letra minúscula, uma letra minúscula e um carácter especial, ex: $#%.";
 
 function validaSenha(senha) {
@@ -75,6 +74,7 @@ function validaEmail(email) {
 const validate = {
     padrao(element) {
         element.value = trim(element.value);
+        element.value = trim2(element.value);
         if (element.value === "") {
             let error = "Este campo é obrigatório.";
             setMessage(error, element);
@@ -96,21 +96,24 @@ const validate = {
             return false;
         } else {
             $(document).ready(function () {
-                load(cpf, "open");
-
                 $.ajax({
-                    url: "index.php?classe=ClienteController&metodo=verificaCpfCadastrado",
+                    url: "index.php?classe=ClienteController&metodo=verificaCpf",
                     type: "POST",
-                    data: { "cpf": cpf.value },
+                    data: {
+                        "cpf": cpf.value,
+                        "cod_cliente": document.getElementById("cod_cliente").value
+                    },
                     dataType: "json",
+                    beforeSend: function () {
+                        load(cpf, "open");
+                    },
 
-                    success: function (dados) {
-                        let msg = dados.cpf;
-                        setMessage(msg, cpf);
+                    success: function (callback) {
+                        setMessage(callback.erro, cpf);
                     },
 
                     error: function () {
-                        alert("Erro na requisição");
+                        alert("Ocorreu um erro ao realizar a requisição!");
                     },
 
                     complete: function () {
@@ -288,44 +291,42 @@ const validate = {
             return false;
         } else {
             $(document).ready(function () {
-                setMessage("nulo", cep);
-                load(cep, "open");
-
-                let url = "https://viacep.com.br/ws/" + cep.value + "/json";
-
                 $.ajax({
-                    url: url,
+                    url: "https://viacep.com.br/ws/" + cep.value + "/json",
                     type: "GET",
                     dataType: "json",
+                    beforeSend: function () {
+                        load(cep, "open");
+                    },
 
-                    success: function (dados) {
-                        if (dados.erro) {
+                    success: function (callback) {
+                        if (callback.erro) {
                             return false;
                         }
 
-                        if (dados.uf !== "") {
-                            $("#estado").val(dados.uf);
+                        if (callback.uf !== "") {
+                            $("#estado").val(callback.uf);
                             validate["padrao"](document.getElementById("estado"))
                         }
 
-                        if (dados.localidade !== "") {
-                            $("#cidade").val(dados.localidade);
+                        if (callback.localidade !== "") {
+                            $("#cidade").val(callback.localidade);
                             validate["padrao"](document.getElementById("cidade"))
                         }
 
-                        if (dados.logradouro !== "") {
-                            $("#endereco").val(dados.logradouro);
+                        if (callback.logradouro !== "") {
+                            $("#endereco").val(callback.logradouro);
                             validate["padrao"](document.getElementById("endereco"))
                         }
 
-                        if (dados.bairro !== "") {
-                            $("#bairro").val(dados.bairro);
+                        if (callback.bairro !== "") {
+                            $("#bairro").val(callback.bairro);
                             validate["padrao"](document.getElementById("bairro"))
                         }
                     },
 
                     error: function () {
-                        alert("Erro na requisição");
+                        alert("Ocorreu um erro ao realizar a requisição!");
                     },
 
                     complete: function () {
@@ -333,7 +334,7 @@ const validate = {
                         setMessage("", cep);
                     }
                 });
-            });        
+            });
             return true;
         }
     },
@@ -357,32 +358,33 @@ const validate = {
             return false;
         } else {
             $(document).ready(function () {
-                setMessage("nulo", email);
-                load(email, "open");
-
                 $.ajax({
-                    url: "index.php?classe=ClienteController&metodo=verificaEmailCadastrado",
+                    url: "index.php?classe=ClienteController&metodo=verificaEmail",
                     type: "POST",
-                    data: { "email": email.value },
+                    data: {
+                        "email": email.value,
+                        "cod_cliente": document.getElementById("cod_cliente").value
+                    },
                     dataType: "json",
+                    beforeSend: function () {
+                        load(email, "open");
+                    },
 
-                    success: function (dados) {
-                        if (dados.email != "") {
-                            setMessage(dados.email, email);
-                            return false;
-                        }
-                        setMessage(dados.email, email);
+                    success: function (callback) {
+                        setMessage(callback.email, email);
                     },
 
                     error: function () {
-                        alert("Erro na requisição");
+                        alert("Ocorreu um erro ao realizar a requisição!");
                     },
 
-                    complete: function (dados) {
+                    complete: function () {
                         load(email, "close");
                     }
                 });
             });
+            if (document.getElementById("email_confirm").value !== "")
+                validate["email_confirm"](document.getElementById("email_confirm"))
             return true;
         }
     },
@@ -417,23 +419,64 @@ const validate = {
             return false;
         } else {
             setMessage("", senha);
+            if (document.getElementById("confirmar_senha").value != "")
+                validate["confirmar_senha"](document.getElementById("confirmar_senha"));
             return true;
         }
     },
 
-    senha_confirm(senha) {
-        if (senha.value == "") {
-            let error = "Por favor, confirm a senha.";
-            setMessage(error, senha);
-            return false;
-        } else if (senha.value != document.getElementById("senha").value) {
-            let error = "As senhas informados não correspondem, por favor, digite-as novamente.";
-            setMessage(error, senha);
-            return false;
+    confirmar_senha(senha) {
+        if (validaSenha(document.getElementById("senha").value)) {
+            if (senha.value == "") {
+                let error = "Por favor, confirm a senha.";
+                setMessage(error, senha);
+                return false;
+            } else if (senha.value != document.getElementById("senha").value) {
+                let error = "As senhas informados não correspondem, por favor, digite-as novamente.";
+                setMessage(error, senha);
+                return false;
+            } else {
+                setMessage("", senha);
+                return true;
+            }
+        } else { return false; }
+    },
+
+    nova_senha(senha) {
+        if (senha.value != "") {
+            if (!validaSenha(senha.value)) {
+                let error = msgSenha;
+                setMessage(error, senha);
+                return false;
+            } else {
+                setMessage("", senha);
+                if (document.getElementById("confirmar_nova_senha").value !== "")
+                    validate["confirmar_nova_senha"](document.getElementById("confirmar_nova_senha"));
+                return true;
+            }
         } else {
-            setMessage("", senha);
             return true;
         }
+    },
+
+    confirmar_nova_senha(senha) {
+        if (document.getElementById("nova_senha").value != "") {
+            if (senha.value == "") {
+                let error = "Por favor, confirm a senha.";
+                setMessage(error, senha);
+                return false;
+            } else if (senha.value != document.getElementById("nova_senha").value) {
+                let error = "As senhas informados não correspondem, por favor, digite-as novamente.";
+                setMessage(error, senha);
+                return false;
+            } else {
+                setMessage("", senha);
+                return true;
+            }
+        } else {
+            return true;
+        }
+
     }
 };
 
@@ -458,8 +501,7 @@ document.querySelectorAll(".form-control").forEach(field => {
     }
 });
 
-
-function validaForm() {
+function validarForm() {
     if (!validate["padrao"](document.getElementById("nome"))) {
         document.getElementById("nome").focus();
         return false;
@@ -530,14 +572,26 @@ function validaForm() {
         return false;
     }
 
-    if (!validate["senha"](document.getElementById("senha"))) {
-        document.getElementById("senha").focus();
-        return false;
-    }
+    if (document.getElementById("frmCadastroCli")) {
+        if (!validate["senha"](document.getElementById("senha"))) {
+            document.getElementById("senha").focus();
+            return false;
+        }
 
-    if (!validate["senha_confirm"](document.getElementById("senha_confirm"))) {
-        document.getElementById("senha_confirm").focus();
-        return false;
+        if (!validate["confirmar_senha"](document.getElementById("confirmar_senha"))) {
+            document.getElementById("confirmar_senha").focus();
+            return false;
+        }
+    } else {
+        if (!validate["nova_senha"](document.getElementById("nova_senha"))) {
+            document.getElementById("nova_senha").focus();
+            return false;
+        }
+
+        if (!validate["confirmar_nova_senha"](document.getElementById("confirmar_nova_senha"))) {
+            document.getElementById("confirmar_nova_senha").focus();
+            return false;
+        }
     }
 }
 
@@ -564,6 +618,13 @@ function trim(str) {
     return str.replace(/^\s+|\s+$/g, "");
 }
 
+function trim2(str) {
+    return str
+        .replace(/[ ]/g, "<>")
+        .replace(/></g, "")
+        .replace(/<>/g, " ");
+}
+
 function goBack() {
     window.history.back();
 }
@@ -572,8 +633,12 @@ function load(field, action) {
     let load = field.parentNode.querySelector("div.load");
 
     if (action === "open") {
+        setMessage("nulo", field);
         load.classList.add("is-rotating");
     } else {
         load.classList.remove("is-rotating");
     }
 }
+
+if (document.getElementById("frmEditarCli"))
+    document.getElementById("frmEditarCli").onload = validarForm();

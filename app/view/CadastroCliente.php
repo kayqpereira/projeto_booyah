@@ -14,7 +14,7 @@
 
 <body>
     <main class="container-fluid">
-        <form action="index.php?classe=ClienteController&metodo=cadastrarCliente" method="post" onsubmit="return validaForm()" novalidate id="register-form " class="register-form container">
+        <form action="index.php?classe=ClienteController&metodo=cadastrarCliente" method="post" onsubmit="return validarForm()" novalidate id="frmCadastroCli" class="frmCadastroCli container">
             <div class="row justify-content-center">
                 <div class="col-12 col-md-6 form__fields-container form__fields-container-personal">
                     <fieldset class="form__fields">
@@ -284,7 +284,6 @@
                                             <option value="SE">SE</option>
                                             <option value="TO">TO</option>
                                         </select>
-                                        </select>
                                         <i class="form__icon form__icon-invalid">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                                                 <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
@@ -369,9 +368,9 @@
                                 </div>
 
                                 <div id="access-senha-confirm" class="form__input-group">
-                                    <label class="form__label" for="senha_confirm">Confirmar senha:</label>
+                                    <label class="form__label" for="confirmar_senha">Confirmar senha:</label>
                                     <div class="form__input-container">
-                                        <input class="form__input form-control" autocomplete="new-password" maxlength="100" type="password" id="senha_confirm" name="senha">
+                                        <input class="form__input form-control" autocomplete="new-password" maxlength="100" type="password" id="confirmar_senha">
                                         <i class="form__icon form__icon-invalid">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                                                 <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
@@ -383,7 +382,7 @@
                                             </svg>
                                         </i>
                                     </div>
-                                    <span class="error-senha_confirm"></span>
+                                    <span class="error-confirmar_senha"></span>
                                 </div>
                             </div>
                         </div>

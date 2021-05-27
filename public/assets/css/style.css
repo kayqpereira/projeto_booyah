@@ -13,16 +13,16 @@ main.container-fluid{
     padding: 0;
 }
 
-.update-registration,
-.register-form{
+.frmEditarCli,
+.frmCadastroCli{
     background-color: var(--bg-form);
     padding: 2rem 1.75rem;
     width: 100%;
     max-width: 900px;
 }
 
-.update-registration .row:not(:last-child),
-.register-form .row:not(:last-child){
+.frmEditarCli .row:not(:last-child),
+.frmCadastroCli .row:not(:last-child){
     background-color: var(--bg-form_row);
     border-radius: .25rem;
     box-shadow:  0 0 10px 0 rgba(80, 80, 80, 0.1);
@@ -209,8 +209,8 @@ span[class^="error-"].is-active{
         font-size: .95rem;
     }
 
-    .update-registration,
-    .register-form{
+    .frmEditarCli,
+    .frmCadastroCli{
         max-width: 475px;
     }
 
@@ -233,21 +233,21 @@ span[class^="error-"].is-active{
         font-size: .9rem;
     }
 
-    .update-registration,
-    .register-form{
+    .frmEditarCli,
+    .frmCadastroCli{
         max-width: 400px;
     }
 
-    .update-registration,
-    .register-form > .row:not(:last-child){
+    .frmEditarCli,
+    .frmCadastroCli > .row:not(:last-child){
         box-shadow: none;
     }
     
-    .register-form > .row:nth-child(1){
+    .frmCadastroCli > .row:nth-child(1){
         border-radius: .25rem .25rem 0 0;
     }
     
-    .register-form > .row:nth-child(2){
+    .frmCadastroCli > .row:nth-child(2){
         border-radius: 0 0 .25rem .25rem;
     }
 
