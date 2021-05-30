@@ -23,30 +23,9 @@ class Endereco
         include_once "Conexao.php";
     }
 
-    # Verifica se o endereço está cadastrado
-    public function verificarEndereco()
-    {
-        $con = Conexao::conectar();
-
-        $cmd = $con->prepare("SELECT * FROM tbenderecos 
-        WHERE cep    = :cep 
-        AND estado   = :estado 
-        AND bairro   = :bairro 
-        AND cidade   = :cidade 
-        AND endereco = :endereco");
-
-        $cmd->bindParam(":cep",         $this->cep);
-        $cmd->bindParam(":estado",      $this->estado);
-        $cmd->bindParam(":cidade",      $this->cidade);
-        $cmd->bindParam(":bairro",      $this->bairro);
-        $cmd->bindParam(":endereco",    $this->endereco);
-
-        $cmd->execute();
-
-        return $cmd->fetch(PDO::FETCH_OBJ);
-    }
-
-    # Cadastra um novo endereço
+    /**
+     * Cadastra um novo endereço
+     */
     public function cadastrarEndereco()
     {
         $con = Conexao::conectar();
@@ -66,18 +45,9 @@ class Endereco
         return $con->lastInsertId();
     }
 
-    # Excluír um endereço com base no cod
-    public function excluirEndereco()
-    {
-        $con = Conexao::conectar();
-
-        $cmd = $con->prepare("DELETE FROM tbenderecos WHERE cod_endereco = :cod_endereco");
-        $cmd->bindParam(":cod_endereco", $this->cod_endereco);
-
-        $cmd->execute();
-    }
-
-    # Consulta todos os endereços
+    /**
+     * Consulta todos os endereços
+     */
     public function consultarEnderecos()
     {
         $con = Conexao::conectar();
@@ -89,20 +59,9 @@ class Endereco
         return $cmd->fetchAll(PDO::FETCH_OBJ);
     }
 
-    # Consulta um endereço com base no cod 
-    public function consultarEndereco()
-    {
-        $con = Conexao::conectar();
-
-        $cmd = $con->prepare("SELECT * FROM tbenderecos WHERE cod_endereco = :cod_endereco");
-        $cmd->bindParam(":cod_endereco", $this->cod_endereco);
-
-        $cmd->execute();
-
-        return $cmd->fetch(PDO::FETCH_OBJ);
-    }
-
-    # Atualiza o endereço
+    /**
+     * Atualiza o endereço com base no cod
+     */
     public function atualizarEndereco()
     {
         $con = Conexao::conectar();
@@ -123,5 +82,59 @@ class Endereco
         $cmd->bindParam(":cidade",        $this->cidade);
 
         $cmd->execute();
+    }
+
+    /**
+     * Excluír um endereço com base no cod
+     */
+    public function excluirEndereco()
+    {
+        $con = Conexao::conectar();
+
+        $cmd = $con->prepare("DELETE FROM tbenderecos WHERE cod_endereco = :cod_endereco");
+        $cmd->bindParam(":cod_endereco", $this->cod_endereco);
+
+        $cmd->execute();
+    }
+
+    /**
+     * Consulta um endereço com base no cod 
+     */
+    public function consultarEnderecoCod()
+    {
+        $con = Conexao::conectar();
+
+        $cmd = $con->prepare("SELECT * FROM tbenderecos WHERE cod_endereco = :cod_endereco");
+        $cmd->bindParam(":cod_endereco", $this->cod_endereco);
+
+        $cmd->execute();
+
+        return $cmd->fetch(PDO::FETCH_OBJ);
+    }
+
+
+    /**
+     * Verifica se o endereço está cadastrado
+     */
+    public function verificarEndereco()
+    {
+        $con = Conexao::conectar();
+
+        $cmd = $con->prepare("SELECT * FROM tbenderecos 
+        WHERE cep    = :cep 
+        AND estado   = :estado 
+        AND bairro   = :bairro 
+        AND cidade   = :cidade 
+        AND endereco = :endereco");
+
+        $cmd->bindParam(":cep",         $this->cep);
+        $cmd->bindParam(":estado",      $this->estado);
+        $cmd->bindParam(":cidade",      $this->cidade);
+        $cmd->bindParam(":bairro",      $this->bairro);
+        $cmd->bindParam(":endereco",    $this->endereco);
+
+        $cmd->execute();
+
+        return $cmd->fetch(PDO::FETCH_OBJ);
     }
 }

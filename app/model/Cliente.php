@@ -30,7 +30,9 @@ class Cliente
         include_once "Conexao.php";
     }
 
-    // Método para cadastrar os dados pessoais
+    /**
+     * Método para cadastrar os dados pessoais
+     */
     public function cadastrarDadosPessoais()
     {
         $con = Conexao::conectar();
@@ -54,7 +56,9 @@ class Cliente
         $cmd->execute();
     }
 
-    // Busca os dados do cliente
+    /**
+     * Consulta todos os clientes
+     */
     public function consultarClientes()
     {
         $con = Conexao::conectar();
@@ -66,7 +70,9 @@ class Cliente
         return $cmd->fetchAll(PDO::FETCH_OBJ);
     }
 
-    // |Excluí um cliente pelo seu cod
+    /**
+     * Excluí um cliente com base no cod
+     */
     public function excluirCliente()
     {
         $con = Conexao::conectar();
@@ -77,7 +83,9 @@ class Cliente
         $cmd->execute();
     }
 
-    // Busca os dados do cliente
+    /**
+     * Consulta dados de um cliente incluindo seu endereço
+     */
     public function consultarDadosCliente()
     {
         $con = Conexao::conectar();
@@ -92,7 +100,10 @@ class Cliente
         return $cmd->fetch(PDO::FETCH_OBJ);
     }
 
-    public function consultarClientePorEndereco()
+    /**
+     * Consulta todos os clientes com base no cod_endereco
+     */
+    public function consultarClientePorCodEnd()
     {
         $con = Conexao::conectar();
 
@@ -104,11 +115,14 @@ class Cliente
         return $cmd->fetchAll(PDO::FETCH_OBJ);
     }
 
-    // Atualizar os dados pessoais do cliente
+    /**
+     * Atualiza os dados pessoais do cliente com base no cod
+     */
     public function atualizarDadosPessoais()
     {
         $con = Conexao::conectar();
 
+        # Caso a senha não esteja vazia cadastra uma nova
         if (!empty($this->senha)) {
             $cmd = $con->prepare("UPDATE tbclientes SET
             cod_endereco    = :cod_endereco,
@@ -168,7 +182,6 @@ class Cliente
 
     /**
      * Verifica se o email já foi cadastrado
-     *
      * @return boolean
      */
     public function verificarEmail()
@@ -200,7 +213,6 @@ class Cliente
 
     /**
      * Verifica se o CPF já foi cadastrado
-     *
      * @return boolean
      */
     public function verificarCpf()

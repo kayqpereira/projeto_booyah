@@ -9,7 +9,7 @@ class EnderecoController
 
         if (isset($_GET["cod_endereco"])) {
             $end->cod_endereco = $_GET["cod_endereco"];
-            $dadosEnd = $end->consultarEndereco();
+            $dadosEnd = $end->consultarEnderecoCod();
 
             include_once "../app/view/AtualizarEndereco.php";
         }
@@ -27,7 +27,7 @@ class EnderecoController
             $cli->cod_endereco = $_GET["cod_endereco"];
             $end->cod_endereco = $_GET["cod_endereco"];
 
-            $dadosCli = $cli->consultarClientePorEndereco();
+            $dadosCli = $cli->consultarClientePorCodEnd();
 
             if (!empty($dadosCli)) {
                 foreach ($dadosCli as $cliente) {
@@ -53,6 +53,23 @@ class EnderecoController
                         window.location='index.php?classe=ClienteController&metodo=abrirConsulta';
                     }
                 });
+            </script>";
+        } else {
+            echo "<body></body>
+            <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css'>
+            <script src='https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js'></script>
+            <script src='//cdn.jsdelivr.net/npm/sweetalert2@10'></script>
+            <script>
+            Swal.fire({
+                icon: 'error',
+                iconColor: '#dc3545',
+                title: 'Erro!',
+                text: 'Não foi possível exluír o Endereço.',
+                confirmButtonColor: '#7166f0',
+                onClose: () => {
+                    window.history.back();
+                }
+            });
             </script>";
         }
     }

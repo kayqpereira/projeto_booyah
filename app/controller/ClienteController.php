@@ -47,7 +47,7 @@ class ClienteController
         $end->bairro    = $_POST["bairro"];
         $end->endereco  = $_POST["endereco"];
 
-        // Verifica se o endereço já foi cadastrado 
+        # Verifica se o endereço já foi cadastrado 
         $dadosEnd = $end->verificarEndereco();
 
         if (!empty($dadosEnd)) {
@@ -151,24 +151,9 @@ class ClienteController
         $cli->email         = $_POST["email"];
         $cli->numero        = $_POST["numero"];
         $cli->complemento   = $_POST["complemento"];
-        // Se houver uma nova senha
+        # Se houver uma nova senha
         if (!empty($_POST["senha"])) {
             $cli->senha = hash("sha512", $_POST["senha"]);
-        }
-
-        // Verifica se o endereço já foi cadastrado 
-        $dadosEnd = $end->verificarEndereco();
-
-        if (!empty($dadosEnd)) {
-            if ($_POST["cod_endereco"] != $dadosEnd->cod_endereco) {
-                $codEndereco = $_POST["cod_endereco"];
-                $cli->cod_endereco = $dadosEnd->cod_endereco;
-            } else {
-                $cli->cod_endereco = $_POST["cod_endereco"];
-            }
-        } else {
-            $codEndereco = $_POST["cod_endereco"];
-            $cli->cod_endereco = $end->cadastrarEndereco();
         }
 
         if ($cli->verificarCpf()) {
@@ -211,11 +196,26 @@ class ClienteController
             return false;
         }
 
+        # Verifica se o endereço já foi cadastrado 
+        $dadosEnd = $end->verificarEndereco();
+
+        if (!empty($dadosEnd)) {
+            if ($_POST["cod_endereco"] != $dadosEnd->cod_endereco) {
+                $codEndereco = $_POST["cod_endereco"];
+                $cli->cod_endereco = $dadosEnd->cod_endereco;
+            } else {
+                $cli->cod_endereco = $_POST["cod_endereco"];
+            }
+        } else {
+            $codEndereco = $_POST["cod_endereco"];
+            $cli->cod_endereco = $end->cadastrarEndereco();
+        }
+
         $cli->atualizarDadosPessoais();
 
         if (isset($codEndereco)) {
             $cli->cod_endereco = $codEndereco;
-            $dadosCli = $cli->consultarClientePorEndereco();
+            $dadosCli = $cli->consultarClientePorCodEnd();
 
             if (empty($dadosCli)) {
                 $end->cod_endereco = $codEndereco;
@@ -224,9 +224,9 @@ class ClienteController
         }
 
         echo "<body></body>
-        <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css'>
-        <script src='https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js'></script>
-        <script src='//cdn.jsdelivr.net/npm/sweetalert2@10'></script>
+        <link rel='stylesheet' href='https:#cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css'>
+        <script src='https:#cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js'></script>
+        <script src='#cdn.jsdelivr.net/npm/sweetalert2@10'></script>
         <script>
         Swal.fire({
             title:'Salvou!',
@@ -255,7 +255,7 @@ class ClienteController
             $cli->cod_endereco = $_GET["cod_endereco"];
 
             $cli->excluirCliente();
-            $dadosCli = $cli->consultarClientePorEndereco();
+            $dadosCli = $cli->consultarClientePorCodEnd();
 
             if (empty($dadosCli)) {
                 $end->cod_endereco = $_GET["cod_endereco"];
@@ -278,10 +278,33 @@ class ClienteController
                     }
                 });
             </script>";
+        } else {
+            echo "<body></body>
+            <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css'>
+            <script src='https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js'></script>
+            <script src='//cdn.jsdelivr.net/npm/sweetalert2@10'></script>
+            <script>
+            Swal.fire({
+                icon: 'error',
+                iconColor: '#dc3545',
+                title: 'Erro!',
+                text: 'Não foi possível exluír o cliente.',
+                confirmButtonColor: '#7166f0',
+                onClose: () => {
+                    window.history.back();
+                }
+            });
+            </script>";
         }
     }
 
-    // Formata a data no padrão BR(00/00/0000) ou EUA(0000-00-00)
+    /**
+     * Formata a data no padrão BR(00/00/0000) ou EUA(0000-00-00)
+     *
+     * @param string $data
+     * @param string $padrao
+     * @return date
+     */
     public function formatarData(string $data, string $padrao)
     {
         if ($padrao === "EUA") {
@@ -303,7 +326,7 @@ class ClienteController
         }
     }
 
-    // Verifica se o CPF já foi cadastrado
+    # Verifica se o CPF já foi cadastrado
     public function verificarCpf()
     {
         header("Content-Type: application/json");
@@ -325,7 +348,7 @@ class ClienteController
         }
     }
 
-    // Verifica se o email já foi cadastrado
+    # Verifica se o email já foi cadastrado
     public function verificarEmail()
     {
         header("Content-Type: application/json");
