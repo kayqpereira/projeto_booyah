@@ -23,8 +23,8 @@ class Endereco
         include_once "Conexao.php";
     }
 
-    // Verifica se o endereço está cadastrado
-    public function verificarEnderecoCadastrado()
+    # Verifica se o endereço está cadastrado
+    public function verificarEndereco()
     {
         $con = Conexao::conectar();
 
@@ -46,7 +46,7 @@ class Endereco
         return $cmd->fetch(PDO::FETCH_OBJ);
     }
 
-    // Cadastra o endereço
+    # Cadastra um novo endereço
     public function cadastrarEndereco()
     {
         $con = Conexao::conectar();
@@ -64,5 +64,64 @@ class Endereco
         $cmd->execute();
 
         return $con->lastInsertId();
+    }
+
+    # Excluír um endereço com base no cod
+    public function excluirEndereco()
+    {
+        $con = Conexao::conectar();
+
+        $cmd = $con->prepare("DELETE FROM tbenderecos WHERE cod_endereco = :cod_endereco");
+        $cmd->bindParam(":cod_endereco", $this->cod_endereco);
+
+        $cmd->execute();
+    }
+
+    # Consulta todos os endereços
+    public function consultarEnderecos()
+    {
+        $con = Conexao::conectar();
+
+        $cmd = $con->prepare("SELECT * FROM tbenderecos");
+
+        $cmd->execute();
+
+        return $cmd->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    # Consulta um endereço com base no cod 
+    public function consultarEndereco()
+    {
+        $con = Conexao::conectar();
+
+        $cmd = $con->prepare("SELECT * FROM tbenderecos WHERE cod_endereco = :cod_endereco");
+        $cmd->bindParam(":cod_endereco", $this->cod_endereco);
+
+        $cmd->execute();
+
+        return $cmd->fetch(PDO::FETCH_OBJ);
+    }
+
+    # Atualiza o endereço
+    public function atualizarEndereco()
+    {
+        $con = Conexao::conectar();
+
+        $cmd = $con->prepare("UPDATE tbenderecos SET
+        cep       = :cep,
+        bairro    = :bairro,
+        endereco  = :endereco,
+        cidade    = :cidade,
+        estado    = :estado
+        WHERE cod_endereco = :cod_endereco");
+
+        $cmd->bindParam(":cod_endereco",  $this->cod_endereco);
+        $cmd->bindParam(":cep",           $this->cep);
+        $cmd->bindParam(":bairro",        $this->bairro);
+        $cmd->bindParam(":endereco",      $this->endereco);
+        $cmd->bindParam(":estado",        $this->estado);
+        $cmd->bindParam(":cidade",        $this->cidade);
+
+        $cmd->execute();
     }
 }

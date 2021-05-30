@@ -5,16 +5,20 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Atualizar Usuários</title>
+    <meta name="theme-color" content="blue">
+    <title>Editar Cliente</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <!-- Styles -->
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 </head>
 
-<body>
+<body class="adm">
     <main class="container-fluid">
-        <form action="index.php?classe=ClienteController&metodo=atualizarCliente" method="post" onsubmit="return validaForm()" novalidate id="frmEditarCli" class="frmEditarCli container">
+        <div class="page-title container">
+            <h1>Editar dados do cliente</h1>
+        </div>
+        <form action="index.php?classe=ClienteController&metodo=atualizarCliente" method="post" onsubmit="return validarForm()" novalidate id="frmEditarCli" class="frmEditarCli container">
             <div class="row justify-content-center">
                 <div class="col-12 col-md-6 form__fields-container form__fields-container-personal">
                     <fieldset class="form__fields">
@@ -137,7 +141,7 @@
                     <fieldset class="form__fields">
                         <legend class="form__title">Dados de Endereço</legend>
 
-                        <input type="hidden" id="cod_endereci" name="cod_endereco" value="<?php echo $dadosCli->cod_endereco; ?>" />
+                        <input type="hidden" id="cod_endereco" name="cod_endereco" value="<?php echo $dadosCli->cod_endereco; ?>" />
 
                         <div id="address-cep" class="form__input-group">
                             <label class="form__label" for="cep">CEP:</label>
@@ -334,9 +338,9 @@
                                 </div>
 
                                 <div id="access-email-confirm" class="form__input-group">
-                                    <label class="form__label" for="email_confirm">Confirmar e-mail:</label>
+                                    <label class="form__label" for="confirmar_email">Confirmar e-mail:</label>
                                     <div class="form__input-container">
-                                        <input class="form__input form-control" value="<?php echo $dadosCli->email ?>" autocomplete="email" maxlength="80" type="email" id="email_confirm" name="email">
+                                        <input class="form__input form-control" value="<?php echo $dadosCli->email ?>" autocomplete="email" maxlength="80" type="email" id="confirmar_email" name="email">
                                         <i class="form__icon form__icon-invalid">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                                                 <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
@@ -348,7 +352,7 @@
                                             </svg>
                                         </i>
                                     </div>
-                                    <span class="error-email_confirm"></span>
+                                    <span class="error-confirmar_email"></span>
                                 </div>
                             </div>
 
@@ -396,7 +400,6 @@
 
             <div class="row justify-content-center mt-4">
                 <div class="col-auto">
-                    <input type="button" class="btn btn-outline-danger" value="Cancelar" onclick="goBack();">
                     <button type="submit" class="btn btn-primary">
                         <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="save" class="svg-inline--fa fa-save fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" height="17" width="17" viewBox="0 0 448 512">
                             <path fill="currentColor" d="M433.941 129.941l-83.882-83.882A48 48 0 0 0 316.118 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h352c26.51 0 48-21.49 48-48V163.882a48 48 0 0 0-14.059-33.941zM224 416c-35.346 0-64-28.654-64-64 0-35.346 28.654-64 64-64s64 28.654 64 64c0 35.346-28.654 64-64 64zm96-304.52V212c0 6.627-5.373 12-12 12H76c-6.627 0-12-5.373-12-12V108c0-6.627 5.373-12 12-12h228.52c3.183 0 6.235 1.264 8.485 3.515l3.48 3.48A11.996 11.996 0 0 1 320 111.48z"></path>

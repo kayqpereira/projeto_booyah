@@ -55,7 +55,30 @@ class Cliente
     }
 
     // Busca os dados do cliente
-    public function buscarDadosDoCliente()
+    public function consultarClientes()
+    {
+        $con = Conexao::conectar();
+
+        $cmd = $con->prepare("SELECT * FROM tbclientes");
+
+        $cmd->execute();
+
+        return $cmd->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    // |Excluí um cliente pelo seu cod
+    public function excluirCliente()
+    {
+        $con = Conexao::conectar();
+
+        $cmd = $con->prepare("DELETE FROM tbclientes WHERE cod_cliente = :cod_cliente");
+        $cmd->bindParam(":cod_cliente", $this->cod_cliente);
+
+        $cmd->execute();
+    }
+
+    // Busca os dados do cliente
+    public function consultarDadosCliente()
     {
         $con = Conexao::conectar();
 
@@ -69,37 +92,24 @@ class Cliente
         return $cmd->fetch(PDO::FETCH_OBJ);
     }
 
+    public function consultarClientePorEndereco()
+    {
+        $con = Conexao::conectar();
+
+        $cmd = $con->prepare("SELECT * FROM tbclientes WHERE cod_endereco = :cod_endereco ");
+        $cmd->bindParam(":cod_endereco", $this->cod_endereco);
+
+        $cmd->execute();
+
+        return $cmd->fetchAll(PDO::FETCH_OBJ);
+    }
+
     // Atualizar os dados pessoais do cliente
     public function atualizarDadosPessoais()
     {
         $con = Conexao::conectar();
 
         if (!empty($this->senha)) {
-            $cmd = $con->prepare("UPDATE tbclientes SET
-            cod_endereco    = :cod_endereco,
-            nome            = :nome,
-            sobrenome       = :sobrenome,
-            cpf             = :cpf,
-            telefone        = :telefone,
-            data_nasc       = :data_nasc,
-            celular         = :celular, 
-            email           = :email,
-            complemento     = :complemento,
-            numero          = :numero
-            WHERE cod_cliente = :cod_cliente");
-
-            $cmd->bindParam(":cod_cliente",     $this->cod_cliente);
-            $cmd->bindParam(":cod_endereco",    $this->cod_endereco);
-            $cmd->bindParam(":nome",            $this->nome);
-            $cmd->bindParam(":sobrenome",       $this->sobrenome);
-            $cmd->bindParam(":cpf",             $this->cpf);
-            $cmd->bindParam(":telefone",        $this->telefone);
-            $cmd->bindParam(":celular",         $this->celular);
-            $cmd->bindParam(":data_nasc",       $this->data_nasc);
-            $cmd->bindParam(":complemento",     $this->complemento);
-            $cmd->bindParam(":numero",          $this->numero);
-            $cmd->bindParam(":email",           $this->email);
-        } else {
             $cmd = $con->prepare("UPDATE tbclientes SET
             cod_endereco    = :cod_endereco,
             nome            = :nome,
@@ -126,6 +136,31 @@ class Cliente
             $cmd->bindParam(":numero",          $this->numero);
             $cmd->bindParam(":email",           $this->email);
             $cmd->bindParam(":senha",           $this->senha);
+        } else {
+            $cmd = $con->prepare("UPDATE tbclientes SET
+            cod_endereco    = :cod_endereco,
+            nome            = :nome,
+            sobrenome       = :sobrenome,
+            cpf             = :cpf,
+            telefone        = :telefone,
+            data_nasc       = :data_nasc,
+            celular         = :celular, 
+            email           = :email,
+            complemento     = :complemento,
+            numero          = :numero
+            WHERE cod_cliente = :cod_cliente");
+
+            $cmd->bindParam(":cod_cliente",     $this->cod_cliente);
+            $cmd->bindParam(":cod_endereco",    $this->cod_endereco);
+            $cmd->bindParam(":nome",            $this->nome);
+            $cmd->bindParam(":sobrenome",       $this->sobrenome);
+            $cmd->bindParam(":cpf",             $this->cpf);
+            $cmd->bindParam(":telefone",        $this->telefone);
+            $cmd->bindParam(":celular",         $this->celular);
+            $cmd->bindParam(":data_nasc",       $this->data_nasc);
+            $cmd->bindParam(":complemento",     $this->complemento);
+            $cmd->bindParam(":numero",          $this->numero);
+            $cmd->bindParam(":email",           $this->email);
         }
 
         $cmd->execute();
@@ -136,25 +171,23 @@ class Cliente
      *
      * @return boolean
      */
-    public function verificaEmail()
+    public function verificarEmail()
     {
         $con = Conexao::conectar();
 
+        $cmd = $con->prepare("SELECT * FROM tbclientes WHERE email = :email");
+        $cmd->bindParam(":email", $this->email);
+
+        $cmd->execute();
+
         if (empty($this->cod_cliente)) {
-            $cmd = $con->prepare("SELECT * FROM tbclientes WHERE email = :email");
-            $cmd->bindParam(":email", $this->email);
-
-            $cmd->execute();
-
             if ($cmd->rowCount() <= 0)
                 return false;
             else
                 return true;
         } else {
-            $cmd = $con->prepare("SELECT * FROM tbclientes WHERE email = :email");
-            $cmd->bindParam(":email", $this->email);
-
-            $cmd->execute();
+            if ($cmd->rowCount() <= 0)
+                return false;
 
             $dados = $cmd->fetch(PDO::FETCH_OBJ);
 
@@ -170,25 +203,23 @@ class Cliente
      *
      * @return boolean
      */
-    public function verificaCpf()
+    public function verificarCpf()
     {
         $con = Conexao::conectar();
 
+        $cmd = $con->prepare("SELECT * FROM tbclientes WHERE cpf = :cpf");
+        $cmd->bindParam(":cpf", $this->cpf);
+
+        $cmd->execute();
+
         if (empty($this->cod_cliente)) {
-            $cmd = $con->prepare("SELECT * FROM tbclientes WHERE cpf = :cpf");
-            $cmd->bindParam(":cpf", $this->cpf);
-
-            $cmd->execute();
-
             if ($cmd->rowCount() <= 0)
                 return false;
             else
                 return true;
         } else {
-            $cmd = $con->prepare("SELECT * FROM tbclientes WHERE cpf = :cpf");
-            $cmd->bindParam(":cpf", $this->cpf);
-
-            $cmd->execute();
+            if ($cmd->rowCount() <= 0)
+                return false;
 
             $dados = $cmd->fetch(PDO::FETCH_OBJ);
 

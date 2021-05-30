@@ -95,13 +95,18 @@ const validate = {
             setMessage(error, cpf);
             return false;
         } else {
+            if (document.getElementById("cod_cliente"))
+                var cod_cliente = document.getElementById("cod_cliente").value;
+            else
+                var cod_cliente = "";
             $(document).ready(function () {
+
                 $.ajax({
-                    url: "index.php?classe=ClienteController&metodo=verificaCpf",
+                    url: "index.php?classe=ClienteController&metodo=verificarCpf",
                     type: "POST",
                     data: {
                         "cpf": cpf.value,
-                        "cod_cliente": document.getElementById("cod_cliente").value
+                        "cod_cliente": cod_cliente
                     },
                     dataType: "json",
                     beforeSend: function () {
@@ -357,13 +362,18 @@ const validate = {
             setMessage(error, email);
             return false;
         } else {
+            if (document.getElementById("cod_cliente"))
+                var cod_cliente = document.getElementById("cod_cliente").value;
+            else
+                var cod_cliente = "";
             $(document).ready(function () {
+
                 $.ajax({
-                    url: "index.php?classe=ClienteController&metodo=verificaEmail",
+                    url: "index.php?classe=ClienteController&metodo=verificarEmail",
                     type: "POST",
                     data: {
                         "email": email.value,
-                        "cod_cliente": document.getElementById("cod_cliente").value
+                        "cod_cliente": cod_cliente
                     },
                     dataType: "json",
                     beforeSend: function () {
@@ -371,7 +381,7 @@ const validate = {
                     },
 
                     success: function (callback) {
-                        setMessage(callback.email, email);
+                        setMessage(callback.erro, email);
                     },
 
                     error: function () {
@@ -383,13 +393,13 @@ const validate = {
                     }
                 });
             });
-            if (document.getElementById("email_confirm").value !== "")
-                validate["email_confirm"](document.getElementById("email_confirm"))
+            if (document.getElementById("confirmar_email").value !== "")
+                validate["confirmar_email"](document.getElementById("confirmar_email"))
             return true;
         }
     },
 
-    email_confirm(email) {
+    confirmar_email(email) {
         if (email.value == "") {
             let error = "Por favor, digite o seu e-mail.";
             setMessage(error, email);
@@ -428,7 +438,7 @@ const validate = {
     confirmar_senha(senha) {
         if (validaSenha(document.getElementById("senha").value)) {
             if (senha.value == "") {
-                let error = "Por favor, confirm a senha.";
+                let error = "Por favor, confirma senha.";
                 setMessage(error, senha);
                 return false;
             } else if (senha.value != document.getElementById("senha").value) {
@@ -450,11 +460,13 @@ const validate = {
                 return false;
             } else {
                 setMessage("", senha);
-                if (document.getElementById("confirmar_nova_senha").value !== "")
+                if (document.getElementById("confirmar_nova_senha").value != "")
                     validate["confirmar_nova_senha"](document.getElementById("confirmar_nova_senha"));
                 return true;
             }
         } else {
+            let error = "nulo";
+            setMessage(error, telefone);
             return true;
         }
     },
@@ -462,7 +474,7 @@ const validate = {
     confirmar_nova_senha(senha) {
         if (document.getElementById("nova_senha").value != "") {
             if (senha.value == "") {
-                let error = "Por favor, confirm a senha.";
+                let error = "Por favor, confirme a senha.";
                 setMessage(error, senha);
                 return false;
             } else if (senha.value != document.getElementById("nova_senha").value) {
@@ -474,9 +486,10 @@ const validate = {
                 return true;
             }
         } else {
+            let error = "nulo";
+            setMessage(error, telefone);
             return true;
         }
-
     }
 };
 
@@ -567,8 +580,8 @@ function validarForm() {
         return false;
     }
 
-    if (!validate["email_confirm"](document.getElementById("email_confirm"))) {
-        document.getElementById("email_confirm").focus();
+    if (!validate["confirmar_email"](document.getElementById("confirmar_email"))) {
+        document.getElementById("confirmar_email").focus();
         return false;
     }
 
@@ -592,6 +605,33 @@ function validarForm() {
             document.getElementById("confirmar_nova_senha").focus();
             return false;
         }
+    }
+}
+
+function validarFormEnd() {
+    if (!validate["cep"](document.getElementById("cep"))) {
+        document.getElementById("cep").focus();
+        return false;
+    }
+
+    if (!validate["padrao"](document.getElementById("bairro"))) {
+        document.getElementById("bairro").focus();
+        return false;
+    }
+
+    if (!validate["padrao"](document.getElementById("endereco"))) {
+        document.getElementById("endereco").focus();
+        return false;
+    }
+
+    if (!validate["padrao"](document.getElementById("cidade"))) {
+        document.getElementById("cidade").focus();
+        return false;
+    }
+
+    if (!validate["padrao"](document.getElementById("estado"))) {
+        document.getElementById("estado").focus();
+        return false;
     }
 }
 
@@ -642,3 +682,16 @@ function load(field, action) {
 
 if (document.getElementById("frmEditarCli"))
     document.getElementById("frmEditarCli").onload = validarForm();
+else if (document.getElementById("frmEditarEnd"))
+    document.getElementById("frmEditarEnd").onload = validarFormEnd();
+
+$(document).ready(function () {
+    if (document.querySelector(".tabela")) {
+        $(".tabela").DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"
+            },
+            "scrollX": true,
+        });
+    }
+});

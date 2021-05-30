@@ -1,26 +1,58 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@700&display=swap');
 
 :root{
-    --bg-register: #f5f5f7;/*#eff3f7;*/
+    --bg-adm: #f5f5f7;/*#eff3f7;*/
     --bg-form: rgb(245, 245, 247);
     --bg-form_row: #ffffff;
     --bg-form_fieldset: #ffffff;
+    --color-primary: #7166f0;
+    --color-primary-shadow: #685dd8;
+}
+
+body{
+    background-color: var(--bg-adm);
 }
 
 main.container-fluid{
     font-family: 'Roboto', sans-serif;
-    background-color: var(--bg-register);
+    background-color: var(--bg-adm);
     padding: 0;
+    overflow-x: hidden;
 }
 
+
+.page-title{
+    padding-top: 1.5rem;
+    font-weight: 700;
+    font-family: 'Rubik', sans-serif;
+    color: rgba(113, 102, 240, .9);
+    text-align: center;
+}
+
+.page-title h1,
+.page-title h2{
+    display: inline-block;
+    font-size: 1.8rem;
+    margin: 0 auto;
+    padding-bottom: .5rem;
+    border-bottom: 2px solid rgba(113, 102, 240, .9);
+}
+
+.frmEditarEnd,
 .frmEditarCli,
 .frmCadastroCli{
     background-color: var(--bg-form);
-    padding: 2rem 1.75rem;
+    padding: 1.75rem 1.5rem;
     width: 100%;
     max-width: 900px;
 }
 
+.frmEditarEnd{
+    max-width: 475px !important;
+}
+
+.frmEditarEnd .row:not(:last-child),
 .frmEditarCli .row:not(:last-child),
 .frmCadastroCli .row:not(:last-child){
     background-color: var(--bg-form_row);
@@ -28,7 +60,7 @@ main.container-fluid{
     box-shadow:  0 0 10px 0 rgba(80, 80, 80, 0.1);
     -webkit-box-shadow: 0 0 10px rgba(80, 80, 80, 0.1);
 }
-
+.form__fields-container-edit,
 .form__fields-container{
     position: relative;
     background-color: var(--bg-form_fieldset);
@@ -78,7 +110,8 @@ main.container-fluid{
 }
 
 .form__input:focus{
-    border-color: var(--blue);
+    border-color: var(--color-primary-shadow);
+    box-shadow: 0 0 0 0.2rem rgba(115, 103, 240, 25%);
 }
 
 .form__icon{
@@ -151,7 +184,7 @@ span[class^="error-"].is-active{
 }
 
 .form__link-style{
-    font-size: .85rem;
+    font-size: .9rem;
     font-weight: 400;
     color: var(--blue);
 }
@@ -160,15 +193,23 @@ span[class^="error-"].is-active{
     color: var(--blue);
 }
 
-.btn{
-    margin: 0 .1rem !important;
-    padding: .4rem .8rem;
-    font-weight: 400;
+.btn-sm{
+    padding: 0.3rem .6rem !important;
 }
 
 .btn:focus,
 .btn-primary:focus{
     box-shadow: none !important;
+}
+
+.btn-primary{
+    background-color: var(--color-primary) !important;
+    border-color: var(--color-primary) !important; 
+}
+
+.btn-primary:hover{
+    background-color: var(--color-primary-shadow) !important;
+    border-color: var(--color-primary-shadow) !important; 
 }
 
 .load{
@@ -180,7 +221,7 @@ span[class^="error-"].is-active{
     height: 20px;
     width: 20px;
 
-    border: .27rem solid #e6e6e6;
+    border: .2rem solid #e6e6e6;
     border-top-color: transparent;
     border-radius: 50%;
 }
@@ -191,6 +232,25 @@ span[class^="error-"].is-active{
 
 .load.is-rotating{
     display: block;
+}
+
+.tabela-container{
+    max-width: 1000px;
+    padding: 2rem;
+    background-color: var(--bg-form_row);
+    border-radius: .25rem;
+    box-shadow:  0 0 10px 0 rgba(80, 80, 80, 0.1);
+    -webkit-box-shadow: 0 0 10px rgba(80, 80, 80, 0.1);
+}
+
+.tabela{
+    font: 90%/1.45em "Helvetica Neue",HelveticaNeue,Helvetica,Arial,sans-serif !important;
+}
+
+td .acao{
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
 }
 
 @keyframes is-rotating{
@@ -209,13 +269,14 @@ span[class^="error-"].is-active{
         font-size: .95rem;
     }
 
+    .page-title h1{
+        font-size: 1.75rem;
+    }
+
+    .frmEditarEnd,
     .frmEditarCli,
     .frmCadastroCli{
         max-width: 475px;
-    }
-
-    .form__fields-container{
-        padding: 0 2.5rem;
     }
     
     .form__fields-container-personal{
@@ -233,12 +294,17 @@ span[class^="error-"].is-active{
         font-size: .9rem;
     }
 
+    .page-title h1{
+        font-size: 1.35rem;
+    }
+
     .frmEditarCli,
     .frmCadastroCli{
         max-width: 400px;
     }
 
-    .frmEditarCli,
+    .frmEditarEnd > .row:not(:last-child),
+    .frmEditarCli > .row:not(:last-child),
     .frmCadastroCli > .row:not(:last-child){
         box-shadow: none;
     }
@@ -249,10 +315,6 @@ span[class^="error-"].is-active{
     
     .frmCadastroCli > .row:nth-child(2){
         border-radius: 0 0 .25rem .25rem;
-    }
-
-    .form__fields-container{
-        padding: 0 2rem;
     }
 
     .form__fields-container:not(.form__fields-container-personal){

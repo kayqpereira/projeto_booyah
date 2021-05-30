@@ -5,15 +5,19 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Cadastro de Usuários</title>
+    <title>Cadastro de Cliente</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <!-- Styles CSS -->
     <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
 </head>
 
-<body>
+<body class="adm">
+
     <main class="container-fluid">
+        <div class="page-title container">
+            <h1>Cadastro de novo cliente</h1>
+        </div>
         <form action="index.php?classe=ClienteController&metodo=cadastrarCliente" method="post" onsubmit="return validarForm()" novalidate id="frmCadastroCli" class="frmCadastroCli container">
             <div class="row justify-content-center">
                 <div class="col-12 col-md-6 form__fields-container form__fields-container-personal">
@@ -330,9 +334,9 @@
                                 </div>
 
                                 <div id="access-email-confirm" class="form__input-group">
-                                    <label class="form__label" for="email_confirm">Confirmar e-mail:</label>
+                                    <label class="form__label" for="confirmar_email">Confirmar e-mail:</label>
                                     <div class="form__input-container">
-                                        <input class="form__input form-control" autocomplete="email" maxlength="80" type="email" id="email_confirm" name="email">
+                                        <input class="form__input form-control" autocomplete="email" maxlength="80" type="email" id="confirmar_email" name="email">
                                         <i class="form__icon form__icon-invalid">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                                                 <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
@@ -344,7 +348,7 @@
                                             </svg>
                                         </i>
                                     </div>
-                                    <span class="error-email_confirm"></span>
+                                    <span class="error-confirmar_email"></span>
                                 </div>
                             </div>
 
@@ -392,7 +396,6 @@
 
             <div class="row justify-content-center mt-4">
                 <div class="col-auto">
-                    <input type="button" class="btn btn-outline-danger" value="Cancelar" onclick="goBack();">
                     <input type="submit" class="btn btn-primary" value="Criar Conta">
                 </div>
             </div>
