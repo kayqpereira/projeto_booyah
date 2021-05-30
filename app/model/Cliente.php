@@ -2,7 +2,6 @@
 
 class Cliente
 {
-    // Tabela Clientes
     private $cod_cliente;
     private $cod_endereco;
     private $nome;
@@ -20,6 +19,7 @@ class Cliente
     {
         return $this->$atributo;
     }
+
     public function __set($atributo, $valor)
     {
         $this->$atributo = $valor;
@@ -31,7 +31,7 @@ class Cliente
     }
 
     /**
-     * Método para cadastrar os dados pessoais
+     * Cadastrar dados pessoais do clientes
      */
     public function cadastrarDadosPessoais()
     {
@@ -57,7 +57,7 @@ class Cliente
     }
 
     /**
-     * Consulta todos os clientes
+     * Consultar todos os clientes
      */
     public function consultarClientes()
     {
@@ -71,7 +71,7 @@ class Cliente
     }
 
     /**
-     * Excluí um cliente com base no cod
+     * Excluír um cliente com base no cod
      */
     public function excluirCliente()
     {
@@ -84,7 +84,7 @@ class Cliente
     }
 
     /**
-     * Consulta dados de um cliente incluindo seu endereço
+     * Consultar dados de um cliente incluindo seu endereço
      */
     public function consultarDadosCliente()
     {
@@ -101,7 +101,7 @@ class Cliente
     }
 
     /**
-     * Consulta todos os clientes com base no cod_endereco
+     * Consultar todos os clientes com base no cod_endereco
      */
     public function consultarClientePorCodEnd()
     {
@@ -116,7 +116,7 @@ class Cliente
     }
 
     /**
-     * Atualiza os dados pessoais do cliente com base no cod
+     * Atualizar os dados pessoais do cliente com base no cod
      */
     public function atualizarDadosPessoais()
     {
@@ -181,7 +181,7 @@ class Cliente
     }
 
     /**
-     * Verifica se o email já foi cadastrado
+     * Verificar se o email já foi cadastrado
      * @return boolean
      */
     public function verificarEmail()
@@ -212,7 +212,7 @@ class Cliente
     }
 
     /**
-     * Verifica se o CPF já foi cadastrado
+     * Verificar se o CPF já foi cadastrado
      * @return boolean
      */
     public function verificarCpf()

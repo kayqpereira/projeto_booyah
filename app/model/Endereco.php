@@ -13,6 +13,7 @@ class Endereco
     {
         return $this->$atributo;
     }
+
     public function __set($atributo, $valor)
     {
         $this->$atributo = $valor;
@@ -24,7 +25,7 @@ class Endereco
     }
 
     /**
-     * Cadastra um novo endereço
+     * Cadastrar um novo endereço
      */
     public function cadastrarEndereco()
     {
@@ -46,7 +47,7 @@ class Endereco
     }
 
     /**
-     * Consulta todos os endereços
+     * Consultar todos os endereços
      */
     public function consultarEnderecos()
     {
@@ -60,7 +61,7 @@ class Endereco
     }
 
     /**
-     * Atualiza o endereço com base no cod
+     * Atualizar o endereço com base no cod
      */
     public function atualizarEndereco()
     {
@@ -98,7 +99,7 @@ class Endereco
     }
 
     /**
-     * Consulta um endereço com base no cod 
+     * Consultar um endereço com base no cod 
      */
     public function consultarEnderecoCod()
     {
@@ -114,7 +115,7 @@ class Endereco
 
 
     /**
-     * Verifica se o endereço está cadastrado
+     * Verificar se o endereço está cadastrado
      */
     public function verificarEndereco()
     {

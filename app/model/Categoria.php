@@ -8,6 +8,7 @@ class Categoria
     {
         return $this->$atributo;
     }
+
     function __set($atributo, $valor)
     {
         $this->$atributo = $valor;
@@ -19,7 +20,7 @@ class Categoria
     }
 
     /**
-     * Cadastra uma nova categoria
+     * Cadastrar uma nova categoria
      */
     function cadastrarCategoria()
     {
@@ -33,7 +34,7 @@ class Categoria
     }
 
     /**
-     * Consulta todas as categorias
+     * Consultar todas as categorias
      */
     function consultarCategorias()
     {
@@ -46,7 +47,7 @@ class Categoria
     }
 
     /**
-     * Atualiza uma categoria com base no cod
+     * Atualizar uma categoria com base no cod
      */
     function atualizarCategoria()
     {
@@ -61,7 +62,7 @@ class Categoria
 
         $cmd->execute();
     }
-    
+
     /**
      * Excluír uma categoria com base no cod
      */
@@ -75,9 +76,8 @@ class Categoria
         $cmd->execute();
     }
 
-
     /**
-     * Consulta uma categoria com base no cod
+     * Consultar uma categoria com base no cod
      */
     function consultarCategoriaCod()
     {
