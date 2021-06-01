@@ -18,7 +18,7 @@
         <div class="page-title container">
             <h1>Cadastro de novo cliente</h1>
         </div>
-        <form action="index.php?classe=ClienteController&metodo=cadastrarCliente" method="post" onsubmit="return validarForm()" novalidate id="frmCadastroCli" class="frmCadastroCli container">
+        <form action="index.php?classe=ClienteController&metodo=cadastrarCliente" method="post" onsubmit="return validarForm()" novalidate id="frmCadastroCli" class="frmCli container">
             <div class="row justify-content-center">
                 <div class="col-12 col-md-6 form__fields-container form__fields-container-personal">
                     <fieldset class="form__fields">
@@ -396,7 +396,7 @@
 
             <div class="row justify-content-center mt-4">
                 <div class="col-auto">
-                    <input type="submit" class="btn btn-primary" value="Criar Conta">
+                    <input type="submit" class="btn btn-principal" value="Criar Conta">
                 </div>
             </div>
         </form>

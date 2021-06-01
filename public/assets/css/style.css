@@ -2,8 +2,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@700&display=swap');
 
 :root{
-    --bg-adm: #f5f5f7;/*#eff3f7;*/
-    --bg-form: rgb(245, 245, 247);
+    --bg-adm: #f5f5f7;
+    --bg-form: #f5f5f7;
     --bg-form_row: #ffffff;
     --bg-form_fieldset: #ffffff;
     --color-primary: #7166f0;
@@ -39,27 +39,42 @@ main.container-fluid{
     border-bottom: 2px solid rgba(113, 102, 240, .9);
 }
 
-.frmEditarEnd,
-.frmEditarCli,
-.frmCadastroCli{
+.frmMar,
+.frmProd,
+.frmEnd,
+.frmCli{
     background-color: var(--bg-form);
     padding: 1.75rem 1.5rem;
     width: 100%;
-    max-width: 900px;
+    max-width: 850px;
 }
 
-.frmEditarEnd{
+.frmEnd{
     max-width: 475px !important;
 }
 
-.frmEditarEnd .row:not(:last-child),
-.frmEditarCli .row:not(:last-child),
-.frmCadastroCli .row:not(:last-child){
+.frmProd{
+    max-width: 900px !important;
+}
+
+.frmMar{
+    max-width: 600px !important;
+}
+
+.frmProd .form__fields > .row{
+    margin-bottom: 10px;
+}
+
+.frmMar .row,
+.frmProd > .row:not(:last-child),
+.frmEnd .row:not(:last-child),
+.frmCli .row:not(:last-child){
     background-color: var(--bg-form_row);
     border-radius: .25rem;
     box-shadow:  0 0 10px 0 rgba(80, 80, 80, 0.1);
     -webkit-box-shadow: 0 0 10px rgba(80, 80, 80, 0.1);
 }
+
 .form__fields-container-edit,
 .form__fields-container{
     position: relative;
@@ -68,18 +83,21 @@ main.container-fluid{
     margin: 1.5rem 0 2rem;
 }
 
+.form__fields-container-edit{
+    margin: 2rem 0 !important;
+}
+
 .form__fields-container-personal{
     border-right: 1px solid #e6e3e3;
 }
 
 .form__title{
     font-weight: 400;
-    margin-bottom: 1rem;
     text-align: center;
 }
 
 .form__input-group:not(:last-child){
-    margin-bottom: 10px;
+    margin-bottom: 10px !important;
 }
 
 .form__label{
@@ -198,18 +216,20 @@ span[class^="error-"].is-active{
 }
 
 .btn:focus,
-.btn-primary:focus{
+.btn-principal:focus{
     box-shadow: none !important;
 }
 
-.btn-primary{
-    background-color: var(--color-primary) !important;
-    border-color: var(--color-primary) !important; 
+.btn-principal{
+    color: #fff;
+    background-color: var(--color-primary);
+    border-color: var(--color-primary) ; 
 }
 
-.btn-primary:hover{
-    background-color: var(--color-primary-shadow) !important;
-    border-color: var(--color-primary-shadow) !important; 
+.btn-principal:hover{
+    color: #fff;
+    background-color: var(--color-primary-shadow) ;
+    border-color: var(--color-primary-shadow); 
 }
 
 .load{
@@ -253,6 +273,10 @@ td .acao{
     flex-direction: column;
 }
 
+.swal2-styled:focus{
+    box-shadow: none !important;
+}
+
 @keyframes is-rotating{
     from {
         transform: rotate(0deg);
@@ -273,10 +297,15 @@ td .acao{
         font-size: 1.75rem;
     }
 
-    .frmEditarEnd,
-    .frmEditarCli,
-    .frmCadastroCli{
+    .frmMar,
+    .frmProd,
+    .frmEnd,
+    .frmCli{
         max-width: 475px;
+    }
+    
+    .frmProd .form__fields > .row > [class^="col"]:not(:last-child){
+        margin-bottom: 10px;
     }
     
     .form__fields-container-personal{
@@ -298,22 +327,27 @@ td .acao{
         font-size: 1.35rem;
     }
 
-    .frmEditarCli,
-    .frmCadastroCli{
+    .frmCli{
         max-width: 400px;
     }
 
-    .frmEditarEnd > .row:not(:last-child),
-    .frmEditarCli > .row:not(:last-child),
-    .frmCadastroCli > .row:not(:last-child){
+    .frmMar,
+    .frmProd,
+    .frmEnd > .row:not(:last-child),
+    .frmCli > .row:not(:last-child){
         box-shadow: none;
     }
+
+    .frmProd .form__fields .row:nth-child(1) [class^="col"]:nth-child(2),
+    .frmProd .form__fields .row:nth-child(1) [class^="col"]:nth-child(3){
+        margin-bottom: 0;
+    }
     
-    .frmCadastroCli > .row:nth-child(1){
+    .frmCli > .row:nth-child(1){
         border-radius: .25rem .25rem 0 0;
     }
     
-    .frmCadastroCli > .row:nth-child(2){
+    .frmCli > .row:nth-child(2){
         border-radius: 0 0 .25rem .25rem;
     }
 
@@ -332,4 +366,16 @@ td .acao{
     .is-valid{
         border: 1px solid #28a745 !important;
     }
+}
+
+@media screen and (max-width: 270px){
+    .page-title h1,
+    .page-title h2{
+        border: none;
+    }
+}
+
+/* Modal */
+.modal-content{
+    border: none;
 }

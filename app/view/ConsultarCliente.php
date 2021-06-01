@@ -86,7 +86,6 @@
                                     <td>$endereco->cidade</td>
                                     <td>$endereco->estado</td>
                                     <td class='acao'>
-                                        <button data-toggle='tooltip' title='Excluír' onclick=\"excluirEndereco($endereco->cod_endereco);\" class='btn btn-sm btn-danger'><i class='fas fa-trash-alt'></i></button>
                                         <a data-toggle='tooltip' title='Editar' href='index.php?classe=EnderecoController&metodo=abrirAtualizacao&cod_endereco=$endereco->cod_endereco'class='btn btn-sm btn-secondary'><i class='fas fa-edit'></i></a>
                                     </td>
                                 </tr>";
@@ -118,24 +117,6 @@
                 boundary: 'window'
             })
         })
-
-        function excluirEndereco(cod_endereco) {
-            Swal.fire({
-                title: "Tem certeza",
-                text: "Todos os clientes vinculados a este endereço serão exluídos!",
-                icon: "warning",
-                iconColor: "#dc3545",
-                showCancelButton: true,
-                cancelButtonColor: "#dc3545",
-                confirmButtonText: "Sim",
-                cancelButtonText: "Cancelar",
-                focusConfirm: "false"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location = "index.php?classe=EnderecoController&metodo=excluirEndereco&cod_endereco=" + cod_endereco;
-                }
-            });
-        }
 
         function excluirCliente(cod_cliente, cod_endereco) {
             Swal.fire({

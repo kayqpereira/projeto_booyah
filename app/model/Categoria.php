@@ -91,4 +91,35 @@ class Categoria
 
         return $cmd->fetch(PDO::FETCH_OBJ);
     }
+
+    /**
+     * Verificar se a categoria já foi cadastrada
+     * @return boolean
+     */
+    public function verificarCategoria()
+    {
+        $con = Conexao::conectar();
+
+        $cmd = $con->prepare("SELECT * FROM tbcategorias WHERE nome_categoria = :nome_categoria");
+        $cmd->bindParam(":nome_categoria", $this->nome_categoria);
+
+        $cmd->execute();
+
+        if (empty($this->cod_categoria)) {
+            if ($cmd->rowCount() <= 0)
+                return false;
+            else
+                return true;
+        } else {
+            if ($cmd->rowCount() <= 0)
+                return false;
+
+            $dados = $cmd->fetch(PDO::FETCH_OBJ);
+
+            if ($this->cod_categoria == $dados->cod_categoria)
+                return false;
+            else
+                return true;
+        }
+    }
 }

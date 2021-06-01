@@ -15,65 +15,6 @@ class EnderecoController
         }
     }
 
-    public function excluirEndereco()
-    {
-        include "../app/model/Endereco.php";
-        $end = new Endereco();
-
-        include "../app/model/Cliente.php";
-        $cli = new Cliente();
-
-        if (isset($_GET["cod_endereco"])) {
-            $cli->cod_endereco = $_GET["cod_endereco"];
-            $end->cod_endereco = $_GET["cod_endereco"];
-
-            $dadosCli = $cli->consultarClientePorCodEnd();
-
-            if (!empty($dadosCli)) {
-                foreach ($dadosCli as $cliente) {
-                    $cli->cod_cliente = $cliente->cod_cliente;
-                    $cli->excluirCliente();
-                }
-            }
-
-            $end->excluirEndereco();
-
-            echo "<body></body>
-            <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css'>
-            <script src='https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js'></script>
-            <script src='//cdn.jsdelivr.net/npm/sweetalert2@10'></script>
-            <script>
-                Swal.fire({
-                    title:'Endereço excluído com sucesso!',
-                    type:'success',
-                    icon:'success',
-                    showConfirmButton:false,
-                    timer:1500,
-                    onClose: () => {
-                        window.location='index.php?classe=ClienteController&metodo=abrirConsulta';
-                    }
-                });
-            </script>";
-        } else {
-            echo "<body></body>
-            <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css'>
-            <script src='https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js'></script>
-            <script src='//cdn.jsdelivr.net/npm/sweetalert2@10'></script>
-            <script>
-            Swal.fire({
-                icon: 'error',
-                iconColor: '#dc3545',
-                title: 'Erro!',
-                text: 'Não foi possível exluír o Endereço.',
-                confirmButtonColor: '#7166f0',
-                onClose: () => {
-                    window.history.back();
-                }
-            });
-            </script>";
-        }
-    }
-
     public function atualizarEndereco()
     {
         include "../app/model/Endereco.php";

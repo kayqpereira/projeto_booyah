@@ -14,6 +14,10 @@ class Cliente
     private $numero;
     private $email;
     private $senha;
+    # Tabela la
+    private $cod_marca;
+
+
 
     public function __get($atributo)
     {
@@ -98,21 +102,6 @@ class Cliente
         $cmd->execute();
 
         return $cmd->fetch(PDO::FETCH_OBJ);
-    }
-
-    /**
-     * Consultar todos os clientes com base no cod_endereco
-     */
-    public function consultarClientePorCodEnd()
-    {
-        $con = Conexao::conectar();
-
-        $cmd = $con->prepare("SELECT * FROM tbclientes WHERE cod_endereco = :cod_endereco ");
-        $cmd->bindParam(":cod_endereco", $this->cod_endereco);
-
-        $cmd->execute();
-
-        return $cmd->fetchAll(PDO::FETCH_OBJ);
     }
 
     /**

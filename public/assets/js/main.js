@@ -45,6 +45,12 @@ const masks = {
             .replace(/(\d{5})(\d)/, "$1-$2")
             .replace(/(-\d{3})\d+?$/, "$1");
     },
+
+    estoque(value) {
+        return value
+            .replace(/\D+/g, "")
+            .replace(/(\d{6})\d+?$/, "$1");
+    },
 }
 
 // Adicionando as mascaras aos campos
@@ -297,7 +303,7 @@ const validate = {
         } else {
             $(document).ready(function () {
                 $.ajax({
-                    url: "https://viacep.com.br/ws/" + cep.value + "/json",
+                    url: "https://viacep.com.br/ws/" + cepValue + "/json",
                     type: "GET",
                     dataType: "json",
                     beforeSend: function () {
@@ -490,7 +496,37 @@ const validate = {
             setMessage(error, telefone);
             return true;
         }
-    }
+    },
+
+    estoque(estoque) {
+        if (estoque.value == "") {
+            let error = "Este campo é obrigatório.";
+            setMessage(error, estoque);
+            return false;
+        } else if (parseInt(estoque.value) <= 0) {
+            let error = "Estoque deve ser maior que 0.";
+            setMessage(error, estoque);
+            return false;
+        } else {
+            setMessage("", estoque);
+            return true;
+        }
+    },
+
+    preco(preco) {
+        if (preco.value == "") {
+            let error = "Este campo é obrigatório.";
+            setMessage(error, preco);
+            return false;
+        } else if (parseFloat(preco.value) <= 0) {
+            let error = "O preço deve ser maior que 0.";
+            setMessage(error, preco);
+            return false;
+        } else {
+            setMessage("", preco);
+            return true;
+        }
+    },
 };
 
 // Adiciona o evento change e um função correspondente a todos os campos 
@@ -503,7 +539,14 @@ document.querySelectorAll(".form-control").forEach(field => {
         (id == "endereco") ||
         (id == "numero") ||
         (id == "cidade") ||
-        (id == "estado")) {
+        (id == "estado") ||
+        (id == "nome_produto") ||
+        (id == "destaque") ||
+        (id == "ativo") ||
+        (id == "cod_categoria") ||
+        (id == "cod_marca") ||
+        (id == "nome_categoria") ||
+        (id == "nome_marca")) {
         field.addEventListener("change", event => {
             event.target = validate["padrao"](event.target);
         }, false);
@@ -635,6 +678,57 @@ function validarFormEnd() {
     }
 }
 
+function validarFormMar() {
+    if (!validate["padrao"](document.getElementById("nome_marca"))) {
+        document.getElementById("nome_marca").focus();
+        return false;
+    }
+}
+
+function validarFormCateg() {
+    if (!validate["padrao"](document.getElementById("nome_categoria"))) {
+        document.getElementById("nome_categoria").focus();
+        return false;
+    }
+}
+
+function validarFormProd() {
+    if (!validate["padrao"](document.getElementById("nome_produto"))) {
+        document.getElementById("nome_produto").focus();
+        return false;
+    }
+
+    if (!validate["padrao"](document.getElementById("destaque"))) {
+        document.getElementById("destaque").focus();
+        return false;
+    }
+
+    if (!validate["padrao"](document.getElementById("ativo"))) {
+        document.getElementById("ativo").focus();
+        return false;
+    }
+
+    if (!validate["estoque"](document.getElementById("estoque"))) {
+        document.getElementById("estoque").focus();
+        return false;
+    }
+
+    if (!validate["preco"](document.getElementById("preco"))) {
+        document.getElementById("preco").focus();
+        return false;
+    }
+
+    if (!validate["padrao"](document.getElementById("cod_categoria"))) {
+        document.getElementById("cod_categoria").focus();
+        return false;
+    }
+
+    if (!validate["padrao"](document.getElementById("cod_marca"))) {
+        document.getElementById("cod_marca").focus();
+        return false;
+    }
+}
+
 function setMessage(error, field) {
     const spanErrorMessage = document.querySelector(`span.error-${field.id}`);
 
@@ -684,6 +778,8 @@ if (document.getElementById("frmEditarCli"))
     document.getElementById("frmEditarCli").onload = validarForm();
 else if (document.getElementById("frmEditarEnd"))
     document.getElementById("frmEditarEnd").onload = validarFormEnd();
+else if (document.getElementById("frmEditarProd"))
+    document.getElementById("frmEditarProd").onload = validarFormProd();
 
 $(document).ready(function () {
     if (document.querySelector(".tabela")) {

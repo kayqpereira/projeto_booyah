@@ -196,37 +196,25 @@ class ClienteController
             return false;
         }
 
-        # Verifica se o endereço já foi cadastrado 
         $dadosEnd = $end->verificarEndereco();
 
         if (!empty($dadosEnd)) {
             if ($_POST["cod_endereco"] != $dadosEnd->cod_endereco) {
-                $codEndereco = $_POST["cod_endereco"];
                 $cli->cod_endereco = $dadosEnd->cod_endereco;
             } else {
                 $cli->cod_endereco = $_POST["cod_endereco"];
             }
         } else {
-            $codEndereco = $_POST["cod_endereco"];
             $cli->cod_endereco = $end->cadastrarEndereco();
         }
 
         $cli->atualizarDadosPessoais();
 
-        if (isset($codEndereco)) {
-            $cli->cod_endereco = $codEndereco;
-            $dadosCli = $cli->consultarClientePorCodEnd();
-
-            if (empty($dadosCli)) {
-                $end->cod_endereco = $codEndereco;
-                $end->excluirEndereco();
-            }
-        }
 
         echo "<body></body>
-        <link rel='stylesheet' href='https:#cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css'>
-        <script src='https:#cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js'></script>
-        <script src='#cdn.jsdelivr.net/npm/sweetalert2@10'></script>
+        <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css'>
+        <script src='https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js'></script>
+        <script src='//cdn.jsdelivr.net/npm/sweetalert2@10'></script>
         <script>
         Swal.fire({
             title:'Salvou!',
@@ -244,23 +232,12 @@ class ClienteController
 
     public function excluirCliente()
     {
-        include "../app/model/Cliente.php";
-        $cli = new Cliente();
+        if (isset($_GET["cod_cliente"])) {
+            include "../app/model/Cliente.php";
+            $cli = new Cliente();
 
-        include "../app/model/Endereco.php";
-        $end = new Endereco();
-
-        if (isset($_GET["cod_cliente"]) && isset($_GET["cod_endereco"])) {
             $cli->cod_cliente  = $_GET["cod_cliente"];
-            $cli->cod_endereco = $_GET["cod_endereco"];
-
             $cli->excluirCliente();
-            $dadosCli = $cli->consultarClientePorCodEnd();
-
-            if (empty($dadosCli)) {
-                $end->cod_endereco = $_GET["cod_endereco"];
-                $end->excluirEndereco();
-            }
 
             echo "<body></body>
             <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css'>
@@ -288,7 +265,7 @@ class ClienteController
                 icon: 'error',
                 iconColor: '#dc3545',
                 title: 'Erro!',
-                text: 'Não foi possível exluír o cliente.',
+                text: 'Não foi possível excluír o cliente.',
                 confirmButtonColor: '#7166f0',
                 onClose: () => {
                     window.history.back();

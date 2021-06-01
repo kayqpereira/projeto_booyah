@@ -91,4 +91,35 @@ class Marca
 
         return $cmd->fetch(PDO::FETCH_OBJ);
     }
+
+    /**
+     * Verificar se a marca já foi cadastrada
+     * @return boolean
+     */
+    public function verificarMarca()
+    {
+        $con = Conexao::conectar();
+
+        $cmd = $con->prepare("SELECT * FROM tbmarcas WHERE nome_marca = :nome_marca");
+        $cmd->bindParam(":nome_marca", $this->nome_marca);
+
+        $cmd->execute();
+
+        if (empty($this->cod_marca)) {
+            if ($cmd->rowCount() <= 0)
+                return false;
+            else
+                return true;
+        } else {
+            if ($cmd->rowCount() <= 0)
+                return false;
+
+            $dados = $cmd->fetch(PDO::FETCH_OBJ);
+
+            if ($this->cod_marca == $dados->cod_marca)
+                return false;
+            else
+                return true;
+        }
+    }
 }

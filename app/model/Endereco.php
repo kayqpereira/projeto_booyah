@@ -86,19 +86,6 @@ class Endereco
     }
 
     /**
-     * Excluír um endereço com base no cod
-     */
-    public function excluirEndereco()
-    {
-        $con = Conexao::conectar();
-
-        $cmd = $con->prepare("DELETE FROM tbenderecos WHERE cod_endereco = :cod_endereco");
-        $cmd->bindParam(":cod_endereco", $this->cod_endereco);
-
-        $cmd->execute();
-    }
-
-    /**
      * Consultar um endereço com base no cod 
      */
     public function consultarEnderecoCod()
