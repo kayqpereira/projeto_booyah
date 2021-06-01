@@ -217,7 +217,7 @@
 
             <div class="row justify-content-center mt-4">
                 <div class="col-auto">
-                    <input type="submit" class="btn btn-principal" value="Cadastrar">
+                    <input type="submit" class="btn btn-principal-3d" value="Cadastrar">
                 </div>
             </div>
         </form>

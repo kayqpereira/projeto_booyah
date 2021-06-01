@@ -31,7 +31,7 @@
                             <div class="form__input-container input-group">
                                 <input class="form__input form-control" value="<?php if (isset($dadosMarCod)) echo $dadosMarCod->nome_marca; ?>" maxlength="30" type="text" id="nome_marca" name="nome_marca">
                                 <div class="input-group-append">
-                                    <input type="submit" id="salvar" class="btn btn-principal rounded-right" value="Salvar">
+                                    <input type="submit" id="salvar" class="btn btn-principal-3d rounded-right" value="Salvar">
                                 </div>
                                 <i class="form__icon form__icon-invalid">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">

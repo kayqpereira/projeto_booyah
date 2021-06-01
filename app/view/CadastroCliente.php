@@ -396,7 +396,7 @@
 
             <div class="row justify-content-center mt-4">
                 <div class="col-auto">
-                    <input type="submit" class="btn btn-principal" value="Criar Conta">
+                    <input type="submit" class="btn btn-principal-3d" value="Criar Conta">
                 </div>
             </div>
         </form>

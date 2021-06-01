@@ -232,6 +232,20 @@ span[class^="error-"].is-active{
     border-color: var(--color-primary-shadow); 
 }
 
+.btn-principal-3d{
+    color: #fff;
+    background-color: var(--color-primary);
+    border: 1px solid #5349c5;
+    border-bottom: 4px solid #5349c5;  
+}
+
+.btn-principal-3d:hover{
+    color: #fff;
+    background-color: var(--color-primary-shadow) ;
+    border: 1px solid #5349c5;
+    border-bottom: 4px solid #5349c5;  
+}
+
 .load{
     display: none;
     position: absolute;
