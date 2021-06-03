@@ -14,6 +14,8 @@
 
 <body class="adm">
 
+    <?php include_once "navbar.php"; ?>
+
     <main class="container-fluid">
         <div class="page-title container">
             <h1>Editar produto</h1>

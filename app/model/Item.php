@@ -49,61 +49,27 @@ class Item
     {
         $con = Conexao::conectar();
 
-        $cmd = $con->prepare("SELECT * FROM tbitens");
+        $cmd = $con->prepare("SELECT tbprodutos.nome_produto, tbitens.* 
+        FROM tbitens INNER JOIN tbprodutos ON tbitens.cod_produto = tbprodutos.cod_produto");
         $cmd->execute();
 
         return $cmd->fetchAll(PDO::FETCH_OBJ);
     }
 
     /**
-     * Excluír um item com base no cod
-     */
-    public function excluirItem()
-    {
-        $con = Conexao::conectar();
-
-        $cmd = $con->prepare("DELETE FROM tbitens WHERE cod_item = :cod_item");
-        $cmd->bindParam(":cod_item", $this->cod_item);
-
-        $cmd->execute();
-    }
-
-    /**
-     * Atualizar item com base no cod
-     */
-    public function atualizarItem()
-    {
-        $con = Conexao::conectar();
-
-        $cmd = $con->prepare("UPDATE tbitens SET
-        cod_produto = :cod_produto
-        cod_venda   = :cod_venda,
-        quantidade  = :quantidade,
-        preco       = :preco,
-        WHERE cod_item  = :cod_item,");
-
-        $cmd->bindParam(":cod_item",    $this->cod_item);
-        $cmd->bindParam(":cod_produto", $this->cod_produto);
-        $cmd->bindParam(":cod_venda",   $this->cod_venda);
-        $cmd->bindParam(":quantidade",  $this->quantidade);
-        $cmd->bindParam(":preco",       $this->preco);
-
-        $cmd->execute();
-    }
-
-    /**
      * Consultar um item com base no cod
      */
-    public function consultarItemCod()
+    public function consultarItensPorCodVenda()
     {
         $con = Conexao::conectar();
 
-        $cmd = $con->prepare("SELECT * FROM tbitens 
-        WHERE cod_item = :cod_item");
-        $cmd->bindParam(":cod_item", $this->cod_item);
+        $cmd = $con->prepare("SELECT tbprodutos.nome_produto, tbitens.* 
+        FROM tbitens INNER JOIN tbprodutos ON tbitens.cod_produto = tbprodutos.cod_produto
+        WHERE cod_venda = :cod_venda");
+        $cmd->bindParam(":cod_venda", $this->cod_venda);
 
         $cmd->execute();
 
-        return $cmd->fetch(PDO::FETCH_OBJ);
+        return $cmd->fetchAll(PDO::FETCH_OBJ);
     }
 }

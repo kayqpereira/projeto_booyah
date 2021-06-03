@@ -791,3 +791,25 @@ $(document).ready(function () {
         });
     }
 });
+
+const link = document.querySelectorAll(".nav-link");
+const dropdownItem = document.querySelectorAll(".dropdown-item");
+const urlAtual = location.href;
+
+if (link) {
+    link.forEach(l => l.parentNode.classList.remove("active"));
+    
+    for (let i = 0; i < link.length; i++) {
+        if (link[i].href === urlAtual)
+            link[i].parentNode.classList.add("active");
+    }
+
+    if (dropdownItem) {
+        dropdownItem.forEach(l => l.parentNode.parentNode.classList.remove("active"));
+        for (let i = 0; i < dropdownItem.length; i++) {
+            if (dropdownItem[i].href === urlAtual)
+                dropdownItem[i].parentNode.parentNode.classList.add("active");
+        }
+    }
+}
+

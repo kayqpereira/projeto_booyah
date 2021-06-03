@@ -16,6 +16,8 @@
 
 <body class="adm">
 
+    <?php include_once "navbar.php"; ?>
+
     <main class="container-fluid">
         <div class="page-title container">
             <h1>Gerenciar Categorias</h1>
@@ -94,9 +96,10 @@
     <script>
         $(function() {
             $('[data-toggle="tooltip"]').tooltip({
-                boundary: 'window'
-            })
-        })
+                boundary: 'window',
+                trigger: 'hover'
+            });
+        });
 
         function excluirCategoria(cod_categoria) {
             Swal.fire({

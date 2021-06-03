@@ -14,6 +14,9 @@
 </head>
 
 <body class="adm">
+
+    <?php include_once "navbar.php"; ?>
+
     <main class="container-fluid">
         <div class="page-title container">
             <h1>Editar dados do cliente</h1>
@@ -411,8 +414,12 @@
         </form>
     </main>
 
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/87aa5c0f8d.js" crossorigin="anonymous"></script>
     <!-- JQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <!-- Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
     <!-- Scripts -->
     <script>
         document.getElementById("estado").value = "<?php echo $dadosCli->estado ?>";

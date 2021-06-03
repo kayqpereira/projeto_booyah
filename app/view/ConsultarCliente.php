@@ -15,6 +15,9 @@
 </head>
 
 <body class="adm">
+
+    <?php include_once "navbar.php"; ?>
+
     <main class="container-fluid">
         <div class="page-title container">
             <h2>Clientes</h2>
@@ -114,9 +117,10 @@
     <script>
         $(function() {
             $('[data-toggle="tooltip"]').tooltip({
-                boundary: 'window'
-            })
-        })
+                boundary: 'window',
+                trigger: 'hover'
+            });
+        });
 
         function excluirCliente(cod_cliente, cod_endereco) {
             Swal.fire({

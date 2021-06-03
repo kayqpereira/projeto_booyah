@@ -17,7 +17,27 @@ class CategoriaController
         include "../app/model/Categoria.php";
         $categ = new Categoria();
 
-        $categ->nome_categoria = $_POST["nome_categoria"];
+        if (isset($_POST["nome_categoria"]))
+            $categ->nome_categoria = $_POST["nome_categoria"];
+        else {
+            echo "<body></body>
+                <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css'>
+                <script src='https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js'></script>
+                <script src='//cdn.jsdelivr.net/npm/sweetalert2@10'></script>
+                <script>
+                Swal.fire({
+                    icon: 'error',
+                    iconColor: '#dc3545',
+                    title: 'Erro!',
+                    text: 'É necessário informar um nome para a categoria.',
+                    confirmButtonColor: '#7166f0',
+                    onClose: () => {
+                        window.history.back();
+                    }
+                });
+                </script>";
+            return false;
+        }
 
         if (empty($_POST["cod_categoria"])) {
             if ($categ->verificarCategoria()) {
@@ -47,7 +67,7 @@ class CategoriaController
                 <script>
                 Swal.fire({
                     title:'Salvou!',
-                    text:'Dados alterados com sucesso.',
+                    text:'Dados cadastrados com sucesso.',
                     type:'success',
                     icon:'success',
                     showConfirmButton:false,

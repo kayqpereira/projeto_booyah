@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Consulta dos Produtos</title>
+    <title>Consulta de Vendas</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <!-- Data Tables -->
@@ -15,11 +15,12 @@
 </head>
 
 <body class="adm">
+
     <?php include_once "navbar.php"; ?>
 
     <main class="container-fluid">
         <div class="page-title container">
-            <h2>Produtos</h2>
+            <h2>Vendas</h2>
         </div>
         <div class="row">
             <div class="col px-4 py-3">
@@ -27,40 +28,27 @@
                     <table class="tabela display compact nowrap w-100">
                         <thead>
                             <th>ID</th>
-                            <th>Categoria</th>
-                            <th>Marca</th>
-                            <th>Nome</th>
-                            <th>Destaque</th>
-                            <th>Ativo</th>
-                            <th>Estoque</th>
-                            <th>Preço</th>
+                            <th>Nome Completo</th>
+                            <th>Data</th>
+                            <th>Hora</th>
+                            <th>Forma de Pagamento</th>
                             <th>Ação</th>
                         </thead>
                         <tbody>
                             <?php
-                            foreach ($dadosProd as $produto) {
-                                if ($produto->destaque == 1)
-                                    $produto->destaque = "Sim";
-                                else
-                                    $produto->destaque = "Não";
-
-                                if ($produto->ativo == 1)
-                                    $produto->ativo = "Sim";
-                                else
-                                    $produto->ativo = "Não";
+                            foreach ($dadosVend as $venda) {
                                 echo "
                                 <tr>
-                                    <td>$produto->cod_produto</td>
-                                    <td>$produto->nome_categoria</td>
-                                    <td>$produto->nome_marca</td>
-                                    <td>$produto->nome_produto</td>
-                                    <td>$produto->destaque</td>
-                                    <td>$produto->ativo</td>
-                                    <td>$produto->estoque</td>
-                                <td>R$ " . number_format("$produto->preco", "2", ",", ".") . "</td>
+                                    <td>$venda->cod_venda</td>
+                                    <td>$venda->nome</td>
+                                    <td>" . $cli->formatarData($venda->data_venda, "BR") . "</td>
+                                    <td>$venda->hora</td>
+                                    <td>$venda->forma_pag</td>
                                     <td class='acao'>
-                                        <button data-toggle='tooltip' title='Excluír' onclick=\"excluirProduto($produto->cod_produto);\" class='btn btn-sm btn-danger'><i class='fas fa-trash-alt'></i></button>
-                                        <a data-toggle='tooltip' title='Editar' href='index.php?classe=ProdutoController&metodo=abrirAtualizacao&cod_produto=$produto->cod_produto'class='btn btn-sm btn-secondary'><i class='fas fa-edit'></i></a>
+                                        <a data-toggle='tooltip' title='Detalhes' href='index.php?classe=ItemController&metodo=abrirConsulta&cod_venda=$venda->cod_venda'class='btn btn-sm btn-primary'>
+                                        <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-list' viewBox='0 0 16 16'>
+                                            <path fill-rule='evenodd' d='M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z'/>
+                                        </svg> Detalhes</a>
                                     </td>
                                 </tr>";
                             }
@@ -70,7 +58,6 @@
                 </div>
             </div>
         </div>
-
     </main>
 
     <!-- Font Awesome -->
@@ -92,23 +79,6 @@
                 trigger: 'hover'
             });
         });
-
-        function excluirProduto(cod_produto) {
-            Swal.fire({
-                title: "Tem certeza de que deseja excluír este cadastro?",
-                text: "Você não poderá reverter isso!",
-                icon: "warning",
-                iconColor: "#dc3545",
-                showCancelButton: true,
-                cancelButtonColor: "#dc3545",
-                confirmButtonText: "Sim",
-                cancelButtonText: "Cancelar"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location = "index.php?classe=ProdutoController&metodo=abrirAtualizacao&metodo=excluirProduto&cod_produto=" + cod_produto;
-                }
-            });
-        }
     </script>
 </body>
 

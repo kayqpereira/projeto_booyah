@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
 
 :root{
     --bg-adm: #f5f5f7;
@@ -8,25 +9,30 @@
     --bg-form_fieldset: #ffffff;
     --color-primary: #7166f0;
     --color-primary-shadow: #685dd8;
+    --nav-width: 92px;
+    --body-font: 'Poppins', sans-serif;
+    
+    --z-fixed: 100;
 }
 
-body{
+.adm{
+    position: relative;
     background-color: var(--bg-adm);
+    font-family: var(--body-font);
+    transition: .5s;
 }
 
 main.container-fluid{
-    font-family: 'Roboto', sans-serif;
     background-color: var(--bg-adm);
     padding: 0;
     overflow-x: hidden;
 }
 
-
 .page-title{
     padding-top: 1.5rem;
     font-weight: 700;
     font-family: 'Rubik', sans-serif;
-    color: rgba(113, 102, 240, .9);
+    color: rgba(104, 93, 216,.9);
     text-align: center;
 }
 
@@ -268,6 +274,15 @@ span[class^="error-"].is-active{
     display: block;
 }
 
+@keyframes is-rotating{
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
 .tabela-container{
     max-width: 1000px;
     padding: 2rem;
@@ -291,20 +306,82 @@ td .acao{
     box-shadow: none !important;
 }
 
-@keyframes is-rotating{
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
+.content{
+    width: 100%;
+    max-width: 1000px;
 }
 
+.navbar-dark{
+    background-color: #070333;
+}
+
+.info-box{
+    border-top: none;
+    border-bottom: none;
+    border-left: 2px solid;
+    border-right: 2px solid;
+    border-radius: .5rem;
+    box-shadow:  0 0 10px 0 rgba(80, 80, 80, 0.2);
+    -webkit-box-shadow: 0 0 10px rgba(80, 80, 80, 0.2);
+}
+
+.info-box.orange{
+    color:var(--orange);
+    border-color:var(--orange);
+}
+
+.info-box.blue{
+    color:#428bca;
+    border-color:#428bca;
+}
+
+.info-box.purple{
+    color:var(--purple);
+    border-color:var(--purple);
+}
+
+.navbar-brand{
+    font-family: 'Rubik', sans-serif !important;
+}
+
+.navbar-brand>span{
+    color: var(--color-primary)
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: var(--white) !important;
+}
+
+.card-title{
+    font-size: 1.5rem !important;
+}
+
+.navbar-expand-lg .navbar-nav .nav-link {
+    padding-right: .5rem !important;
+    padding-left: .5rem !important;
+}
+
+.nav-link{
+    line-height: 1.6;
+}
+
+.dropdown-toggle {
+    text-align: center;
+}
+
+.active{
+    background-color: var(--color-primary-shadow);
+    border-radius: .25rem;
+}
 
 @media screen and (max-width: 767px){
     
     html{
         font-size: .95rem;
+    }
+
+    .card-title{
+        font-size: 1.4rem !important;
     }
 
     .page-title h1{
@@ -387,9 +464,4 @@ td .acao{
     .page-title h2{
         border: none;
     }
-}
-
-/* Modal */
-.modal-content{
-    border: none;
 }

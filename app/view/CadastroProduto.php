@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Cadastro de Cliente</title>
+    <title>Cadastro de Produto</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <!-- Styles CSS -->
@@ -13,6 +13,8 @@
 </head>
 
 <body class="adm">
+
+    <?php include_once "navbar.php"; ?>
 
     <main class="container-fluid">
         <div class="page-title container">
@@ -141,7 +143,7 @@
                                     <label class="form__label" for="cod_categoria">Categoria:</label>
                                     <div class="form__input-containe input-group">
                                         <div class="input-group-append" data-toggle="tooltip" title="Gerenciar categorias">
-                                            <a href="index.php?classe=CategoriaController&metodo=abrirCadastro&retornar=cad" class="btn btn-principal rounded-left">
+                                            <a href="index.php?classe=CategoriaController&metodo=abrirCadastro" class="btn btn-principal rounded-left">
                                                 <i class="fas fa-cogs"></i>
                                             </a>
                                         </div>
@@ -176,7 +178,7 @@
                                     <label class="form__label" for="cod_marca">Marca:</label>
                                     <div class="form__input-containe input-group">
                                         <div class="input-group-append" data-toggle="tooltip" title="Gerenciar marcas">
-                                            <a href="index.php?classe=MarcaController&metodo=abrirCadastro&retornar=cad" class="btn btn-principal rounded-left">
+                                            <a href="index.php?classe=MarcaController&metodo=abrirCadastro" class="btn btn-principal rounded-left">
                                                 <i class="fas fa-cogs"></i>
                                             </a>
                                         </div>
