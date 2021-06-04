@@ -9,10 +9,7 @@
     --bg-form_fieldset: #ffffff;
     --color-primary: #7166f0;
     --color-primary-shadow: #685dd8;
-    --nav-width: 92px;
     --body-font: 'Poppins', sans-serif;
-    
-    --z-fixed: 100;
 }
 
 .adm{
@@ -284,7 +281,7 @@ span[class^="error-"].is-active{
 }
 
 .tabela-container{
-    max-width: 1000px;
+    max-width: 1100px;
     padding: 2rem;
     background-color: var(--bg-form_row);
     border-radius: .25rem;
@@ -313,6 +310,15 @@ td .acao{
 
 .navbar-dark{
     background-color: #070333;
+}
+
+.nav-link{
+    display: flex;
+    align-items: center;
+}
+
+.nav-link > svg{
+    margin-right:5px;
 }
 
 .info-box{
