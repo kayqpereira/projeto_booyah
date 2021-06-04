@@ -5,7 +5,7 @@ class ItemController
     public function abrirConsulta()
     {
         if (isset($_GET["cod_venda"])) {
-            include "../app/model/Item.php";
+            include "../../app/model/Item.php";
             $item = new Item();
 
             $item->cod_venda = $_GET["cod_venda"];
@@ -30,6 +30,6 @@ class ItemController
         }
         $dadosItem = $item->consultarItensPorCodVenda();
 
-        include_once "../app/view/ConsultarItens.php";
+        include_once "../../app/view/admin/ConsultarItens.php";
     }
 }

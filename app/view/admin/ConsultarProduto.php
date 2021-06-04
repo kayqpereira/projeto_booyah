@@ -11,11 +11,11 @@
     <!-- Data Tables -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.24/datatables.min.css" />
     <!-- Styles -->
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/style.css">
 </head>
 
 <body class="adm">
-    <?php include_once "navbar.php"; ?>
+    <?php include_once "header.php"; ?>
 
     <main class="container-fluid">
         <div class="page-title container">
@@ -84,7 +84,7 @@
     <!-- SweetAlert2 -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Scripts -->
-    <script src="assets/js/main.js"></script>
+    <script src="../assets/js/main.js"></script>
     <script>
         $(function() {
             $('[data-toggle="tooltip"]').tooltip({

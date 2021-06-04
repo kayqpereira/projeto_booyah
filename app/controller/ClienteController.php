@@ -4,41 +4,41 @@ class ClienteController
 {
     public function abrirCadastro()
     {
-        include_once "../app/view/CadastroCliente.php";
+        include_once "../../app/view/admin/CadastroCliente.php";
     }
 
     public function abrirAtualizacao()
     {
-        include "../app/model/Cliente.php";
+        include "../../app/model/Cliente.php";
         $cli = new Cliente();
 
         if (isset($_GET["cod_cliente"])) {
             $cli->cod_cliente = $_GET["cod_cliente"];
             $dadosCli = $cli->consultarDadosCliente();
 
-            include_once "../app/view/AtualizarCliente.php";
+            include_once "../../app/view/admin/AtualizarCliente.php";
         }
     }
 
     public function abrirConsulta()
     {
-        include "../app/model/Cliente.php";
+        include "../../app/model/Cliente.php";
         $cli = new Cliente();
         $dadosCli = $cli->consultarClientes();
 
-        include "../app/model/Endereco.php";
+        include "../../app/model/Endereco.php";
         $end = new Endereco();
         $dadosEnd = $end->consultarEnderecos();
 
-        include_once "../app/view/ConsultarCliente.php";
+        include_once "../../app/view/admin/ConsultarCliente.php";
     }
 
     public function cadastrarCliente()
     {
-        include "../app/model/Cliente.php";
+        include "../../app/model/Cliente.php";
         $cli = new Cliente();
 
-        include "../app/model/Endereco.php";
+        include "../../app/model/Endereco.php";
         $end = new Endereco();
 
         $end->cep       = $_POST["cep"];
@@ -129,10 +129,10 @@ class ClienteController
 
     public function atualizarCliente()
     {
-        include "../app/model/Cliente.php";
+        include "../../app/model/Cliente.php";
         $cli = new Cliente();
 
-        include "../app/model/Endereco.php";
+        include "../../app/model/Endereco.php";
         $end = new Endereco();
 
         $end->cep       = $_POST["cep"];
@@ -233,7 +233,7 @@ class ClienteController
     public function excluirCliente()
     {
         if (isset($_GET["cod_cliente"])) {
-            include "../app/model/Cliente.php";
+            include "../../app/model/Cliente.php";
             $cli = new Cliente();
 
             $cli->cod_cliente  = $_GET["cod_cliente"];
@@ -308,7 +308,7 @@ class ClienteController
     {
         header("Content-Type: application/json");
         if (isset($_POST["cpf"])) {
-            include "../app/model/Cliente.php";
+            include "../../app/model/Cliente.php";
             $cli = new Cliente();
 
             if (isset($_POST["cod_cliente"])) {
@@ -330,7 +330,7 @@ class ClienteController
     {
         header("Content-Type: application/json");
         if (isset($_POST["email"])) {
-            include "../app/model/Cliente.php";
+            include "../../app/model/Cliente.php";
             $cli = new Cliente();
 
             if (isset($_POST["cod_cliente"])) {
