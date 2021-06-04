@@ -144,7 +144,7 @@
                                 <div class="form__input-group">
                                     <label class="form__label" for="cod_categoria">Categoria:</label>
                                     <div class="form__input-containe input-group">
-                                        <div class="input-group-append" data-toggle="tooltip" title="Gerenciar categorias">
+                                        <div class="input-group-append"  title="Gerenciar categorias">
                                             <a href="index.php?classe=CategoriaController&metodo=abrirCadastro" class="btn btn-principal rounded-left">
                                                 <i class="fas fa-cogs"></i>
                                             </a>
@@ -179,7 +179,7 @@
                                 <div class="form__input-group">
                                     <label class="form__label" for="cod_marca">Marca:</label>
                                     <div class="form__input-containe input-group">
-                                        <div class="input-group-append" data-toggle="tooltip" title="Gerenciar marcas">
+                                        <div class="input-group-append"  title="Gerenciar marcas">
                                             <a href="index.php?classe=MarcaController&metodo=abrirCadastro" class="btn btn-principal rounded-left">
                                                 <i class="fas fa-cogs"></i>
                                             </a>
@@ -247,11 +247,7 @@
         document.getElementById("cod_categoria").value = "<?php echo $dadosProd->cod_categoria; ?>";
         document.getElementById("cod_marca").value = "<?php echo $dadosProd->cod_marca; ?>";
 
-        $(document).ready(function() {
-            $("[data-toggle='tooltip']").tooltip({
-                boundary: "window"
-            });
-        });
+        
 
         CKEDITOR.replace("descricao");
     </script>

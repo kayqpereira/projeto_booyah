@@ -51,8 +51,8 @@
                                     <td>$cliente->celular</td>
                                     <td>$cliente->email</td>
                                     <td class='acao'>
-                                        <button data-toggle='tooltip' title='Excluír' onclick=\"excluirCliente($cliente->cod_cliente, $cliente->cod_endereco);\" class='btn btn-sm btn-danger'><i class='fas fa-trash-alt'></i></button>
-                                        <a data-toggle='tooltip' title='Editar' href='index.php?classe=ClienteController&metodo=abrirAtualizacao&cod_cliente=$cliente->cod_cliente'class='btn btn-sm btn-secondary'><i class='fas fa-edit'></i></a>
+                                        <button  title='Excluír' onclick=\"excluirCliente($cliente->cod_cliente, $cliente->cod_endereco);\" class='btn btn-sm btn-danger'><i class='fas fa-trash-alt'></i></button>
+                                        <a title='Editar' href='index.php?classe=ClienteController&metodo=abrirAtualizacao&cod_cliente=$cliente->cod_cliente'class='btn btn-sm btn-secondary'><i class='fas fa-edit'></i></a>
                                     </td>
                                 </tr>";
                             }
@@ -89,7 +89,7 @@
                                     <td>$endereco->cidade</td>
                                     <td>$endereco->estado</td>
                                     <td class='acao'>
-                                        <a data-toggle='tooltip' title='Editar' href='index.php?classe=EnderecoController&metodo=abrirAtualizacao&cod_endereco=$endereco->cod_endereco'class='btn btn-sm btn-secondary'><i class='fas fa-edit'></i></a>
+                                        <a title='Editar' href='index.php?classe=EnderecoController&metodo=abrirAtualizacao&cod_endereco=$endereco->cod_endereco'class='btn btn-sm btn-secondary'><i class='fas fa-edit'></i></a>
                                     </td>
                                 </tr>";
                             }
@@ -115,13 +115,6 @@
     <!-- Scripts -->
     <script src="../assets/js/main.js"></script>
     <script>
-        $(function() {
-            $('[data-toggle="tooltip"]').tooltip({
-                boundary: 'window',
-                trigger: 'hover'
-            });
-        });
-
         function excluirCliente(cod_cliente, cod_endereco) {
             Swal.fire({
                 title: "Tem certeza de que deseja excluír este cadastro?",

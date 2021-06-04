@@ -67,8 +67,8 @@
                                     <td>$categoria->cod_categoria</td>
                                     <td>$categoria->nome_categoria</td>
                                     <td class='acao'>
-                                        <button type='button' data-toggle='tooltip' title='Excluír' onclick=\"excluirCategoria($categoria->cod_categoria);\" class='btn btn-sm btn-danger'><i class='fas fa-trash-alt'></i></button>
-                                        <a data-toggle='tooltip' title='Editar' href='index.php?classe=CategoriaController&metodo=abrirAtualizacao&cod_categoria=$categoria->cod_categoria'class='btn btn-sm btn-secondary'><i class='fas fa-edit'></i></a>
+                                        <button type='button'  title='Excluír' onclick=\"excluirCategoria($categoria->cod_categoria);\" class='btn btn-sm btn-danger'><i class='fas fa-trash-alt'></i></button>
+                                        <a title='Editar' href='index.php?classe=CategoriaController&metodo=abrirAtualizacao&cod_categoria=$categoria->cod_categoria'class='btn btn-sm btn-secondary'><i class='fas fa-edit'></i></a>
                                     </td>
                                 </tr>";
                             }
@@ -94,13 +94,6 @@
     <!-- Scripts -->
     <script src="../assets/js/main.js"></script>
     <script>
-        $(function() {
-            $('[data-toggle="tooltip"]').tooltip({
-                boundary: 'window',
-                trigger: 'hover'
-            });
-        });
-
         function excluirCategoria(cod_categoria) {
             Swal.fire({
                 title: "Tem certeza",

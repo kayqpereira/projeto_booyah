@@ -65,14 +65,6 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Scripts -->
     <script src="../assets/js/main.js"></script>
-    <script>
-        $(function() {
-            $('[data-toggle="tooltip"]').tooltip({
-                boundary: 'window',
-                trigger: 'hover'
-            })
-        })
-    </script>
 </body>
 
 </html>

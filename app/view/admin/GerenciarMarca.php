@@ -67,8 +67,8 @@
                                     <td>$marca->cod_marca</td>
                                     <td>$marca->nome_marca</td>
                                     <td class='acao'>
-                                        <button type='button' data-toggle='tooltip' title='Excluír' onclick=\"excluirMarca($marca->cod_marca);\" class='btn btn-sm btn-danger'><i class='fas fa-trash-alt'></i></button>
-                                        <a data-toggle='tooltip' title='Editar' href='index.php?classe=MarcaController&metodo=abrirAtualizacao&cod_marca=$marca->cod_marca'class='btn btn-sm btn-secondary'><i class='fas fa-edit'></i></a>
+                                        <button type='button'  title='Excluír' onclick=\"excluirMarca($marca->cod_marca);\" class='btn btn-sm btn-danger'><i class='fas fa-trash-alt'></i></button>
+                                        <a title='Editar' href='index.php?classe=MarcaController&metodo=abrirAtualizacao&cod_marca=$marca->cod_marca'class='btn btn-sm btn-secondary'><i class='fas fa-edit'></i></a>
                                     </td>
                                 </tr>";
                             }
@@ -94,12 +94,6 @@
     <!-- Scripts -->
     <script src="../assets/js/main.js"></script>
     <script>
-        $(function() {
-            $('[data-toggle="tooltip"]').tooltip({
-                boundary: 'window'
-            });
-        });
-
         function excluirMarca(cod_marca) {
             Swal.fire({
                 title: "Tem certeza",

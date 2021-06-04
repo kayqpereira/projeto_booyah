@@ -59,8 +59,8 @@
                                     <td>$produto->estoque</td>
                                 <td>R$ " . number_format("$produto->preco", "2", ",", ".") . "</td>
                                     <td class='acao'>
-                                        <button data-toggle='tooltip' title='Excluír' onclick=\"excluirProduto($produto->cod_produto);\" class='btn btn-sm btn-danger'><i class='fas fa-trash-alt'></i></button>
-                                        <a data-toggle='tooltip' title='Editar' href='index.php?classe=ProdutoController&metodo=abrirAtualizacao&cod_produto=$produto->cod_produto'class='btn btn-sm btn-secondary'><i class='fas fa-edit'></i></a>
+                                        <button  title='Excluír' onclick=\"excluirProduto($produto->cod_produto);\" class='btn btn-sm btn-danger'><i class='fas fa-trash-alt'></i></button>
+                                        <a title='Editar' href='index.php?classe=ProdutoController&metodo=abrirAtualizacao&cod_produto=$produto->cod_produto'class='btn btn-sm btn-secondary'><i class='fas fa-edit'></i></a>
                                     </td>
                                 </tr>";
                             }
@@ -86,13 +86,6 @@
     <!-- Scripts -->
     <script src="../assets/js/main.js"></script>
     <script>
-        $(function() {
-            $('[data-toggle="tooltip"]').tooltip({
-                boundary: 'window',
-                trigger: 'hover'
-            });
-        });
-
         function excluirProduto(cod_produto) {
             Swal.fire({
                 title: "Tem certeza de que deseja excluír este cadastro?",
