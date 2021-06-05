@@ -26,7 +26,6 @@
                             <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
                             <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
                             <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
-                            <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
                         </ol>
 
                         <div class="carousel-inner">
@@ -42,10 +41,6 @@
 
                             <div class="carousel-item">
                                 <img src="./assets/images/cyberpunk-2077.jpg" class="d-block img-fluid" alt="Cyberpunk 2077">
-                            </div>
-
-                            <div class="carousel-item">
-                                <img src="./assets/images/dying-light-2.jpg" class="d-block img-fluid" alt="Dying Light 2">
                             </div>
                         </div>
 
@@ -63,6 +58,8 @@
             </div>
         </section>
     </main>
+
+    <?php include_once "modal.php"; ?>
 
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/87aa5c0f8d.js" crossorigin="anonymous"></script>

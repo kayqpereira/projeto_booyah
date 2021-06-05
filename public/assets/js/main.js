@@ -124,7 +124,7 @@ const validate = {
                     },
 
                     error: function () {
-                        alert("Ocorreu um erro ao realizar a requisição!");
+                        setMessage("", cpf);
                     },
 
                     complete: function () {
@@ -337,7 +337,7 @@ const validate = {
                     },
 
                     error: function () {
-                        alert("Ocorreu um erro ao realizar a requisição!");
+                        setMessage("", cep);
                     },
 
                     complete: function () {
@@ -391,7 +391,7 @@ const validate = {
                     },
 
                     error: function () {
-                        alert("Ocorreu um erro ao realizar a requisição!");
+                        setMessage("", email);
                     },
 
                     complete: function () {
@@ -527,6 +527,32 @@ const validate = {
             return true;
         }
     },
+
+    senha_login(senha_login) {
+        if (senha_login.value === "") {
+            let error = "Este campo é obrigatório.";
+            setMessage(error, senha_login);
+            return false;
+        } else {
+            setMessage("", senha_login);
+            return true;
+        }
+    },
+
+    email_login(email_login) {
+        if (email_login.value == "") {
+            let error = "Por favor, digite o seu e-mail.";
+            setMessage(error, email_login);
+            return false;
+        } else if (!validaEmail(email_login)) {
+            let error = "Formato de email inválido, por favor, informe um email válido.";
+            setMessage(error, email_login);
+            return false;
+        } else {
+            setMessage("", email_login);
+            return true;
+        }
+    },
 };
 
 // Adiciona o evento change e um função correspondente a todos os campos 
@@ -648,6 +674,18 @@ function validarForm() {
             document.getElementById("confirmar_nova_senha").focus();
             return false;
         }
+    }
+}
+
+function validarFormLogin() {
+    if (!validate["email_login"](document.getElementById("email_login"))) {
+        document.getElementById("email_login").focus();
+        return false;
+    }
+
+    if (!validate["senha_login"](document.getElementById("senha_login"))) {
+        document.getElementById("senha_login").focus();
+        return false;
     }
 }
 
@@ -792,16 +830,16 @@ $(document).ready(function () {
     }
 });
 
-const link = document.querySelectorAll(".nav-link");
+const links = document.querySelectorAll(".nav-links");
 const dropdownItem = document.querySelectorAll(".dropdown-item");
 const urlAtual = location.href;
 
-if (link) {
-    link.forEach(l => l.parentNode.classList.remove("active"));
+if (links) {
+    links.forEach(l => l.parentNode.classList.remove("active"));
 
-    for (let i = 0; i < link.length; i++) {
-        if (link[i].href === urlAtual)
-            link[i].parentNode.classList.add("active");
+    for (let i = 0; i < links.length; i++) {
+        if (links[i].href === urlAtual)
+            links[i].parentNode.classList.add("active");
     }
 
     if (dropdownItem) {

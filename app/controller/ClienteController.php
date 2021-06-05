@@ -7,6 +7,41 @@ class ClienteController
         include_once "../../app/view/admin/CadastroCliente.php";
     }
 
+    public function abrirAutoCadastro()
+    {
+        session_start();
+
+        include "../app/model/Marca.php";
+        $mar = new Marca();
+        $dadosMar = $mar->consultarMarcas();
+
+        include "../app/model/Categoria.php";
+        $categ = new Categoria();
+        $dadosCateg = $categ->consultarCategorias();
+
+        include_once "../app/view/cliente/CadastroCliente.php";
+    }
+
+    public function abrirAutoEdicao()
+    {
+        session_start();
+
+        include "../app/model/Marca.php";
+        $mar = new Marca();
+        $dadosMar = $mar->consultarMarcas();
+
+        include "../app/model/Categoria.php";
+        $categ = new Categoria();
+        $dadosCateg = $categ->consultarCategorias();
+
+        include "../app/model/Cliente.php";
+        $cli = new Cliente();
+        $cli->cod_cliente = $_SESSION["codcli_logado"];
+        $dadosCli = $cli->consultarDadosCliente();
+
+        include_once "../app/view/cliente/AtualizarCliente.php";
+    }
+
     public function abrirAtualizacao()
     {
         include "../../app/model/Cliente.php";
@@ -35,10 +70,15 @@ class ClienteController
 
     public function cadastrarCliente()
     {
-        include "../../app/model/Cliente.php";
-        $cli = new Cliente();
+        if (isset($_GET["session"]) && $_GET["session"] == "start") {
+            include "../app/model/Cliente.php";
+            include "../app/model/Endereco.php";
+        } else {
+            include "../../app/model/Cliente.php";
+            include "../../app/model/Endereco.php";
+        }
 
-        include "../../app/model/Endereco.php";
+        $cli = new Cliente();
         $end = new Endereco();
 
         $end->cep       = $_POST["cep"];
@@ -107,7 +147,34 @@ class ClienteController
             return false;
         }
 
-        $cli->cadastrarDadosPessoais();
+        $codCliente = $cli->cadastrarDadosPessoais();
+
+        if (isset($_GET["session"]) && $_GET["session"] == "start") {
+            session_start();
+            session_regenerate_id(true);
+
+            $_SESSION["codcli_logado"]    = $codCliente;
+            $primeiroNome = explode(" ", $cli->nome);
+            $_SESSION["nomecli_logado"]   = $primeiroNome;
+
+            echo "<body></body>
+                <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css'>
+                <script src='https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js'></script>
+                <script src='//cdn.jsdelivr.net/npm/sweetalert2@10'></script>
+                <script>
+                Swal.fire({
+                    title:'Cadastro concluído com sucesso!',
+                    type:'success',
+                    icon:'success',
+                    showConfirmButton:false,
+                    timer:1500,
+                    onClose: () => {
+                        window.location='index.php?classe=HomeController&metodo=abrirPrincipal';
+                    }
+                });
+                </script>";
+            exit();
+        }
 
         echo "<body></body>
         <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css'>
@@ -129,10 +196,17 @@ class ClienteController
 
     public function atualizarCliente()
     {
-        include "../../app/model/Cliente.php";
-        $cli = new Cliente();
+        if (isset($_GET["session"]) && $_GET["session"] == "start") {
+            include "../app/model/Cliente.php";
+            include "../app/model/Endereco.php";
+            $uri = "index.php?classe=HomeController&metodo=abrirPrincipal";
+        } else {
+            include "../../app/model/Cliente.php";
+            include "../../app/model/Endereco.php";
+            $uri = "index.php?classe=ClienteController&metodo=abrirConsulta";
+        }
 
-        include "../../app/model/Endereco.php";
+        $cli = new Cliente();
         $end = new Endereco();
 
         $end->cep       = $_POST["cep"];
@@ -210,7 +284,6 @@ class ClienteController
 
         $cli->atualizarDadosPessoais();
 
-
         echo "<body></body>
         <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css'>
         <script src='https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js'></script>
@@ -224,7 +297,7 @@ class ClienteController
             showConfirmButton:false,
             timer:1500,
             onClose: () => {
-                window.location='index.php?classe=ClienteController&metodo=abrirConsulta';
+                window.location= '$uri';
             }
         });
         </script>";
@@ -271,6 +344,61 @@ class ClienteController
                     window.history.back();
                 }
             });
+            </script>";
+        }
+    }
+
+    public function logar()
+    {
+        include_once "../app/model/Cliente.php";
+        $cli = new Cliente();
+
+        $cli->email = $_POST["email_login"];
+        $cli->senha = hash("sha512", $_POST["senha_login"]);
+
+        $dadosCli = $cli->logar();
+
+        if (empty($dadosCli)) {
+            echo "<body></body>
+            <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css'>
+            <script src='https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js'></script>
+            <script src='//cdn.jsdelivr.net/npm/sweetalert2@10'></script>
+            <script>
+            Swal.fire({
+                icon: 'error',
+                iconColor: '#dc3545',
+                title: 'Erro!',
+                text: 'Usuário ou senha inválido.',
+                confirmButtonColor: '#7166f0',
+                onClose: () => {
+                    window.history.back();
+                }
+            });
+            </script>";
+        } else {
+            session_start();
+            session_regenerate_id(true);
+
+            $_SESSION["codcli_logado"]    = $dadosCli->cod_cliente;
+            $primeiroNome = explode(" ", $dadosCli->nome);
+            $_SESSION["nomecli_logado"]   = $primeiroNome;
+
+
+            echo "<body></body>
+            <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css'>
+            <script src='https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js'></script>
+            <script src='//cdn.jsdelivr.net/npm/sweetalert2@10'></script>
+            <script>
+                Swal.fire({
+                    title:'Login efetuado com susseso!',
+                    type:'success',
+                    icon:'success',
+                    showConfirmButton:false,
+                    timer:1500,
+                    onClose: () => {
+                        window.location='index.php?classe=HomeController&metodo=abrirPrincipal';
+                    }
+                });
             </script>";
         }
     }

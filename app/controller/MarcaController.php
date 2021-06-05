@@ -125,7 +125,6 @@ class MarcaController
     {
         include "../../app/model/Marca.php";
         $mar = new Marca();
-
         $dadosMar = $mar->consultarMarcas();
 
         if (isset($_GET["cod_marca"])) {

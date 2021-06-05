@@ -21,7 +21,7 @@
                         </svg> Clientes
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="index.php?classe=ClienteController&metodo=abrirCadastro"> <i class="fas fa-plus"></i> Cadastrar</a>
+                        <a class="dropdown-item" href="index.php?classe=ClienteController&metodo=abrirCadastro"><i class="fas fa-plus"></i> Cadastrar</a>
                         <a class="dropdown-item" href="index.php?classe=ClienteController&metodo=abrirConsulta"><i class="fas fa-search"></i> Consultar</a>
                     </div>
                 </li>

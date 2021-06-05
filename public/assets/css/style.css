@@ -380,10 +380,11 @@ td .acao{
     text-align: center;
     line-height: 0.9;
     margin: 0 !important;
+    letter-spacing: -1.25px;
 }
 
 .logo>span{
-    color: var(--color-primary)
+    color: var(--color-primary);
 }
 
 .cli .nav-link.dropdown-toggle{
@@ -397,9 +398,13 @@ td .acao{
     overflow-y: auto;
 }
 
-.dropdown-item{
+.cli .dropdown-item{
     display: flex;
     align-items: center;
+}
+
+.cli .dropdown-item svg{
+    margin-right: 7px;
 }
 
 .navbar-dark .navbar-nav .nav-link {
@@ -451,6 +456,7 @@ td .acao{
 
 .qtd-itens span{
     position: absolute;
+    display: inline-block;
     top: -3px;
     bottom: 0;
     right: -7px;
@@ -462,9 +468,9 @@ td .acao{
     border: 1px solid #ccc;
     border-radius: 50%;
     font-weight: bold;
-    font-size: .7rem;
-    width: 15px;
-    height: 15px;
+    font-size: .75rem;
+    width: 16px;
+    height: 16px;
 }
 
 .banners .carousel-item{
@@ -473,10 +479,31 @@ td .acao{
     max-width: 1200px;
 }
 
+.cli a svg,
+.cli .btn svg{
+    display: inline-block;
+    vertical-align: -.125em;
+}
+
 .banners img{
     height: 100%;
     width: 100%;
     object-fit: fill;
+}
+
+/* Modal Bootstrap */
+.modal-content{
+    border: none;
+}
+
+.modal-header .modal-title{
+    font-family: 'Rubik', sans-serif ;
+    color: var(--color-primary);
+}
+
+.modal-footer{
+    border: none;
+    justify-content: center !important;
 }
 
 @media screen and (max-width: 992px){

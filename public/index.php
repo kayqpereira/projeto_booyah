@@ -9,7 +9,7 @@ if (isset($_REQUEST["classe"]) && isset($_REQUEST["metodo"])) {
     if (method_exists($obj, $metodo))
         $obj->$metodo();
     else
-        include_once "../app/view/admin/PaginaErro.php";
+        include_once "../app/view/cliente/PaginaErro.php";
 } else {
     header("location:index.php?classe=HomeController&metodo=abrirPrincipal");
 }

@@ -10,21 +10,70 @@
             <div class="col-12 col-sm-8 col-lg-6">
                 <form method="post" action="index.php?classe=HomeController&metodo=abriPesquisa">
                     <div class="input-group">
-                        <input type="text" name="nomeproduto" class="form__input form-control" placeholder="Pesquisar..." aria-label="Recipient's username" aria-describedby="button-addon2">
+                        <input type="text" name="nome_produto" class="form__input form-control" placeholder="Pesquisar..." aria-describedby="button-addon2">
 
                         <div class="input-group-append">
-                            <button class="btn btn-principal" type="submit" id="button-addon2"><i class="fas fa-search"></i></button>
+                            <button class="btn btn-principal" type="submit" id="button-addon2">
+                                <svg aria-hidden="true" width="16" height="16" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                    <path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"></path>
+                                </svg>
+                            </button>
                         </div>
                     </div>
                 </form>
             </div>
 
             <div class="col-12 col-sm-4 col-lg-4">
-                <button class="btn btn-secondary">
-                    <i class="fas fa-user"></i> Entrar
-                </button>
+                <?php if (isset($_SESSION["nomecli_logado"])) { ?>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <svg xmlns=" http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                            </svg> Minha Conta
+                        </button>
 
-                <a class="carrinho" href="index.php?classe=CarrinhoController&metodo=abrirCarrinho">
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="index.php?classe=ClienteController&metodo=abrirAutoEdicao">
+                                <svg aria-hidden="true" focusable="false" width="16" height="16" data-prefix="fas" data-icon="edit" class="svg-inline--fa fa-edit fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                                    <path fill="currentColor" d="M402.6 83.2l90.2 90.2c3.8 3.8 3.8 10 0 13.8L274.4 405.6l-92.8 10.3c-12.4 1.4-22.9-9.1-21.5-21.5l10.3-92.8L388.8 83.2c3.8-3.8 10-3.8 13.8 0zm162-22.9l-48.8-48.8c-15.2-15.2-39.9-15.2-55.2 0l-35.4 35.4c-3.8 3.8-3.8 10 0 13.8l90.2 90.2c3.8 3.8 10 3.8 13.8 0l35.4-35.4c15.2-15.3 15.2-40 0-55.2zM384 346.2V448H64V128h229.8c3.2 0 6.2-1.3 8.5-3.5l40-40c7.6-7.6 2.2-20.5-8.5-20.5H48C21.5 64 0 85.5 0 112v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V306.2c0-10.7-12.9-16-20.5-8.5l-40 40c-2.2 2.3-3.5 5.3-3.5 8.5z"></path>
+                                </svg> Alterar dados
+                            </a>
+
+                            <a class="dropdown-item" href="index.php?classe=ClienteController&metodo=abrirAutoCadastro">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
+                                    <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                                    <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z" />
+                                </svg> Cadastrar-se
+                            </a>
+
+                            <div class="dropdown-divider"></div>
+                        </div>
+                    </div>
+                <?php } else { ?>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <svg xmlns=" http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                            </svg> Entrar
+                        </button>
+
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#loginModal">
+                                <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="sign-in-alt" width="16" height="16" class="svg-inline--fa fa-sign-in-alt fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                    <path fill="currentColor" d="M416 448h-84c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h84c17.7 0 32-14.3 32-32V160c0-17.7-14.3-32-32-32h-84c-6.6 0-12-5.4-12-12V76c0-6.6 5.4-12 12-12h84c53 0 96 43 96 96v192c0 53-43 96-96 96zm-47-201L201 79c-15-15-41-4.5-41 17v96H24c-13.3 0-24 10.7-24 24v96c0 13.3 10.7 24 24 24h136v96c0 21.5 26 32 41 17l168-168c9.3-9.4 9.3-24.6 0-34z"></path>
+                                </svg> Login
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="index.php?classe=ClienteController&metodo=abrirAutoCadastro">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
+                                    <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                                    <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z" />
+                                </svg> Cadastrar-se
+                            </a>
+                        </div>
+                    </div>
+                <?php } ?>
+                <a class="carrinho" href="index.php?classe=ItemController&metodo=abrirCarrinho">
                     <div class="icon" id="icon">
                         <svg class="icon-carrinho" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="shopping-cart" class="svg-inline--fa fa-shopping-cart fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
                             <path fill="currentColor" d="M528.12 301.319l47.273-208C578.806 78.301 567.391 64 551.99 64H159.208l-9.166-44.81C147.758 8.021 137.93 0 126.529 0H24C10.745 0 0 10.745 0 24v16c0 13.255 10.745 24 24 24h69.883l70.248 343.435C147.325 417.1 136 435.222 136 456c0 30.928 25.072 56 56 56s56-25.072 56-56c0-15.674-6.447-29.835-16.824-40h209.647C430.447 426.165 424 440.326 424 456c0 30.928 25.072 56 56 56s56-25.072 56-56c0-22.172-12.888-41.332-31.579-50.405l5.517-24.276c3.413-15.018-8.002-29.319-23.403-29.319H218.117l-6.545-32h293.145c11.206 0 20.92-7.754 23.403-18.681z">
@@ -62,18 +111,18 @@
                                     </svg> Categorias
                                 </a>
 
-                                <?php
-                                foreach ($dadosCateg as $categ) {
-                                    echo "
-                                    <div class='dropdown-menu' aria-labelledby='navbarDropdown'>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <?php
+                                    foreach ($dadosCateg as $categ) {
+                                        echo "
                                         <a class='dropdown-item' href='index.php?classe=HomeController&metodo=abrirPesquisa&cod_categoria=$categ->cod_categoria'>
                                             <svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='currentColor' class='bi bi-chevron-right' viewBox='0 0 16 16'>
                                                 <path fill-rule='evenodd' d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z' />
                                             </svg>$categ->nome_categoria
-                                        </a>
-                                    </div>";
-                                }
-                                ?>
+                                        </a>";
+                                    }
+                                    ?>
+                                </div>
                             </li>
 
                             <li class="nav-item dropdown">
@@ -84,18 +133,18 @@
                                     </svg> Marcas
                                 </a>
 
-                                <?php
-                                foreach ($dadosMar as $marca) {
-                                    echo "
-                                    <div class='dropdown-menu' aria-labelledby='navbarDropdown'>
+                                <div class='dropdown-menu' aria-labelledby='navbarDropdown'>
+                                    <?php
+                                    foreach ($dadosMar as $marca) {
+                                        echo "
                                         <a class='dropdown-item' href='index.php?classe=HomeController&metodo=abrirPesquisa&cod_marca=$marca->cod_marca'>
                                             <svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='currentColor' class='bi bi-chevron-right' viewBox='0 0 16 16'>
                                                 <path fill-rule='evenodd' d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z' />
                                             </svg>$marca->nome_marca
-                                        </a>
-                                    </div>";
-                                }
-                                ?>
+                                        </a>";
+                                    }
+                                    ?>
+                                </div>
                             </li>
                         </ul>
                     </div>

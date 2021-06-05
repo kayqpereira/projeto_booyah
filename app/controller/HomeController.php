@@ -21,6 +21,8 @@ class HomeController
 
     function abrirPrincipal()
     {
+        session_start();
+
         include "../app/model/Marca.php";
         $mar = new Marca();
         $dadosMar = $mar->consultarMarcas();
