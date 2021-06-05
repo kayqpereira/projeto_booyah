@@ -798,7 +798,7 @@ const urlAtual = location.href;
 
 if (link) {
     link.forEach(l => l.parentNode.classList.remove("active"));
-    
+
     for (let i = 0; i < link.length; i++) {
         if (link[i].href === urlAtual)
             link[i].parentNode.classList.add("active");
@@ -813,3 +813,28 @@ if (link) {
     }
 }
 
+const icon = document.querySelector(".carrinho");
+const carrinho = document.querySelector(".carrinho-interno");
+const shadowCart = document.querySelector(".sombra-carrinho");
+
+icon.addEventListener("click", function () {
+    if (carrinho.classList.contains("hidden")) {
+        carrinho.classList.remove("hidden");
+        shadowCart.classList.remove("hidden");
+    }
+    else {
+        carrinho.classList.add("hidden");
+        shadowCart.classList.add("hidden");
+    }
+})
+
+shadowCart.addEventListener("click", function () {
+    if (!shadowCart.classList.contains("hidden")) {
+        carrinho.classList.add("hidden");
+        shadowCart.classList.add("hidden");
+    }
+    else {
+        carrinho.classList.remove("hidden");
+        shadowCart.classList.remove("hidden");
+    }
+})

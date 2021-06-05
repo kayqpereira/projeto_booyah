@@ -18,4 +18,9 @@ class HomeController
 
         include_once "../../app/view/admin/Home.php";
     }
+
+    function abrirLoja()
+    {
+        include_once "../app/view/cliente/Home.php";
+    }
 }

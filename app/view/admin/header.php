@@ -1,6 +1,6 @@
 <header>
     <nav class="navbar navbar-expand-lg fixad-top px-3 navbar-dark ">
-        <a class="navbar-brand user-select-none" href="">Boyaah <span>Games</span></a>
+        <a class="navbar-brand user-select-none logo" href="">Boyaah <span>Games</span></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-links" aria-controls="navbar-links" aria-expanded="false" aria-label="Alterna navegação">
             <span class="navbar-toggler-icon"></span>
         </button>

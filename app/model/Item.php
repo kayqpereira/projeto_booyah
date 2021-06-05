@@ -45,12 +45,11 @@ class Item
     /**
      * Consultar todos os itens
      */
-    public function consultarItems()
+    public function consultarItens()
     {
         $con = Conexao::conectar();
 
-        $cmd = $con->prepare("SELECT tbprodutos.nome_produto, tbitens.* 
-        FROM tbitens INNER JOIN tbprodutos ON tbitens.cod_produto = tbprodutos.cod_produto");
+        $cmd = $con->prepare("SELECT * FROM tbitens");
         $cmd->execute();
 
         return $cmd->fetchAll(PDO::FETCH_OBJ);

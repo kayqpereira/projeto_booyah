@@ -19,6 +19,14 @@
     transition: .5s;
 }
 
+.cli{
+    position: relative;
+    background-color: var(--bg-adm);
+    font-family: var(--body-font);
+    transition: .5s;
+    height: 100vh;
+}
+
 main.container-fluid{
     background-color: var(--bg-adm);
     padding: 0;
@@ -315,6 +323,7 @@ td .acao{
 .nav-link{
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 .nav-link > svg{
@@ -346,11 +355,14 @@ td .acao{
     border-color:var(--purple);
 }
 
-.navbar-brand{
+.logo{
     font-family: 'Rubik', sans-serif !important;
+    text-align: center;
+    line-height: 0.9;
+    margin: 0 !important;
 }
 
-.navbar-brand>span{
+.logo>span{
     color: var(--color-primary)
 }
 
@@ -371,13 +383,209 @@ td .acao{
     line-height: 1.6;
 }
 
-.dropdown-toggle {
-    text-align: center;
-}
-
 .active{
     background-color: var(--color-primary-shadow);
     border-radius: .25rem;
+}
+
+.header > .row:first-child{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header > .row:first-child > .col-12:last-child{
+    display: flex;
+    align-items: center;
+}
+
+.carrinho{
+    margin-left: 5px;
+    cursor: pointer;
+    height: 35px;
+    width: 35px;
+}
+
+.icon{
+    position: relative;
+    z-index: 2;
+}
+
+.icon .icon-carrinho{
+    height: 35px;
+    width: 35px;
+    color:var(--color-primary-shadow);
+}
+
+.qtd-itens span{
+    position: absolute;
+    top: -3px;
+    bottom: 0;
+    right: -7px;
+
+    color: rgb(76, 8, 116);
+    text-align: center;
+    line-height: 15px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: .7rem;
+    width: 15px;
+    height: 15px;
+}
+
+.sombra-carrinho{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    height: 100%;
+    width: 100%;
+
+    z-index: 1;
+    transition: .4s ease-in-out;
+    background-color: rgba(0, 0, 0,.3);
+}
+
+.carrinho-interno{
+    position: absolute;
+    top: calc(100% + -7px);
+    right: 10px;
+
+    z-index: 2;
+    padding: 0 15px;
+    max-height: 500px;
+    width: 350px;
+    
+    background-color: white;
+    box-shadow:  0 5px 10px 0 rgba(0, 0, 0, 0.19);
+}
+
+.carrinho-interno::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: -5px;
+    right: 40px;
+
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 5px solid white;
+}
+
+.carrinho-header{
+    font-weight: 400;
+    font-size: 18px;
+    text-transform: uppercase;
+    color: rgb(76, 8, 116);
+
+    background-color: white;
+    margin: 15px 0;
+}
+
+.carrinho-vazio{
+    font-size: 15px;
+    font-weight: 400;
+    margin: 10px 0;
+}
+
+.carrinho-vazio a{
+    text-decoration: none;
+}
+
+.carrinho-vazio a:hover{
+    text-decoration: underline;
+}
+
+.carrinho-vazio a:visited{
+    color: #0000ff;
+}
+
+.lista {
+    max-height: 350px;
+    overflow-y: auto;
+}
+
+.lista::-webkit-scrollbar{
+    width: 5px;
+    margin-left: 10px;
+}
+.lista::-webkit-scrollbar-thumb{
+    background-color: rgb(76, 8, 116);
+}
+
+.lista::-webkit-scrollbar-track{
+    background-color: #e4e3e3;
+}
+
+.lista .item{
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+
+    margin: 10px 10px 0 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.item-image{
+    margin-right: 10px;
+    padding: 10px;
+    height: 70px;
+    width: 70px;
+}
+
+.item-image img{
+    max-width: 100%;
+}
+
+.item-nome{
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 5px;
+    height: 34px;
+}
+
+.item-quantidade{
+    font-size: 14px;
+}
+
+.item-preco{
+    font-size: 15px;
+    font-weight: 500;
+    color: rgb(26, 26, 26);
+    margin: 5px 0 10px 0;
+}
+
+.carrinho-footer{
+    margin: 15px 0;
+}
+
+.carrinho-footer .icon-btn-cart{
+    margin: 0 10px;
+    color:white;
+}
+
+.item-remover{
+    display: block;
+    margin-left: auto;
+}
+
+.item-remover i{
+    color: #4c0874;
+}
+
+.hidden{
+    display: none;
+}
+
+@media screen and (max-width: 992px){
+    
+    .logo{
+        margin-bottom: 5px !important;
+    }
 }
 
 @media screen and (max-width: 767px){
@@ -462,6 +670,11 @@ td .acao{
 
     .is-valid{
         border: 1px solid #28a745 !important;
+    }
+
+    .header > .row:first-child > .col-12:last-child{
+        justify-content: flex-end;
+        margin-top: .5rem;
     }
 }
 
