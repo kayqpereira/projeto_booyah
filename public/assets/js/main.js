@@ -812,29 +812,3 @@ if (link) {
         }
     }
 }
-
-const icon = document.querySelector(".carrinho");
-const carrinho = document.querySelector(".carrinho-interno");
-const shadowCart = document.querySelector(".sombra-carrinho");
-
-icon.addEventListener("click", function () {
-    if (carrinho.classList.contains("hidden")) {
-        carrinho.classList.remove("hidden");
-        shadowCart.classList.remove("hidden");
-    }
-    else {
-        carrinho.classList.add("hidden");
-        shadowCart.classList.add("hidden");
-    }
-})
-
-shadowCart.addEventListener("click", function () {
-    if (!shadowCart.classList.contains("hidden")) {
-        carrinho.classList.add("hidden");
-        shadowCart.classList.add("hidden");
-    }
-    else {
-        carrinho.classList.remove("hidden");
-        shadowCart.classList.remove("hidden");
-    }
-})

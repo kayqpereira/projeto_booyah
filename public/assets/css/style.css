@@ -257,6 +257,20 @@ span[class^="error-"].is-active{
     border-bottom: 4px solid #5349c5;  
 }
 
+.btn-comercial{
+    color:#fff;
+    background-color: #43ad6f;
+    border-color: #43ad6f;
+    border-radius: 0;
+}
+
+.btn-comercial:hover{
+    color:#fff;
+    background-color: #58b67f;
+    border-color: #58b67f;
+    border-radius: 0;
+}
+
 .load{
     display: none;
     position: absolute;
@@ -355,7 +369,13 @@ td .acao{
     border-color:var(--purple);
 }
 
+
+.cli .row:first-child .col-12:first-child a{
+    text-decoration: none !important;
+}
+
 .logo{
+    color: #282730;
     font-family: 'Rubik', sans-serif !important;
     text-align: center;
     line-height: 0.9;
@@ -364,6 +384,22 @@ td .acao{
 
 .logo>span{
     color: var(--color-primary)
+}
+
+.cli .nav-link.dropdown-toggle{
+    font-family: 'Rubik', sans-serif !important;
+    font-size: 1.1rem;
+    color: var(--color-primary) !important;
+}
+
+.cli .dropdown-menu{
+    max-height: 360px;
+    overflow-y: auto;
+}
+
+.dropdown-item{
+    display: flex;
+    align-items: center;
 }
 
 .navbar-dark .navbar-nav .nav-link {
@@ -401,14 +437,10 @@ td .acao{
 
 .carrinho{
     margin-left: 5px;
-    cursor: pointer;
-    height: 35px;
-    width: 35px;
 }
 
 .icon{
     position: relative;
-    z-index: 2;
 }
 
 .icon .icon-carrinho{
@@ -423,7 +455,7 @@ td .acao{
     bottom: 0;
     right: -7px;
 
-    color: rgb(76, 8, 116);
+    color: #181818;
     text-align: center;
     line-height: 15px;
     background-color: white;
@@ -435,153 +467,23 @@ td .acao{
     height: 15px;
 }
 
-.sombra-carrinho{
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+.banners .carousel-item{
+    height: 400px;
+    width: 100%;
+    max-width: 1200px;
+}
 
+.banners img{
     height: 100%;
     width: 100%;
-
-    z-index: 1;
-    transition: .4s ease-in-out;
-    background-color: rgba(0, 0, 0,.3);
-}
-
-.carrinho-interno{
-    position: absolute;
-    top: calc(100% + -7px);
-    right: 10px;
-
-    z-index: 2;
-    padding: 0 15px;
-    max-height: 500px;
-    width: 350px;
-    
-    background-color: white;
-    box-shadow:  0 5px 10px 0 rgba(0, 0, 0, 0.19);
-}
-
-.carrinho-interno::before {
-    content: '';
-    display: block;
-    position: absolute;
-    top: -5px;
-    right: 40px;
-
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-bottom: 5px solid white;
-}
-
-.carrinho-header{
-    font-weight: 400;
-    font-size: 18px;
-    text-transform: uppercase;
-    color: rgb(76, 8, 116);
-
-    background-color: white;
-    margin: 15px 0;
-}
-
-.carrinho-vazio{
-    font-size: 15px;
-    font-weight: 400;
-    margin: 10px 0;
-}
-
-.carrinho-vazio a{
-    text-decoration: none;
-}
-
-.carrinho-vazio a:hover{
-    text-decoration: underline;
-}
-
-.carrinho-vazio a:visited{
-    color: #0000ff;
-}
-
-.lista {
-    max-height: 350px;
-    overflow-y: auto;
-}
-
-.lista::-webkit-scrollbar{
-    width: 5px;
-    margin-left: 10px;
-}
-.lista::-webkit-scrollbar-thumb{
-    background-color: rgb(76, 8, 116);
-}
-
-.lista::-webkit-scrollbar-track{
-    background-color: #e4e3e3;
-}
-
-.lista .item{
-    display: flex;
-    align-items: flex-start;
-    flex-direction: row;
-
-    margin: 10px 10px 0 10px;
-    border-bottom: 1px solid #ccc;
-}
-
-.item-image{
-    margin-right: 10px;
-    padding: 10px;
-    height: 70px;
-    width: 70px;
-}
-
-.item-image img{
-    max-width: 100%;
-}
-
-.item-nome{
-    font-size: 14px;
-    font-weight: 400;
-    margin-bottom: 5px;
-    height: 34px;
-}
-
-.item-quantidade{
-    font-size: 14px;
-}
-
-.item-preco{
-    font-size: 15px;
-    font-weight: 500;
-    color: rgb(26, 26, 26);
-    margin: 5px 0 10px 0;
-}
-
-.carrinho-footer{
-    margin: 15px 0;
-}
-
-.carrinho-footer .icon-btn-cart{
-    margin: 0 10px;
-    color:white;
-}
-
-.item-remover{
-    display: block;
-    margin-left: auto;
-}
-
-.item-remover i{
-    color: #4c0874;
-}
-
-.hidden{
-    display: none;
+    object-fit: fill;
 }
 
 @media screen and (max-width: 992px){
+    
+    .banners .carousel-item{
+        height: 350px;
+    }
     
     .logo{
         margin-bottom: 5px !important;
@@ -619,6 +521,10 @@ td .acao{
     
     .form__fields-container-address{
         margin-top: 0;
+    }
+
+    .banners .carousel-item{
+        height: 300px;
     }
 }
 
@@ -676,6 +582,19 @@ td .acao{
         justify-content: flex-end;
         margin-top: .5rem;
     }
+
+    .banners .carousel-item{
+        height: 200px;
+    }
+}
+
+@media screen and (max-width: 390px){
+    .banners .carousel-item{
+        height: 150px;
+        width: 100%;
+        max-width: 1200px;
+    }
+    
 }
 
 @media screen and (max-width: 270px){

@@ -11,5 +11,5 @@ if (isset($_REQUEST["classe"]) && isset($_REQUEST["metodo"])) {
     else
         include_once "../app/view/admin/PaginaErro.php";
 } else {
-    header("location:index.php?classe=HomeController&metodo=abrirLoja");
+    header("location:index.php?classe=HomeController&metodo=abrirPrincipal");
 }

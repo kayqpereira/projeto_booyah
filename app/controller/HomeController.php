@@ -19,8 +19,16 @@ class HomeController
         include_once "../../app/view/admin/Home.php";
     }
 
-    function abrirLoja()
+    function abrirPrincipal()
     {
+        include "../app/model/Marca.php";
+        $mar = new Marca();
+        $dadosMar = $mar->consultarMarcas();
+
+        include "../app/model/Categoria.php";
+        $categ = new Categoria();
+        $dadosCateg = $categ->consultarCategorias();
+
         include_once "../app/view/cliente/Home.php";
     }
 }
