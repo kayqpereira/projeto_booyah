@@ -36,7 +36,7 @@ class ClienteController
 
         include "../app/model/Cliente.php";
         $cli = new Cliente();
-        $cli->cod_cliente = $_SESSION["codcli_logado"];
+        $cli->cod_cliente = $_SESSION["codCliente"];
         $dadosCli = $cli->consultarDadosCliente();
 
         include_once "../app/view/cliente/AtualizarCliente.php";
@@ -153,9 +153,9 @@ class ClienteController
             session_start();
             session_regenerate_id(true);
 
-            $_SESSION["codcli_logado"]    = $codCliente;
+            $_SESSION["codCliente"]    = $codCliente;
             $primeiroNome = explode(" ", $cli->nome);
-            $_SESSION["nomecli_logado"]   = $primeiroNome;
+            $_SESSION["nomeCliente"]   = $primeiroNome;
 
             echo "<body></body>
                 <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css'>
@@ -379,9 +379,9 @@ class ClienteController
             session_start();
             session_regenerate_id(true);
 
-            $_SESSION["codcli_logado"]    = $dadosCli->cod_cliente;
+            $_SESSION["codCliente"]    = $dadosCli->cod_cliente;
             $primeiroNome = explode(" ", $dadosCli->nome);
-            $_SESSION["nomecli_logado"]   = $primeiroNome;
+            $_SESSION["nomeCliente"]   = $primeiroNome[0];
 
 
             echo "<body></body>
@@ -389,18 +389,27 @@ class ClienteController
             <script src='https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js'></script>
             <script src='//cdn.jsdelivr.net/npm/sweetalert2@10'></script>
             <script>
-                Swal.fire({
-                    title:'Login efetuado com susseso!',
+            Swal.fire({
+                    title:'Sucesso!',
+                    text:'Seja bem-vindo $primeiroNome[0].',
                     type:'success',
                     icon:'success',
                     showConfirmButton:false,
-                    timer:1500,
+                    timer:2000,
                     onClose: () => {
                         window.location='index.php?classe=HomeController&metodo=abrirPrincipal';
                     }
                 });
             </script>";
         }
+    }
+
+    public function logout()
+    {
+        session_start();
+        session_destroy();
+
+        header("location:index.php?classe=HomeController&metodo=abrirPrincipal");
     }
 
     /**

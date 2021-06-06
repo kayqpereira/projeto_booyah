@@ -72,10 +72,15 @@
                         <a href="index.php?classe=ItemController&metodo=finalizar" class="btn btn-comercial float-right">FINALIZAR</a>
                     </div>
                 </div>
+
             <?php } else { ?>
-                <div class="row">
-                    <div class="col">
-                        <h1>Carrinho vazio!</h1>
+                <div class="row justify-content-center align-items-center pt-5">
+                    <div class="col-auto">
+                        <h2 class="carrinho-vazio">Seu carrinho está vazio!</h2>
+                    </div>
+
+                    <div class="col-auto">
+                        <a href="index.php?classe=HomeController&metodo=abrirPrincipal" class="btn btn-comercial">Adicionar itens</a>
                     </div>
                 </div>
             <?php } ?>

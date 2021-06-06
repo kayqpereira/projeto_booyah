@@ -311,8 +311,14 @@ span[class^="error-"].is-active{
     -webkit-box-shadow: 0 0 10px rgba(80, 80, 80, 0.1);
 }
 
+.table,
 .tabela{
     font: 90%/1.45em "Helvetica Neue",HelveticaNeue,Helvetica,Arial,sans-serif !important;
+}
+
+.table tbody th,
+.table td{
+    vertical-align: middle;
 }
 
 td .acao{
@@ -485,6 +491,10 @@ td .acao{
     vertical-align: -.125em;
 }
 
+.carrinho-vazio{
+    color: #282730;
+}
+
 .banners img{
     height: 100%;
     width: 100%;
@@ -613,13 +623,15 @@ td .acao{
     .banners .carousel-item{
         height: 200px;
     }
+
+    .carrinho-vazio{
+        font-size: 1.5rem;
+    }
 }
 
 @media screen and (max-width: 390px){
     .banners .carousel-item{
         height: 150px;
-        width: 100%;
-        max-width: 1200px;
     }
     
 }

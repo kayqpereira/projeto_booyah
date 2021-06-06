@@ -5,7 +5,7 @@ class ItemController
     public function abrirConsulta()
     {
         if (isset($_GET["cod_venda"])) {
-            include "../../app/../app/model/Item.php";
+            include "../../app//model/Item.php";
             $item = new Item();
 
             $item->cod_venda = $_GET["cod_venda"];
@@ -14,6 +14,29 @@ class ItemController
         $dadosItem = $item->consultarItensPorCodVenda();
 
         include_once "../../app/view/admin/ConsultarItens.php";
+    }
+
+    public function abrirItensDoPedido()
+    {
+        session_start();
+        include "../app/model/Marca.php";
+        $mar = new Marca();
+        $dadosMar = $mar->consultarMarcas();
+
+        include "../app/model/Categoria.php";
+        $categ = new Categoria();
+        $dadosCateg = $categ->consultarCategorias();
+        
+        if (isset($_GET["cod_venda"])) {
+            include "../app/model/Item.php";
+            $item = new Item();
+
+            $item->cod_venda = $_GET["cod_venda"];
+        }
+
+        $dadosItem = $item->consultarItensPorCodVenda();
+
+        include_once "../app/view/cliente/ItensDoPedido.php";
     }
 
     function abrirCarrinho()
