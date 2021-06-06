@@ -393,10 +393,21 @@ td .acao{
     color: var(--color-primary);
 }
 
-.cli .nav-link.dropdown-toggle{
+.cli .navbar-menu{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: .6rem;
+    border-top: 1px solid silver;
+    border-bottom: 1px solid silver;
+    margin: 0 15px;
+}
+
+.cli .navbar-menu .dropdown-toggle{
     font-family: 'Rubik', sans-serif !important;
     font-size: 1.1rem;
     color: var(--color-primary) !important;
+    text-decoration: none !important;
 }
 
 .cli .dropdown-menu{
@@ -633,7 +644,10 @@ td .acao{
     .banners .carousel-item{
         height: 150px;
     }
-    
+
+    .cli .navbar-menu{
+        justify-content: flex-start;
+    }
 }
 
 @media screen and (max-width: 270px){

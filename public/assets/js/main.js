@@ -830,7 +830,7 @@ $(document).ready(function () {
     }
 });
 
-const links = document.querySelectorAll(".nav-links");
+const links = document.querySelectorAll(".nav-link");
 const dropdownItem = document.querySelectorAll(".dropdown-item");
 const urlAtual = location.href;
 

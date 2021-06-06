@@ -20,7 +20,7 @@
 
     <main class="container-fluid">
         <div class="page-title container">
-            <h2>Vendas</h2>
+            <h2>Pedidos</h2>
         </div>
         <div class="row">
             <div class="col px-4 py-3">
