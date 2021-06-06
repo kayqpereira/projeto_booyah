@@ -62,9 +62,7 @@ class Item
     {
         $con = Conexao::conectar();
 
-        $cmd = $con->prepare("SELECT tbprodutos.nome_produto, tbitens.* 
-        FROM tbitens INNER JOIN tbprodutos ON tbitens.cod_produto = tbprodutos.cod_produto
-        WHERE cod_venda = :cod_venda");
+        $cmd = $con->prepare("SELECT * FROM tbitens WHERE cod_venda = :cod_venda");
         $cmd->bindParam(":cod_venda", $this->cod_venda);
 
         $cmd->execute();

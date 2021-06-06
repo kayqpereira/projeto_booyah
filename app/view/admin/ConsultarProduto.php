@@ -61,6 +61,7 @@
                                     <td class='acao'>
                                         <button  title='Excluír' onclick=\"excluirProduto($produto->cod_produto);\" class='btn btn-sm btn-danger'><i class='fas fa-trash-alt'></i></button>
                                         <a title='Editar' href='index.php?classe=ProdutoController&metodo=abrirAtualizacao&cod_produto=$produto->cod_produto'class='btn btn-sm btn-secondary'><i class='fas fa-edit'></i></a>
+                                        <a title='Imagens' href='index.php?classe=ImagemController&metodo=abrirCadastro&cod_produto=$produto->cod_produto'class='btn btn-sm btn-primary'><i class='fas fa-image'></i></a>
                                     </td>
                                 </tr>";
                             }

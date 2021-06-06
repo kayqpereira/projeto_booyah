@@ -19,6 +19,13 @@ class ItemController
     public function abrirItensDoPedido()
     {
         session_start();
+        if (!isset($_GET["cod_venda"])) {
+            $fallback = "index.php?class=HomeController&metodo=abrirHome";
+            $anterior = isset($_SERVER["HTTP_REFERER"]) ? $_SERVER["HTTP_REFERER"] : $fallback;
+            header("location: {$anterior}");
+            exit();
+        }
+
         include "../app/model/Marca.php";
         $mar = new Marca();
         $dadosMar = $mar->consultarMarcas();
@@ -26,14 +33,14 @@ class ItemController
         include "../app/model/Categoria.php";
         $categ = new Categoria();
         $dadosCateg = $categ->consultarCategorias();
-        
-        if (isset($_GET["cod_venda"])) {
-            include "../app/model/Item.php";
-            $item = new Item();
 
-            $item->cod_venda = $_GET["cod_venda"];
-        }
+        include "../app/model/Produto.php";
+        $prod = new Produto();
 
+        include "../app/model/Item.php";
+        $item = new Item();
+
+        $item->cod_venda = $_GET["cod_venda"];
         $dadosItem = $item->consultarItensPorCodVenda();
 
         include_once "../app/view/cliente/ItensDoPedido.php";

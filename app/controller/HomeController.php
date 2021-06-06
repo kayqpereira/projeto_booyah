@@ -31,6 +31,10 @@ class HomeController
         $categ = new Categoria();
         $dadosCateg = $categ->consultarCategorias();
 
+        include "../app/model/Produto.php";
+        $prod = new Produto();
+        $dadosProd = $prod->consultarProdutos();
+
         include_once "../app/view/cliente/Home.php";
     }
 }

@@ -36,7 +36,7 @@ class CategoriaController
                     }
                 });
                 </script>";
-            return false;
+            exit();
         }
 
         if (empty($_POST["cod_categoria"])) {

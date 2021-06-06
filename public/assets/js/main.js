@@ -820,7 +820,16 @@ else if (document.getElementById("frmEditarProd"))
     document.getElementById("frmEditarProd").onload = validarFormProd();
 
 $(document).ready(function () {
-    if (document.querySelector(".tabela")) {
+    if (document.querySelector("#tabelaCli")) {
+        $("#tabelaCli").DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"
+            },
+            "scrollX": true,
+            "paging": false,
+            "info": false
+        });
+    } else if (document.querySelector(".tabela")) {
         $(".tabela").DataTable({
             "language": {
                 "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"

@@ -57,9 +57,11 @@ class Produto
     {
         $con = Conexao::conectar();
 
-        $cmd = $con->prepare("SELECT tbprodutos.*, tbmarcas.nome_marca, tbcategorias.nome_categoria FROM tbprodutos 
+        $cmd = $con->prepare("SELECT tbprodutos.*, tbmarcas.nome_marca, tbcategorias.nome_categoria, tbimagens.*  FROM tbprodutos 
         INNER JOIN tbmarcas ON (tbprodutos.cod_marca = tbmarcas.cod_marca)
-        INNER JOIN tbcategorias ON (tbprodutos.cod_categoria = tbcategorias.cod_categoria) ");
+        INNER JOIN tbcategorias ON (tbprodutos.cod_categoria = tbcategorias.cod_categoria)
+        INNER JOIN tbimagens ON (tbprodutos.cod_produto = tbimagens.cod_produto)
+        GROUP BY tbprodutos.cod_produto");
 
         $cmd->execute();
 
@@ -117,10 +119,11 @@ class Produto
     {
         $con = Conexao::conectar();
 
-        $cmd = $con->prepare("SELECT tbprodutos.*, tbmarcas.nome_marca, tbcategorias.nome_categoria FROM tbprodutos 
+        $cmd = $con->prepare("SELECT tbprodutos.*, tbmarcas.nome_marca, tbcategorias.nome_categoria, tbimagens.*  FROM tbprodutos 
         INNER JOIN tbmarcas ON (tbprodutos.cod_marca = tbmarcas.cod_marca)
         INNER JOIN tbcategorias ON (tbprodutos.cod_categoria = tbcategorias.cod_categoria)
-        WHERE cod_produto = :cod_produto");
+        INNER JOIN tbimagens ON (tbprodutos.cod_produto = tbimagens.cod_produto)
+        WHERE tbprodutos.cod_produto = :cod_produto GROUP BY tbprodutos.cod_produto");
 
         $cmd->bindParam(":cod_produto", $this->cod_produto);
 

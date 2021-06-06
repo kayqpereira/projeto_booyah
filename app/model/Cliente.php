@@ -97,7 +97,7 @@ class Cliente
         $con = Conexao::conectar();
 
         $cmd = $con->prepare("SELECT tbclientes.*, tbenderecos.* FROM tbclientes INNER JOIN tbenderecos 
-        ON (tbclientes.cod_endereco = tbenderecos.cod_endereco) WHERE cod_cliente = :cod_cliente");
+        ON (tbclientes.cod_endereco = tbenderecos.cod_endereco) WHERE tbclientes.cod_cliente = :cod_cliente");
 
         $cmd->bindParam(":cod_cliente", $this->cod_cliente);
 

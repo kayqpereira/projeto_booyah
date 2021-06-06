@@ -40,7 +40,6 @@ class ProdutoController
     {
         include "../../app/model/Produto.php";
         $prod = new Produto();
-
         $dadosProd = $prod->consultarProdutos();
 
         include_once "../../app/view/admin/ConsultarProduto.php";

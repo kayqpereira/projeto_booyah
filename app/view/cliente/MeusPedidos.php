@@ -8,6 +8,8 @@
     <title>Meus pedidos</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <!-- Data Tables -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.24/datatables.min.css" />
     <!-- Styles -->
     <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
 </head>
@@ -22,15 +24,15 @@
         </div>
         <div class="row">
             <div class="col px-4 py-3">
-                <div class="container tabela-container table-responsive">
-                    <table class="table table-hover table-sm">
+                <div class="container tabela-container">
+                    <table id="tabelaCli" class="tabela row-border order-column hover nowrap w-100">
                         <thead>
-                            <th scope="col">#</th>
-                            <th scope="col">Data</th>
-                            <th scope="col">Hora</th>
-                            <th scope="col">Forma de Pagamento</th>
-                            <th scope="col">Meio de Entrega</th>
-                            <th scope="col">Ação</th>
+                            <th>#</th>
+                            <th>Data</th>
+                            <th>Hora</th>
+                            <th>Forma de Pagamento</th>
+                            <th>Meio de Entrega</th>
+                            <th>Ação</th>
                         </thead>
                         <tbody>
                             <?php
@@ -38,7 +40,7 @@
                             foreach ($dadosVend as $venda) {
                                 echo "
                                 <tr>
-                                    <th scope='row'>" . $i++ . "</th>
+                                    <td>" . $i++ . "</td>
                                     <td>" . $cli->formatarData($venda->data_venda, "BR") . "</td>
                                     <td>$venda->hora</td>
                                     <td>$venda->forma_pag</td>
@@ -65,6 +67,8 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <!-- Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+    <!-- Data Tables -->
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.24/datatables.min.js"></script>
     <!-- Scripts -->
     <script src="./assets/js/main.js"></script>
 </body>
