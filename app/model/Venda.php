@@ -44,6 +44,8 @@ class Venda
         $cmd->bindParam(":frete",           $this->frete);
 
         $cmd->execute();
+
+        return $con->lastInsertId();
     }
 
     /**

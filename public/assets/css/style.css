@@ -7,7 +7,7 @@
     --bg-form: #f5f5f7;
     --bg-form_row: #ffffff;
     --bg-form_fieldset: #ffffff;
-    --color-primary: #7166f0;
+    --color-primary: hsl(245, 82%, 67%);
     --color-primary-shadow: #685dd8;
     --body-font: 'Poppins', sans-serif;
 }
@@ -266,8 +266,8 @@ span[class^="error-"].is-active{
 
 .btn-comercial:hover{
     color:#fff;
-    background-color: #58b67f;
-    border-color: #58b67f;
+    background-color: #46a16c;
+    border-color: #46a16c;
     border-radius: 0;
 }
 
@@ -383,7 +383,7 @@ td .acao{
     letter-spacing: -1.25px;
 }
 
-.logo>span{
+.logo > span{
     color: var(--color-primary);
 }
 
@@ -391,9 +391,8 @@ td .acao{
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: .6rem;
+    padding: .8rem;
     border-top: 1px solid silver;
-    border-bottom: 1px solid silver;
     margin: 0 15px;
 }
 
@@ -498,6 +497,7 @@ td .acao{
 
 .carrinho-vazio{
     color: #282730;
+    margin: 0;
 }
 
 .banners img{
@@ -511,15 +511,48 @@ td .acao{
     width: 78px;
     height: 78px;
     background: #fff;
+    margin: 0 auto;
+
     display: flex;
     align-items: center;
     justify-content: center;
 }
+
 .image img{
     display: block;
     max-height: 78px;
     max-width: 78px;
     margin: auto;
+}
+
+#images-produto{
+    border-radius: 1rem !important;
+}
+
+.carousel-item.images{
+    width: 100%;
+    height: 400px;
+    background: #fff;
+    padding: 15px;
+    border: 1px solid #d5d5d5;
+}
+
+.carousel-item.images img{
+    display: block;
+    margin: 0 auto;
+    height: 100%;
+    max-width: 100%;
+    object-fit: fill;
+}
+
+.descricao p{
+    text-align: justify;
+}
+
+.descricao p span{
+    color: var(--color-primary-shadow);
+    font-size: 32px;
+    font-family: 'Rubik', sans-serif !important;
 }
 
 /* Modal Bootstrap */
@@ -537,6 +570,89 @@ td .acao{
     justify-content: center !important;
 }
 
+.products{
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.product{
+    position: relative;
+    width: 265px;
+    padding: 10px;
+    margin: 5px;
+    border: 1px solid white;
+    background-color: white;
+    transition: 200ms ease-in-out;
+}
+
+.product:hover{
+    border: 1px solid var(--color-primary) !important;
+    box-shadow: 0px 0px 6px 4px rgba(83, 73, 197,.4);
+}
+
+/* Imagem do produto */
+.product-image{
+    width: 240px;
+    height: 240px;
+
+    padding: 30px;
+    margin: 0 auto;
+    background-color: inherit;
+}
+
+.product-image img{
+    max-width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    display: block;
+}
+
+/*-------Informações do Produto-------*/
+.info-product{
+    background-color: inherit;
+    text-align: center;
+}
+
+/* Nome do Produto */
+.info-product .product-name{
+    font-size: 1.2rem;
+    padding: 10px 0;
+    font-weight: bold;
+    background-color: inherit;
+}
+
+/* Status do estoque. Stock = Estoque */
+.info-product .product-stock{
+    font-size: 14px;
+    background-color: inherit;
+}
+
+.product-stock span{
+    font-weight: bold;
+    background-color: inherit;
+}
+
+span.positive{
+    color: var(--success);
+}
+
+span.negative{
+    color: var(--red);
+}
+
+/* Preço do Produto */
+.info-product .product-price{
+    background-color: inherit;
+
+    font-size: 18px;
+    padding: 10px 0;
+    font-weight: bold;
+    color: rgb(37, 37, 37);
+}
+
 @media screen and (max-width: 992px){
     
     .banners .carousel-item{
@@ -545,6 +661,10 @@ td .acao{
     
     .logo{
         margin-bottom: 5px !important;
+    }
+
+    .carousel-item.images{
+        height: 250px;
     }
 }
 
@@ -583,6 +703,14 @@ td .acao{
 
     .banners .carousel-item{
         height: 300px;
+    }
+
+    .product{
+        width: 275px;
+    }
+
+    .descricao{
+        margin-top: 10px;
     }
 }
 
@@ -653,6 +781,10 @@ td .acao{
 @media screen and (max-width: 390px){
     .banners .carousel-item{
         height: 150px;
+    }
+
+    .carousel-item.images{
+        height: 200px;
     }
 
     .cli .navbar-menu{

@@ -17,50 +17,16 @@
     <?php include_once "header.php"; ?>
 
     <main class="container-fluid ">
-        <section class="container banners">
-            <div class="row">
-                <div class="col">
-                    <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-ride="carousel">
-                        <ol class="carousel-indicators">
-                            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                            <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
-                        </ol>
-
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img src="./assets/images/resident-evil-village.png" class="d-block img-fluid" alt="Resident Evil Village">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="./assets/images/biomutant.jpg" class="d-block img-fluid" alt="Biomutant">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="./assets/images/assassins-creed-valhalla.jpg" class="d-block img-fluid" alt="Assassin" s Creed Valhalla">
-                            </div>
-
-                            <div class="carousel-item">
-                                <img src="./assets/images/cyberpunk-2077.jpg" class="d-block img-fluid" alt="Cyberpunk 2077">
-                            </div>
-                        </div>
-
-                        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-
-                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <section class="container mt-3">
             <div class="page-title container">
-                <h1>Produtos para você</h1>
+                <?php
+                if ($consulta == "categ")
+                    echo "<h3>Categoria: " . $dadosProd[0]->nome_categoria . "</h3>";
+                else if ($consulta == "mar")
+                    echo "<h3>Marca: " . $dadosProd[0]->nome_marca . "</h3>";
+                else
+                    echo "<h3>$termoPesquisado</h3>";
+                ?>
             </div>
             <div class="row my-3">
                 <div class="col products">
@@ -78,7 +44,7 @@
                                 <div class="product-stock">
                                     <?php
                                     $estoque = $produto->estoque;
-                                    if (isset($_SESSION["produtos"][$produto->cod_produto])) {
+                                    if (isset($_SESSION["produtos"][$produto->estoque])) {
                                         $estoque = $_SESSION["estoque"][$produto->cod_produto];
                                         if ($estoque > 0)
                                             echo "Estoque: <span class='positive'>Disponível!</span>";
@@ -109,7 +75,6 @@
     </main>
 
     <?php include_once "footer.php"; ?>
-    <?php include_once "modal.php"; ?>
 
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/87aa5c0f8d.js" crossorigin="anonymous"></script>

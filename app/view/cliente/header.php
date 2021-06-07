@@ -8,9 +8,9 @@
             </div>
 
             <div class="col-12 col-sm-8 col-lg-6">
-                <form method="post" action="index.php?classe=HomeController&metodo=abriPesquisa">
+                <form method="post" action="index.php?classe=HomeController&metodo=abrirPesquisa">
                     <div class="input-group">
-                        <input type="text" name="nome_produto" class="form__input form-control" placeholder="Pesquisar..." aria-describedby="button-addon2">
+                        <input type="text" name="nome_produto" class="form__input form-control" placeholder="Pesquisar..." value="<?php if (isset($_POST["nome_produto"])) echo $_POST["nome_produto"]; ?>" required aria-describedby="button-addon2">
 
                         <div class="input-group-append">
                             <button class="btn btn-principal" type="submit" id="button-addon2">
@@ -89,12 +89,10 @@
 
                         <div class="qtd-itens">
                             <span class="user-select-none">
-                                <?php
-                                if (isset($_SESSION['carrinho']))
-                                    echo count($_SESSION['carrinho']);
+                                <?php if (isset($_SESSION["produtos"]))
+                                    echo count($_SESSION["produtos"]);
                                 else
-                                    echo 0;
-                                ?>
+                                    echo 0  ?>
                             </span>
                         </div>
                     </div>
@@ -148,6 +146,5 @@
                 </div>
             </div>
         </div>
-    </div>
     </div>
 </header>

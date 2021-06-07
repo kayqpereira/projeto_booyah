@@ -4,7 +4,7 @@ class ImagemController
     function abrirCadastro()
     {
         if (!isset($_GET["cod_produto"])) {
-            $fallback = "index.php?class=HomeController&metodo=abrirHome";
+            $fallback = "index.php?classe=HomeController&metodo=abrirHome";
             $anterior = isset($_SERVER["HTTP_REFERER"]) ? $_SERVER["HTTP_REFERER"] : $fallback;
             header("location: {$anterior}");
             exit();

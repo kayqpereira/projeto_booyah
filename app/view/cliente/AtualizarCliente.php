@@ -415,6 +415,8 @@
         </form>
     </main>
 
+    <?php include_once "footer.php"; ?>
+
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/87aa5c0f8d.js" crossorigin="anonymous"></script>
     <!-- JQuery -->

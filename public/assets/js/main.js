@@ -572,6 +572,8 @@ document.querySelectorAll(".form-control").forEach(field => {
         (id == "cod_categoria") ||
         (id == "cod_marca") ||
         (id == "nome_categoria") ||
+        (id == "meio_entrega") ||
+        (id == "forma_pag") ||
         (id == "nome_marca")) {
         field.addEventListener("change", event => {
             event.target = validate["padrao"](event.target);
@@ -730,6 +732,18 @@ function validarFormCateg() {
     }
 }
 
+function validarFormP() {
+    if (!validate["padrao"](document.getElementById("meio_entrega"))) {
+        document.getElementById("meio_entrega").focus();
+        return false;
+    }
+
+    if (!validate["padrao"](document.getElementById("forma_pag"))) {
+        document.getElementById("forma_pag").focus();
+        return false;
+    }
+}
+
 function validarFormProd() {
     if (!validate["padrao"](document.getElementById("nome_produto"))) {
         document.getElementById("nome_produto").focus();
@@ -829,6 +843,17 @@ $(document).ready(function () {
             "paging": false,
             "info": false
         });
+    } else if (document.querySelector("#tabelaCli2")) {
+        $("#tabelaCli2").DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"
+            },
+            "scrollX": true,
+            "paging": false,
+            "info": false,
+            "ordering": false,
+            "bFilter": false,
+        });
     } else if (document.querySelector(".tabela")) {
         $(".tabela").DataTable({
             "language": {
@@ -839,23 +864,25 @@ $(document).ready(function () {
     }
 });
 
-const links = document.querySelectorAll(".nav-link");
-const dropdownItem = document.querySelectorAll(".dropdown-item");
-const urlAtual = location.href;
+if (document.querySelector(".adm")) {
+    const links = document.querySelectorAll(".nav-link");
+    const dropdownItem = document.querySelectorAll(".dropdown-item");
+    const urlAtual = location.href;
 
-if (links) {
-    links.forEach(l => l.parentNode.classList.remove("active"));
+    if (links) {
+        links.forEach(l => l.parentNode.classList.remove("active"));
 
-    for (let i = 0; i < links.length; i++) {
-        if (links[i].href === urlAtual)
-            links[i].parentNode.classList.add("active");
-    }
+        for (let i = 0; i < links.length; i++) {
+            if (links[i].href === urlAtual)
+                links[i].parentNode.classList.add("active");
+        }
 
-    if (dropdownItem) {
-        dropdownItem.forEach(l => l.parentNode.parentNode.classList.remove("active"));
-        for (let i = 0; i < dropdownItem.length; i++) {
-            if (dropdownItem[i].href === urlAtual)
-                dropdownItem[i].parentNode.parentNode.classList.add("active");
+        if (dropdownItem) {
+            dropdownItem.forEach(l => l.parentNode.parentNode.classList.remove("active"));
+            for (let i = 0; i < dropdownItem.length; i++) {
+                if (dropdownItem[i].href === urlAtual)
+                    dropdownItem[i].parentNode.parentNode.classList.add("active");
+            }
         }
     }
 }

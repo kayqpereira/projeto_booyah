@@ -67,7 +67,7 @@ class ProdutoController
                 }
             });
             </script>";
-            return false;
+            exit();
         }
 
         $prod->cod_categoria   = $_POST["cod_categoria"];
@@ -96,7 +96,7 @@ class ProdutoController
                 }
             });
             </script>";
-            return false;
+            exit();
         }
 
         $prod->cadastrarProduto();
@@ -187,7 +187,7 @@ class ProdutoController
                 }
             });
             </script>";
-            return false;
+            exit();
         }
 
         $prod->cod_produto     = $_POST["cod_produto"];
@@ -217,7 +217,7 @@ class ProdutoController
                 }
             });
             </script>";
-            return false;
+            exit();
         }
 
         $prod->atualizarProduto();

@@ -391,7 +391,7 @@ class ClienteController
             <script>
             Swal.fire({
                     title:'Sucesso!',
-                    text:'Seja bem-vindo $primeiroNome[0].',
+                    text:'Seja bem-vindo(a) $primeiroNome[0].',
                     type:'success',
                     icon:'success',
                     showConfirmButton:false,
@@ -445,7 +445,7 @@ class ClienteController
     {
         header("Content-Type: application/json");
         if (isset($_POST["cpf"])) {
-            include "../../app/model/Cliente.php";
+            include "../app/model/Cliente.php";
             $cli = new Cliente();
 
             if (isset($_POST["cod_cliente"])) {
@@ -467,7 +467,7 @@ class ClienteController
     {
         header("Content-Type: application/json");
         if (isset($_POST["email"])) {
-            include "../../app/model/Cliente.php";
+            include "../app/model/Cliente.php";
             $cli = new Cliente();
 
             if (isset($_POST["cod_cliente"])) {

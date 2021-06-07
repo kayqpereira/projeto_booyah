@@ -4,13 +4,20 @@ class ItemController
 {
     public function abrirConsulta()
     {
-        if (isset($_GET["cod_venda"])) {
-            include "../../app//model/Item.php";
-            $item = new Item();
-
-            $item->cod_venda = $_GET["cod_venda"];
+        if (!isset($_GET["cod_venda"])) {
+            $fallback = "index.php?classe=HomeController&metodo=abrirHome";
+            $anterior = isset($_SERVER["HTTP_REFERER"]) ? $_SERVER["HTTP_REFERER"] : $fallback;
+            header("location: {$anterior}");
+            exit();
         }
 
+        include "../../app/model/Produto.php";
+        $prod = new Produto();
+
+        include "../../app/model/Item.php";
+        $item = new Item();
+
+        $item->cod_venda = $_GET["cod_venda"];
         $dadosItem = $item->consultarItensPorCodVenda();
 
         include_once "../../app/view/admin/ConsultarItens.php";
@@ -20,7 +27,7 @@ class ItemController
     {
         session_start();
         if (!isset($_GET["cod_venda"])) {
-            $fallback = "index.php?class=HomeController&metodo=abrirHome";
+            $fallback = "index.php?classe=HomeController&metodo=abrirPrincipal";
             $anterior = isset($_SERVER["HTTP_REFERER"]) ? $_SERVER["HTTP_REFERER"] : $fallback;
             header("location: {$anterior}");
             exit();
@@ -66,63 +73,69 @@ class ItemController
             $itensCarrinho = count($_SESSION["produtos"]);
         }
 
-        include_once "../app/view/cliente/Carrinho.php"; //incluir o arquivo home (CLIENTE)
+        include_once "../app/view/cliente/Carrinho.php";
     }
 
-    function finalizar()
+    function adicionarItem()
     {
         session_start();
-
-        $itensCarrinho = 0;
-        if (isset($_SESSION["produtos"])) {
-            $itensCarrinho = count($_SESSION["produtos"]);
+        if (!isset($_GET["cod_produto"])) {
+            $fallback = "index.php?classe=HomeController&metodo=abrirPrincipal";
+            $anterior = isset($_SERVER["HTTP_REFERER"]) ? $_SERVER["HTTP_REFERER"] : $fallback;
+            header("location: {$anterior}");
+            exit();
         }
 
-        include_once "view_cliente/Finalizar.php"; //incluir o arquivo home (ADM)
-    }
+        include "../app/model/Produto.php";
+        $prod = new Produto();
 
-    function adicionar()
-    {
-        session_start();
-        if (!isset($_SESSION["produtos"])) //criar apenas uma vez o vetor em sessão
-        {
-            $_SESSION["produtos"] = array(); //armazenar o código do produto
-            $_SESSION["quantidade"] = array(); //armazenar a quantidade
+        $prod->cod_produto = $_GET["cod_produto"];
+        $dadosProd   = $prod->consultarProdutoCod();
+        $codProduto  = $_GET["cod_produto"];
+        $estoque     = $dadosProd->estoque;
+
+        if (!isset($_SESSION["produtos"])) {
+            $_SESSION["produtos"] = array();
+            $_SESSION["quantidade"] = array();
+            $_SESSION["estoque"] = array();
         }
 
-        //adicionar ao vetor
-        $codproduto = $_GET["codproduto"];
-        if (in_array($codproduto, $_SESSION["produtos"])) //existe o código no vetor?
-        {
-            $_SESSION["quantidade"][$codproduto] += 1;
+        if (in_array($codProduto, $_SESSION["produtos"])) {
+            if ($_SESSION["estoque"][$codProduto] > 0) {
+                $_SESSION["quantidade"][$codProduto] += 1;
+                $_SESSION["estoque"][$codProduto]--;
+            } else {
+                echo "<script>
+                        alert('Valor maior que o disponível');
+                        window.location='index.php?classe=ItemController&metodo=abrirCarrinho';
+                    </script>";
+                exit();
+            }
         } else {
-            $_SESSION["produtos"][$codproduto] = $codproduto;
-            $_SESSION["quantidade"][$codproduto] = 1;
+            if ($estoque > 0) {
+                $_SESSION["produtos"][$codProduto] = $codProduto;
+                $_SESSION["quantidade"][$codProduto] = 1;
+                $_SESSION["estoque"][$codProduto] = $estoque - 1;
+            } else {
+                echo "<script>
+                        alert('Valor maior que o disponível');
+                        window.location='index.php?classe=ItemController&metodo=abrirCarrinho';
+                    </script>";
+                exit();
+            }
         }
 
         header("Location:index.php?classe=ItemController&metodo=abrirCarrinho");
     }
 
-    function excluir()
+    function excluirItem()
     {
         session_start();
-        $codproduto = $_GET["codproduto"];
-        unset($_SESSION["produtos"][$codproduto]);
-        unset($_SESSION["quantidade"][$codproduto]);
+        $codProduto = $_GET["cod_produto"];
+        unset($_SESSION["produtos"][$codProduto]);
+        unset($_SESSION["quantidade"][$codProduto]);
+        unset($_SESSION["estoque"][$codProduto]);
 
-        //direcionar para o carrinho
         header("Location:index.php?classe=ItemController&metodo=abrirCarrinho");
-    }
-
-    function cadastrarItens()
-    {
-        session_start();
-        //código para cadastrar a venda e receber o código gerado para esta venda
-        foreach ($_SESSION["produtos"] as $key => $value) {
-            //código para gravar os ítens desta venda
-            echo "Produto: $value<br>";
-            echo "Quantidade: " . $_SESSION["quantidade"][$value];
-            echo "<hr>";
-        }
     }
 }
