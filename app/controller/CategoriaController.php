@@ -5,16 +5,16 @@ class CategoriaController
 
     public function abrirCadastro()
     {
-        include "../app/model/Categoria.php";
+        include "../../app/model/Categoria.php";
         $categ = new Categoria();
 
         $dadosCateg = $categ->consultarCategorias();
-        include_once "../app/view/GerenciarCategoria.php";
+        include_once "../../app/view/admin/GerenciarCategoria.php";
     }
 
     public function gerenciarCategoria()
     {
-        include "../app/model/Categoria.php";
+        include "../../app/model/Categoria.php";
         $categ = new Categoria();
 
         if (isset($_POST["nome_categoria"]))
@@ -36,7 +36,7 @@ class CategoriaController
                     }
                 });
                 </script>";
-            return false;
+            exit();
         }
 
         if (empty($_POST["cod_categoria"])) {
@@ -123,7 +123,7 @@ class CategoriaController
 
     public function abrirAtualizacao()
     {
-        include "../app/model/Categoria.php";
+        include "../../app/model/Categoria.php";
         $categ = new Categoria();
 
         $dadosCateg = $categ->consultarCategorias();
@@ -133,16 +133,16 @@ class CategoriaController
             $dadosCategCod = $categ->consultarCategoriaCod();
         }
 
-        include_once "../app/view/GerenciarCategoria.php";
+        include_once "../../app/view/admin/GerenciarCategoria.php";
     }
 
     public function excluirCategoria()
     {
         if (isset($_GET["cod_categoria"])) {
-            include "../app/model/Categoria.php";
+            include "../../app/model/Categoria.php";
             $categ = new Categoria();
 
-            include "../app/model/Produto.php";
+            include "../../app/model/Produto.php";
             $prod = new Produto();
 
             $prod->cod_categoria = $_GET["cod_categoria"];

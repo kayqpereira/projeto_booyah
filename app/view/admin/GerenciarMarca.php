@@ -5,33 +5,33 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Cadastro de Cliente</title>
+    <title>Gerenciar Marcas</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <!-- Data Tables -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.24/datatables.min.css" />
     <!-- Styles CSS -->
-    <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/style.css">
 </head>
 
 <body class="adm">
 
-    <?php include_once "navbar.php"; ?>
+    <?php include_once "header.php"; ?>
 
     <main class="container-fluid">
         <div class="page-title container">
-            <h1>Gerenciar Categorias</h1>
+            <h1>Gerenciar Marcas</h1>
         </div>
-        <form action="index.php?classe=CategoriaController&metodo=gerenciarCategoria" method="post" onsubmit="return validarFormCateg()" novalidate id="frmMar" class="frmMar container mb-4">
+        <form action="index.php?classe=MarcaController&metodo=gerenciarMarca" method="post" onsubmit="return validarFormMar()" novalidate id="frmMar" class="frmMar container mb-4">
             <div class="row justify-content-center">
                 <div class="col form__fields-container-edit">
                     <fieldset class="form__fields">
-                        <input type="hidden" id="cod_categoria" name="cod_categoria" value="<?php if (isset($dadosCategCod)) echo $dadosCategCod->cod_categoria; ?>" />
+                        <input type="hidden" id="cod_marca" name="cod_marca" value="<?php if (isset($dadosMarCod)) echo $dadosMarCod->cod_marca; ?>" />
 
                         <div class="form__input-group">
-                            <label class="form__label" for="nome_categoria">Nome da categoria:</label>
+                            <label class="form__label" for="nome_marca">Nome da marca:</label>
                             <div class="form__input-container input-group">
-                                <input class="form__input form-control" value="<?php if (isset($dadosCategCod)) echo $dadosCategCod->nome_categoria; ?>" maxlength="30" type="text" id="nome_categoria" name="nome_categoria">
+                                <input class="form__input form-control" value="<?php if (isset($dadosMarCod)) echo $dadosMarCod->nome_marca; ?>" maxlength="30" type="text" id="nome_marca" name="nome_marca">
                                 <div class="input-group-append">
                                     <input type="submit" id="salvar" class="btn btn-principal-3d rounded-right" value="Salvar">
                                 </div>
@@ -46,7 +46,7 @@
                                     </svg>
                                 </i>
                             </div>
-                            <span class="error-nome_categoria"></span>
+                            <span class="error-nome_marca"></span>
                         </div>
                     </fieldset>
                 </div>
@@ -57,18 +57,18 @@
                     <table class="tabela display compact nowrap w-100">
                         <thead>
                             <th>ID</th>
-                            <th>Nome da categoria</th>
+                            <th>Nome da marca</th>
                             <th>Ação</th>
                         </thead>
                         <tbody>
                             <?php
-                            foreach ($dadosCateg as $categoria) {
+                            foreach ($dadosMar as $marca) {
                                 echo "<tr>
-                                    <td>$categoria->cod_categoria</td>
-                                    <td>$categoria->nome_categoria</td>
+                                    <td>$marca->cod_marca</td>
+                                    <td>$marca->nome_marca</td>
                                     <td class='acao'>
-                                        <button type='button' data-toggle='tooltip' title='Excluír' onclick=\"excluirCategoria($categoria->cod_categoria);\" class='btn btn-sm btn-danger'><i class='fas fa-trash-alt'></i></button>
-                                        <a data-toggle='tooltip' title='Editar' href='index.php?classe=CategoriaController&metodo=abrirAtualizacao&cod_categoria=$categoria->cod_categoria'class='btn btn-sm btn-secondary'><i class='fas fa-edit'></i></a>
+                                        <button type='button'  title='Excluír' onclick=\"excluirMarca($marca->cod_marca);\" class='btn btn-sm btn-danger'><i class='fas fa-trash-alt'></i></button>
+                                        <a title='Editar' href='index.php?classe=MarcaController&metodo=abrirAtualizacao&cod_marca=$marca->cod_marca'class='btn btn-sm btn-secondary'><i class='fas fa-edit'></i></a>
                                     </td>
                                 </tr>";
                             }
@@ -92,19 +92,12 @@
     <!-- SweetAlert2 -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Scripts -->
-    <script src="assets/js/main.js"></script>
+    <script src="../assets/js/main.js"></script>
     <script>
-        $(function() {
-            $('[data-toggle="tooltip"]').tooltip({
-                boundary: 'window',
-                trigger: 'hover'
-            });
-        });
-
-        function excluirCategoria(cod_categoria) {
+        function excluirMarca(cod_marca) {
             Swal.fire({
                 title: "Tem certeza",
-                text: "Todos os produtos vinculados a está categoria serão exluídos!",
+                text: "Todos os produtos vinculados a está marca serão exluídos!",
                 icon: "warning",
                 iconColor: "#dc3545",
                 showCancelButton: true,
@@ -114,7 +107,7 @@
                 focusConfirm: "false"
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location = "index.php?classe=CategoriaController&metodo=excluirCategoria&cod_categoria=" + cod_categoria;
+                    window.location = "index.php?classe=MarcaController&metodo=excluirMarca&cod_marca=" + cod_marca;
                 }
             });
         }

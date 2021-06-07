@@ -9,12 +9,12 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <!-- Styles CSS -->
-    <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/style.css">
 </head>
 
 <body class="adm">
 
-    <?php include_once "navbar.php"; ?>
+    <?php include_once "header.php"; ?>
 
     <main class="container-fluid">
         <div class="page-title container">
@@ -144,7 +144,7 @@
                                 <div class="form__input-group">
                                     <label class="form__label" for="cod_categoria">Categoria:</label>
                                     <div class="form__input-containe input-group">
-                                        <div class="input-group-append" data-toggle="tooltip" title="Gerenciar categorias">
+                                        <div class="input-group-append"  title="Gerenciar categorias">
                                             <a href="index.php?classe=CategoriaController&metodo=abrirCadastro" class="btn btn-principal rounded-left">
                                                 <i class="fas fa-cogs"></i>
                                             </a>
@@ -179,7 +179,7 @@
                                 <div class="form__input-group">
                                     <label class="form__label" for="cod_marca">Marca:</label>
                                     <div class="form__input-containe input-group">
-                                        <div class="input-group-append" data-toggle="tooltip" title="Gerenciar marcas">
+                                        <div class="input-group-append"  title="Gerenciar marcas">
                                             <a href="index.php?classe=MarcaController&metodo=abrirCadastro" class="btn btn-principal rounded-left">
                                                 <i class="fas fa-cogs"></i>
                                             </a>
@@ -247,15 +247,11 @@
         document.getElementById("cod_categoria").value = "<?php echo $dadosProd->cod_categoria; ?>";
         document.getElementById("cod_marca").value = "<?php echo $dadosProd->cod_marca; ?>";
 
-        $(document).ready(function() {
-            $("[data-toggle='tooltip']").tooltip({
-                boundary: "window"
-            });
-        });
+        
 
         CKEDITOR.replace("descricao");
     </script>
-    <script src="assets/js/main.js"></script>
+    <script src="../assets/js/main.js"></script>
 </body>
 
 </html>

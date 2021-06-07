@@ -57,9 +57,30 @@ class Produto
     {
         $con = Conexao::conectar();
 
-        $cmd = $con->prepare("SELECT tbprodutos.*, tbmarcas.nome_marca, tbcategorias.nome_categoria FROM tbprodutos 
+        $cmd = $con->prepare("SELECT tbprodutos.*, tbmarcas.nome_marca, tbcategorias.nome_categoria, tbimagens.*  FROM tbprodutos 
         INNER JOIN tbmarcas ON (tbprodutos.cod_marca = tbmarcas.cod_marca)
-        INNER JOIN tbcategorias ON (tbprodutos.cod_categoria = tbcategorias.cod_categoria) ");
+        INNER JOIN tbcategorias ON (tbprodutos.cod_categoria = tbcategorias.cod_categoria)
+        INNER JOIN tbimagens ON (tbprodutos.cod_produto = tbimagens.cod_produto)
+        GROUP BY tbprodutos.cod_produto");
+
+        $cmd->execute();
+
+        return $cmd->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    /**
+     * Consultar todos os produtos ativos
+     */
+    public function consultarProdutosAtivos()
+    {
+        $con = Conexao::conectar();
+
+        $cmd = $con->prepare("SELECT tbprodutos.*, tbmarcas.nome_marca, tbcategorias.nome_categoria, tbimagens.*  FROM tbprodutos 
+        INNER JOIN tbmarcas ON (tbprodutos.cod_marca = tbmarcas.cod_marca)
+        INNER JOIN tbcategorias ON (tbprodutos.cod_categoria = tbcategorias.cod_categoria)
+        INNER JOIN tbimagens ON (tbprodutos.cod_produto = tbimagens.cod_produto)
+        WHERE tbprodutos.ativo = 1 AND tbprodutos.estoque > 0
+        GROUP BY tbprodutos.cod_produto ORDER BY tbprodutos.destaque DESC");
 
         $cmd->execute();
 
@@ -117,10 +138,11 @@ class Produto
     {
         $con = Conexao::conectar();
 
-        $cmd = $con->prepare("SELECT tbprodutos.*, tbmarcas.nome_marca, tbcategorias.nome_categoria FROM tbprodutos 
+        $cmd = $con->prepare("SELECT tbprodutos.*, tbmarcas.nome_marca, tbcategorias.nome_categoria, tbimagens.*  FROM tbprodutos 
         INNER JOIN tbmarcas ON (tbprodutos.cod_marca = tbmarcas.cod_marca)
         INNER JOIN tbcategorias ON (tbprodutos.cod_categoria = tbcategorias.cod_categoria)
-        WHERE cod_produto = :cod_produto");
+        INNER JOIN tbimagens ON (tbprodutos.cod_produto = tbimagens.cod_produto)
+        WHERE tbprodutos.cod_produto = :cod_produto GROUP BY tbprodutos.cod_produto ORDER BY tbprodutos.destaque DESC");
 
         $cmd->bindParam(":cod_produto", $this->cod_produto);
 
@@ -136,7 +158,12 @@ class Produto
     {
         $con = Conexao::conectar();
 
-        $cmd = $con->prepare("SELECT * FROM tbprodutos WHERE cod_marca = :cod_marca ");
+        $cmd = $con->prepare("SELECT tbprodutos.*, tbmarcas.nome_marca, tbcategorias.nome_categoria, tbimagens.*  FROM tbprodutos 
+        INNER JOIN tbmarcas ON (tbprodutos.cod_marca = tbmarcas.cod_marca)
+        INNER JOIN tbcategorias ON (tbprodutos.cod_categoria = tbcategorias.cod_categoria)
+        INNER JOIN tbimagens ON (tbprodutos.cod_produto = tbimagens.cod_produto)
+        WHERE tbprodutos.cod_marca = :cod_marca GROUP BY tbprodutos.cod_produto ORDER BY tbprodutos.destaque DESC");
+
         $cmd->bindParam(":cod_marca", $this->cod_marca);
 
         $cmd->execute();
@@ -151,8 +178,33 @@ class Produto
     {
         $con = Conexao::conectar();
 
-        $cmd = $con->prepare("SELECT * FROM tbprodutos WHERE cod_categoria = :cod_categoria ");
+        $cmd = $con->prepare("SELECT tbprodutos.*, tbmarcas.nome_marca, tbcategorias.nome_categoria, tbimagens.*  FROM tbprodutos 
+        INNER JOIN tbmarcas ON (tbprodutos.cod_marca = tbmarcas.cod_marca)
+        INNER JOIN tbcategorias ON (tbprodutos.cod_categoria = tbcategorias.cod_categoria)
+        INNER JOIN tbimagens ON (tbprodutos.cod_produto = tbimagens.cod_produto)
+        WHERE tbprodutos.cod_categoria = :cod_categoria GROUP BY tbprodutos.cod_produto");
+
         $cmd->bindParam(":cod_categoria", $this->cod_categoria);
+
+        $cmd->execute();
+
+        return $cmd->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    /**
+     * Consultar todos os produtos pelo nome
+     */
+    public function consultarProdutoPorNome()
+    {
+        $con = Conexao::conectar();
+
+        $cmd = $con->prepare("SELECT tbprodutos.*, tbmarcas.nome_marca, tbcategorias.nome_categoria, tbimagens.*  FROM tbprodutos 
+        INNER JOIN tbmarcas ON (tbprodutos.cod_marca = tbmarcas.cod_marca)
+        INNER JOIN tbcategorias ON (tbprodutos.cod_categoria = tbcategorias.cod_categoria)
+        INNER JOIN tbimagens ON (tbprodutos.cod_produto = tbimagens.cod_produto)
+        WHERE tbprodutos.nome_produto LIKE :nome_produto GROUP BY tbprodutos.cod_produto");
+
+        $cmd->bindValue(":nome_produto", "%" . $this->nome_produto . "%");
 
         $cmd->execute();
 

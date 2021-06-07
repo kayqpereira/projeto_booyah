@@ -1,6 +1,6 @@
 <header>
     <nav class="navbar navbar-expand-lg fixad-top px-3 navbar-dark ">
-        <a class="navbar-brand" href="#">Boyaah <span>Games</span></a>
+        <a class="navbar-brand user-select-none logo" href="">Boyaah <span>Games</span></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-links" aria-controls="navbar-links" aria-expanded="false" aria-label="Alterna navegação">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -11,7 +11,8 @@
                     <a class="nav-link" href="index.php?classe=HomeController&metodo=abrirHome">
                         <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="home" class="svg-inline--fa fa-home fa-w-18" role="img" xmlns="http://www.w3.org/2000/svg" width="18" height="16" viewBox="0 0 576 512">
                             <path fill="currentColor" d="M280.37 148.26L96 300.11V464a16 16 0 0 0 16 16l112.06-.29a16 16 0 0 0 15.92-16V368a16 16 0 0 1 16-16h64a16 16 0 0 1 16 16v95.64a16 16 0 0 0 16 16.05L464 480a16 16 0 0 0 16-16V300L295.67 148.26a12.19 12.19 0 0 0-15.3 0zM571.6 251.47L488 182.56V44.05a12 12 0 0 0-12-12h-56a12 12 0 0 0-12 12v72.61L318.47 43a48 48 0 0 0-61 0L4.34 251.47a12 12 0 0 0-1.6 16.9l25.5 31A12 12 0 0 0 45.15 301l235.22-193.74a12.19 12.19 0 0 1 15.3 0L530.9 301a12 12 0 0 0 16.9-1.6l25.5-31a12 12 0 0 0-1.7-16.93z"></path>
-                        </svg> Home</a>
+                        </svg> Home
+                    </a>
                 </li>
 
                 <li class="nav-item dropdown mx-1">
@@ -21,7 +22,7 @@
                         </svg> Clientes
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="index.php?classe=ClienteController&metodo=abrirCadastro"> <i class="fas fa-plus"></i> Cadastrar</a>
+                        <a class="dropdown-item" href="index.php?classe=ClienteController&metodo=abrirCadastro"><i class="fas fa-plus"></i> Cadastrar</a>
                         <a class="dropdown-item" href="index.php?classe=ClienteController&metodo=abrirConsulta"><i class="fas fa-search"></i> Consultar</a>
                     </div>
                 </li>
@@ -60,7 +61,7 @@
                     <a class="nav-link" href="index.php?classe=VendaController&metodo=abrirConsulta">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-fill" viewBox="0 0 16 16">
                             <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
-                        </svg> Vendas
+                        </svg> Pedidos
                     </a>
                 </li>
             </ul>

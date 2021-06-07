@@ -11,16 +11,16 @@
     <!-- Data Tables -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.24/datatables.min.css" />
     <!-- Styles -->
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/style.css">
 </head>
 
 <body class="adm">
 
-    <?php include_once "navbar.php"; ?>
+    <?php include_once "header.php"; ?>
 
     <main class="container-fluid">
         <div class="page-title container">
-            <h2>Vendas</h2>
+            <h2>Pedidos</h2>
         </div>
         <div class="row">
             <div class="col px-4 py-3">
@@ -45,7 +45,7 @@
                                     <td>$venda->hora</td>
                                     <td>$venda->forma_pag</td>
                                     <td class='acao'>
-                                        <a data-toggle='tooltip' title='Detalhes' href='index.php?classe=ItemController&metodo=abrirConsulta&cod_venda=$venda->cod_venda'class='btn btn-sm btn-primary'>
+                                        <a title='Detalhes' href='index.php?classe=ItemController&metodo=abrirConsulta&cod_venda=$venda->cod_venda'class='btn btn-sm btn-primary'>
                                         <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-list' viewBox='0 0 16 16'>
                                             <path fill-rule='evenodd' d='M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z'/>
                                         </svg> Detalhes</a>
@@ -71,15 +71,7 @@
     <!-- SweetAlert2 -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Scripts -->
-    <script src="assets/js/main.js"></script>
-    <script>
-        $(function() {
-            $('[data-toggle="tooltip"]').tooltip({
-                boundary: 'window',
-                trigger: 'hover'
-            });
-        });
-    </script>
+    <script src="../assets/js/main.js"></script>
 </body>
 
 </html>

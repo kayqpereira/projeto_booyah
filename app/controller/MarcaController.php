@@ -5,16 +5,16 @@ class MarcaController
 
     public function abrirCadastro()
     {
-        include "../app/model/Marca.php";
+        include "../../app/model/Marca.php";
         $mar = new Marca();
         $dadosMar = $mar->consultarMarcas();
 
-        include_once "../app/view/GerenciarMarca.php";
+        include_once "../../app/view/admin/GerenciarMarca.php";
     }
 
     public function gerenciarMarca()
     {
-        include "../app/model/Marca.php";
+        include "../../app/model/Marca.php";
         $mar = new Marca();
 
         if (isset($_POST["nome_marca"]))
@@ -123,9 +123,8 @@ class MarcaController
 
     public function abrirAtualizacao()
     {
-        include "../app/model/Marca.php";
+        include "../../app/model/Marca.php";
         $mar = new Marca();
-
         $dadosMar = $mar->consultarMarcas();
 
         if (isset($_GET["cod_marca"])) {
@@ -133,15 +132,15 @@ class MarcaController
             $dadosMarCod = $mar->consultarMarcaCod();
         }
 
-        include_once "../app/view/GerenciarMarca.php";
+        include_once "../../app/view/admin/GerenciarMarca.php";
     }
 
     public function excluirMarca()
     {
-        include "../app/model/Marca.php";
+        include "../../app/model/Marca.php";
         $mar = new Marca();
 
-        include "../app/model/Produto.php";
+        include "../../app/model/Produto.php";
         $prod = new Produto();
 
         if (isset($_GET["cod_marca"])) {

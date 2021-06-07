@@ -58,6 +58,8 @@ class Cliente
         $cmd->bindParam(":senha",           $this->senha);
 
         $cmd->execute();
+
+        return $con->lastInsertId();
     }
 
     /**
@@ -95,9 +97,24 @@ class Cliente
         $con = Conexao::conectar();
 
         $cmd = $con->prepare("SELECT tbclientes.*, tbenderecos.* FROM tbclientes INNER JOIN tbenderecos 
-        ON (tbclientes.cod_endereco = tbenderecos.cod_endereco) WHERE cod_cliente = :cod_cliente");
+        ON (tbclientes.cod_endereco = tbenderecos.cod_endereco) WHERE tbclientes.cod_cliente = :cod_cliente");
 
         $cmd->bindParam(":cod_cliente", $this->cod_cliente);
+
+        $cmd->execute();
+
+        return $cmd->fetch(PDO::FETCH_OBJ);
+    }
+
+    public function logar()
+    {
+        $con = Conexao::conectar();
+
+        $cmd = $con->prepare("SELECT * FROM tbclientes 
+        WHERE email = :email AND senha = :senha");
+
+        $cmd->bindParam(":email", $this->email);
+        $cmd->bindParam(":senha", $this->senha);
 
         $cmd->execute();
 

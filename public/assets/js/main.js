@@ -124,7 +124,7 @@ const validate = {
                     },
 
                     error: function () {
-                        alert("Ocorreu um erro ao realizar a requisição!");
+                        setMessage("", cpf);
                     },
 
                     complete: function () {
@@ -337,7 +337,7 @@ const validate = {
                     },
 
                     error: function () {
-                        alert("Ocorreu um erro ao realizar a requisição!");
+                        setMessage("", cep);
                     },
 
                     complete: function () {
@@ -391,7 +391,7 @@ const validate = {
                     },
 
                     error: function () {
-                        alert("Ocorreu um erro ao realizar a requisição!");
+                        setMessage("", email);
                     },
 
                     complete: function () {
@@ -527,6 +527,32 @@ const validate = {
             return true;
         }
     },
+
+    senha_login(senha_login) {
+        if (senha_login.value === "") {
+            let error = "Este campo é obrigatório.";
+            setMessage(error, senha_login);
+            return false;
+        } else {
+            setMessage("", senha_login);
+            return true;
+        }
+    },
+
+    email_login(email_login) {
+        if (email_login.value == "") {
+            let error = "Por favor, digite o seu e-mail.";
+            setMessage(error, email_login);
+            return false;
+        } else if (!validaEmail(email_login)) {
+            let error = "Formato de email inválido, por favor, informe um email válido.";
+            setMessage(error, email_login);
+            return false;
+        } else {
+            setMessage("", email_login);
+            return true;
+        }
+    },
 };
 
 // Adiciona o evento change e um função correspondente a todos os campos 
@@ -546,6 +572,8 @@ document.querySelectorAll(".form-control").forEach(field => {
         (id == "cod_categoria") ||
         (id == "cod_marca") ||
         (id == "nome_categoria") ||
+        (id == "meio_entrega") ||
+        (id == "forma_pag") ||
         (id == "nome_marca")) {
         field.addEventListener("change", event => {
             event.target = validate["padrao"](event.target);
@@ -651,6 +679,18 @@ function validarForm() {
     }
 }
 
+function validarFormLogin() {
+    if (!validate["email_login"](document.getElementById("email_login"))) {
+        document.getElementById("email_login").focus();
+        return false;
+    }
+
+    if (!validate["senha_login"](document.getElementById("senha_login"))) {
+        document.getElementById("senha_login").focus();
+        return false;
+    }
+}
+
 function validarFormEnd() {
     if (!validate["cep"](document.getElementById("cep"))) {
         document.getElementById("cep").focus();
@@ -688,6 +728,18 @@ function validarFormMar() {
 function validarFormCateg() {
     if (!validate["padrao"](document.getElementById("nome_categoria"))) {
         document.getElementById("nome_categoria").focus();
+        return false;
+    }
+}
+
+function validarFormP() {
+    if (!validate["padrao"](document.getElementById("meio_entrega"))) {
+        document.getElementById("meio_entrega").focus();
+        return false;
+    }
+
+    if (!validate["padrao"](document.getElementById("forma_pag"))) {
+        document.getElementById("forma_pag").focus();
         return false;
     }
 }
@@ -782,7 +834,27 @@ else if (document.getElementById("frmEditarProd"))
     document.getElementById("frmEditarProd").onload = validarFormProd();
 
 $(document).ready(function () {
-    if (document.querySelector(".tabela")) {
+    if (document.querySelector("#tabelaCli")) {
+        $("#tabelaCli").DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"
+            },
+            "scrollX": true,
+            "paging": false,
+            "info": false
+        });
+    } else if (document.querySelector("#tabelaCli2")) {
+        $("#tabelaCli2").DataTable({
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"
+            },
+            "scrollX": true,
+            "paging": false,
+            "info": false,
+            "ordering": false,
+            "bFilter": false,
+        });
+    } else if (document.querySelector(".tabela")) {
         $(".tabela").DataTable({
             "language": {
                 "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Portuguese-Brasil.json"
@@ -792,24 +864,25 @@ $(document).ready(function () {
     }
 });
 
-const link = document.querySelectorAll(".nav-link");
-const dropdownItem = document.querySelectorAll(".dropdown-item");
-const urlAtual = location.href;
+if (document.querySelector(".adm")) {
+    const links = document.querySelectorAll(".nav-link");
+    const dropdownItem = document.querySelectorAll(".dropdown-item");
+    const urlAtual = location.href;
 
-if (link) {
-    link.forEach(l => l.parentNode.classList.remove("active"));
-    
-    for (let i = 0; i < link.length; i++) {
-        if (link[i].href === urlAtual)
-            link[i].parentNode.classList.add("active");
-    }
+    if (links) {
+        links.forEach(l => l.parentNode.classList.remove("active"));
 
-    if (dropdownItem) {
-        dropdownItem.forEach(l => l.parentNode.parentNode.classList.remove("active"));
-        for (let i = 0; i < dropdownItem.length; i++) {
-            if (dropdownItem[i].href === urlAtual)
-                dropdownItem[i].parentNode.parentNode.classList.add("active");
+        for (let i = 0; i < links.length; i++) {
+            if (links[i].href === urlAtual)
+                links[i].parentNode.classList.add("active");
+        }
+
+        if (dropdownItem) {
+            dropdownItem.forEach(l => l.parentNode.parentNode.classList.remove("active"));
+            for (let i = 0; i < dropdownItem.length; i++) {
+                if (dropdownItem[i].href === urlAtual)
+                    dropdownItem[i].parentNode.parentNode.classList.add("active");
+            }
         }
     }
 }
-

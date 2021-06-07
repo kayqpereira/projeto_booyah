@@ -4,20 +4,20 @@ class EnderecoController
 {
     public function abrirAtualizacao()
     {
-        include "../app/model/Endereco.php";
+        include "../../app/model/Endereco.php";
         $end = new Endereco();
 
         if (isset($_GET["cod_endereco"])) {
             $end->cod_endereco = $_GET["cod_endereco"];
             $dadosEnd = $end->consultarEnderecoCod();
 
-            include_once "../app/view/AtualizarEndereco.php";
+            include_once "../../app/view/admin/AtualizarEndereco.php";
         }
     }
 
     public function atualizarEndereco()
     {
-        include "../app/model/Endereco.php";
+        include "../../app/model/Endereco.php";
         $end = new Endereco();
 
         $end->cep          = $_POST["cep"];

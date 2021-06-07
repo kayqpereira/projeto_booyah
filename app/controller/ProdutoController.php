@@ -4,51 +4,50 @@ class ProdutoController
 {
     public function abrirCadastro()
     {
-        include "../app/model/Marca.php";
+        include "../../app/model/Marca.php";
         $mar = new Marca();
         $dadosMar = $mar->consultarMarcas();
 
-        include "../app/model/Categoria.php";
+        include "../../app/model/Categoria.php";
         $categ = new Categoria();
         $dadosCateg = $categ->consultarCategorias();
 
-        include_once "../app/view/CadastroProduto.php";
+        include_once "../../app/view/admin/CadastroProduto.php";
     }
 
     public function abrirAtualizacao()
     {
         if (isset($_GET["cod_produto"])) {
-            include "../app/model/Produto.php";
+            include "../../app/model/Produto.php";
             $prod = new Produto();
 
-            include "../app/model/Marca.php";
+            include "../../app/model/Marca.php";
             $mar = new Marca();
             $dadosMar = $mar->consultarMarcas();
 
-            include "../app/model/Categoria.php";
+            include "../../app/model/Categoria.php";
             $categ = new Categoria();
             $dadosCateg = $categ->consultarCategorias();
 
             $prod->cod_produto = $_GET["cod_produto"];
             $dadosProd = $prod->consultarProdutoCod();
 
-            include_once "../app/view/AtualizarProduto.php";
+            include_once "../../app/view/admin/AtualizarProduto.php";
         }
     }
 
     public function abrirConsulta()
     {
-        include "../app/model/Produto.php";
+        include "../../app/model/Produto.php";
         $prod = new Produto();
-
         $dadosProd = $prod->consultarProdutos();
 
-        include_once "../app/view/ConsultarProduto.php";
+        include_once "../../app/view/admin/ConsultarProduto.php";
     }
 
     public function cadastrarProduto()
     {
-        include "../app/model/Produto.php";
+        include "../../app/model/Produto.php";
         $prod = new Produto();
 
         if (empty($_POST["descricao"])) {
@@ -68,7 +67,7 @@ class ProdutoController
                 }
             });
             </script>";
-            return false;
+            exit();
         }
 
         $prod->cod_categoria   = $_POST["cod_categoria"];
@@ -97,7 +96,7 @@ class ProdutoController
                 }
             });
             </script>";
-            return false;
+            exit();
         }
 
         $prod->cadastrarProduto();
@@ -124,7 +123,7 @@ class ProdutoController
     public function excluirProduto()
     {
         if (isset($_GET["cod_produto"])) {
-            include "../app/model/Produto.php";
+            include "../../app/model/Produto.php";
             $prod = new Produto();
 
             $prod->cod_produto = $_GET["cod_produto"];
@@ -168,7 +167,7 @@ class ProdutoController
 
     public function atualizarProduto()
     {
-        include "../app/model/Produto.php";
+        include "../../app/model/Produto.php";
         $prod = new Produto();
 
         if (empty($_POST["descricao"])) {
@@ -188,7 +187,7 @@ class ProdutoController
                 }
             });
             </script>";
-            return false;
+            exit();
         }
 
         $prod->cod_produto     = $_POST["cod_produto"];
@@ -218,7 +217,7 @@ class ProdutoController
                 }
             });
             </script>";
-            return false;
+            exit();
         }
 
         $prod->atualizarProduto();

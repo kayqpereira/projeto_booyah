@@ -11,11 +11,11 @@
     <!-- Data Tables -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.24/datatables.min.css" />
     <!-- Styles -->
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/style.css">
 </head>
 
 <body class="adm">
-    <?php include_once "navbar.php"; ?>
+    <?php include_once "header.php"; ?>
 
     <main class="container-fluid">
         <div class="page-title container">
@@ -59,8 +59,9 @@
                                     <td>$produto->estoque</td>
                                 <td>R$ " . number_format("$produto->preco", "2", ",", ".") . "</td>
                                     <td class='acao'>
-                                        <button data-toggle='tooltip' title='Excluír' onclick=\"excluirProduto($produto->cod_produto);\" class='btn btn-sm btn-danger'><i class='fas fa-trash-alt'></i></button>
-                                        <a data-toggle='tooltip' title='Editar' href='index.php?classe=ProdutoController&metodo=abrirAtualizacao&cod_produto=$produto->cod_produto'class='btn btn-sm btn-secondary'><i class='fas fa-edit'></i></a>
+                                        <button  title='Excluír' onclick=\"excluirProduto($produto->cod_produto);\" class='btn btn-sm btn-danger'><i class='fas fa-trash-alt'></i></button>
+                                        <a title='Editar' href='index.php?classe=ProdutoController&metodo=abrirAtualizacao&cod_produto=$produto->cod_produto'class='btn btn-sm btn-secondary'><i class='fas fa-edit'></i></a>
+                                        <a title='Imagens' href='index.php?classe=ImagemController&metodo=abrirCadastro&cod_produto=$produto->cod_produto'class='btn btn-sm btn-primary'><i class='fas fa-image'></i></a>
                                     </td>
                                 </tr>";
                             }
@@ -84,15 +85,8 @@
     <!-- SweetAlert2 -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Scripts -->
-    <script src="assets/js/main.js"></script>
+    <script src="../assets/js/main.js"></script>
     <script>
-        $(function() {
-            $('[data-toggle="tooltip"]').tooltip({
-                boundary: 'window',
-                trigger: 'hover'
-            });
-        });
-
         function excluirProduto(cod_produto) {
             Swal.fire({
                 title: "Tem certeza de que deseja excluír este cadastro?",

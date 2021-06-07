@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booyah Games</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <!-- Styles CSS -->
+    <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+</head>
+
+<body class="cli">
+
+    <?php include_once "header.php"; ?>
+
+    <main class="container-fluid ">
+        <section class="container mt-3">
+            <div class="page-title container">
+                <?php
+                if ($consulta == "categ")
+                    echo "<h3>Categoria: " . $dadosProd[0]->nome_categoria . "</h3>";
+                else if ($consulta == "mar")
+                    echo "<h3>Marca: " . $dadosProd[0]->nome_marca . "</h3>";
+                else
+                    echo "<h3>$termoPesquisado</h3>";
+                ?>
+            </div>
+            <div class="row my-3">
+                <div class="col products">
+                    <?php foreach ($dadosProd as $produto) { ?>
+                        <div class="product">
+                            <div class="product-image">
+                                <img src="./assets/images/produtos/<?php echo $produto->nome_imagem ?>" alt="<?php echo $produto->nome_produto ?>" />
+                            </div>
+
+                            <div class="info-product">
+                                <div class="product-name">
+                                    <?php echo $produto->nome_produto ?>
+                                </div>
+
+                                <div class="product-stock">
+                                    <?php
+                                    $estoque = $produto->estoque;
+                                    if (isset($_SESSION["produtos"][$produto->estoque])) {
+                                        $estoque = $_SESSION["estoque"][$produto->cod_produto];
+                                        if ($estoque > 0)
+                                            echo "Estoque: <span class='positive'>Disponível!</span>";
+                                        else
+                                            echo "Estoque: <span class='negative'>Esgotado!</span>";
+                                    } else {
+                                        if ($estoque > 0)
+                                            echo "Estoque: <span class='positive'>Disponível!</span>";
+                                        else
+                                            echo "Estoque: <span class='negative'>Esgotado!</span>";
+                                    }
+                                    ?>
+                                </div>
+
+                                <div class="product-price">
+                                    <?php echo "R$ " . number_format($produto->preco, 2, ",", ".") ?>
+                                </div>
+                            </div>
+
+                            <a class="btn d-block btn-comercial" href="index.php?classe=HomeController&metodo=abrirProduto&cod_produto=<?php echo $produto->cod_produto ?>">
+                                Comprar
+                            </a>
+                        </div>
+                    <?php } ?>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <?php include_once "footer.php"; ?>
+
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/87aa5c0f8d.js" crossorigin="anonymous"></script>
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <!-- Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+    <!-- Scripts -->
+    <script src="./assets/js/main.js"></script>
+</body>
+
+</html>

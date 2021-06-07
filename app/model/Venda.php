@@ -44,6 +44,8 @@ class Venda
         $cmd->bindParam(":frete",           $this->frete);
 
         $cmd->execute();
+
+        return $con->lastInsertId();
     }
 
     /**
@@ -55,6 +57,21 @@ class Venda
 
         $cmd = $con->prepare("SELECT tbvendas.*, CONCAT(tbclientes.nome,' ', tbclientes.sobrenome) AS nome
         FROM tbvendas INNER JOIN tbclientes ON tbvendas.cod_cliente = tbclientes.cod_cliente");
+        $cmd->execute();
+
+        return $cmd->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    /**
+     * Consulta as vendas pelo cod cliente
+     */
+    public function consultarVendaCodCli()
+    {
+        $con = Conexao::conectar();
+
+        $cmd = $con->prepare("SELECT * FROM tbvendas WHERE cod_cliente = :cod_cliente");
+        $cmd->bindParam(":cod_cliente",     $this->cod_cliente);
+
         $cmd->execute();
 
         return $cmd->fetchAll(PDO::FETCH_OBJ);
