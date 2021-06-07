@@ -128,7 +128,7 @@
                 </div>
             </div>
         <?php } else { ?>
-            <div class="container-fluid">
+            <div class="container">
                 <div class="row justify-content-center align-items-center py-5">
                     <div class="col-auto">
                         <h2 class="carrinho-vazio">Seu carrinho está vazio!</h2>
