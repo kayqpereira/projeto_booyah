@@ -38,7 +38,7 @@
                             $total = 0;
                             foreach ($dadosItem as $item) {
                                 $prod->cod_produto = $item->cod_produto;
-                                $dadosProd = $prod->consultarProdutoCod();
+                                $dadosProd = $prod->consultarProdutoCod(false);
 
                                 $subTotal = $item->preco * $item->quantidade;
                                 $total += $subTotal;
@@ -55,7 +55,7 @@
                         </tbody>
                     </table>
                     <div class="mt-3" style="text-align: end;">
-                        <a href="index.php?classe=VendaController&metodo=abrirConsulta" class="btn btn-sm btn-principal float-left">Voltar</a>
+                        <a href="index.php?classe=VendaController&metodo=abrirConsulta" class="btn btn-sm btn-secondary float-left">Voltar</a>
                         <h4>Total: R$ <?php echo number_format("$total", 2, ",", "."); ?></h4>
                     </div>
                 </div>

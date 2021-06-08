@@ -53,15 +53,22 @@ class Produto
     /**
      * Consultar todos os produtos
      */
-    public function consultarProdutos()
+    public function consultarProdutos(bool $isAdm = true)
     {
         $con = Conexao::conectar();
 
-        $cmd = $con->prepare("SELECT tbprodutos.*, tbmarcas.nome_marca, tbcategorias.nome_categoria, tbimagens.*  FROM tbprodutos 
-        INNER JOIN tbmarcas ON (tbprodutos.cod_marca = tbmarcas.cod_marca)
-        INNER JOIN tbcategorias ON (tbprodutos.cod_categoria = tbcategorias.cod_categoria)
-        INNER JOIN tbimagens ON (tbprodutos.cod_produto = tbimagens.cod_produto)
-        GROUP BY tbprodutos.cod_produto");
+        if ($isAdm) {
+            $cmd = $con->prepare("SELECT tbprodutos.*, tbmarcas.nome_marca, tbcategorias.nome_categoria FROM tbprodutos 
+            INNER JOIN tbmarcas ON (tbprodutos.cod_marca = tbmarcas.cod_marca)
+            INNER JOIN tbcategorias ON (tbprodutos.cod_categoria = tbcategorias.cod_categoria)
+            GROUP BY tbprodutos.cod_produto");
+        } else {
+            $cmd = $con->prepare("SELECT tbprodutos.*, tbmarcas.nome_marca, tbcategorias.nome_categoria, tbimagens.*  FROM tbprodutos 
+            INNER JOIN tbmarcas ON (tbprodutos.cod_marca = tbmarcas.cod_marca)
+            INNER JOIN tbcategorias ON (tbprodutos.cod_categoria = tbcategorias.cod_categoria)
+            INNER JOIN tbimagens ON (tbprodutos.cod_produto = tbimagens.cod_produto)
+            GROUP BY tbprodutos.cod_produto ORDER BY tbprodutos.destaque DESC");
+        }
 
         $cmd->execute();
 
@@ -134,15 +141,23 @@ class Produto
     /**
      * Consultar um produto com base no cod
      */
-    public function consultarProdutoCod()
+
+    public function consultarProdutoCod(bool $isAdm = true)
     {
         $con = Conexao::conectar();
 
-        $cmd = $con->prepare("SELECT tbprodutos.*, tbmarcas.nome_marca, tbcategorias.nome_categoria, tbimagens.*  FROM tbprodutos 
-        INNER JOIN tbmarcas ON (tbprodutos.cod_marca = tbmarcas.cod_marca)
-        INNER JOIN tbcategorias ON (tbprodutos.cod_categoria = tbcategorias.cod_categoria)
-        INNER JOIN tbimagens ON (tbprodutos.cod_produto = tbimagens.cod_produto)
-        WHERE tbprodutos.cod_produto = :cod_produto GROUP BY tbprodutos.cod_produto ORDER BY tbprodutos.destaque DESC");
+        if ($isAdm) {
+            $cmd = $con->prepare("SELECT tbprodutos.*, tbmarcas.nome_marca, tbcategorias.nome_categoria FROM tbprodutos 
+            INNER JOIN tbmarcas ON (tbprodutos.cod_marca = tbmarcas.cod_marca)
+            INNER JOIN tbcategorias ON (tbprodutos.cod_categoria = tbcategorias.cod_categoria)
+            WHERE tbprodutos.cod_produto = :cod_produto");
+        } else {
+            $cmd = $con->prepare("SELECT tbprodutos.*, tbmarcas.nome_marca, tbcategorias.nome_categoria, tbimagens.*  FROM tbprodutos 
+            INNER JOIN tbmarcas ON (tbprodutos.cod_marca = tbmarcas.cod_marca)
+            INNER JOIN tbcategorias ON (tbprodutos.cod_categoria = tbcategorias.cod_categoria)
+            INNER JOIN tbimagens ON (tbprodutos.cod_produto = tbimagens.cod_produto)
+            WHERE tbprodutos.cod_produto = :cod_produto GROUP BY tbprodutos.cod_produto");
+        }
 
         $cmd->bindParam(":cod_produto", $this->cod_produto);
 

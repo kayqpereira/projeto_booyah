@@ -40,7 +40,7 @@
                                     $total = 0;
                                     foreach ($_SESSION["produtos"] as $produto) {
                                         $prod->cod_produto = $produto;
-                                        $dadosProd = $prod->consultarProdutoCod();
+                                        $dadosProd = $prod->consultarProdutoCod(false);
                                         $subTotal = $dadosProd->preco * $_SESSION["quantidade"][$produto];
                                         $total += $subTotal;
 

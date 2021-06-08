@@ -137,21 +137,37 @@ class MarcaController
 
     public function excluirMarca()
     {
-        include "../../app/model/Marca.php";
-        $mar = new Marca();
-
-        include "../../app/model/Produto.php";
-        $prod = new Produto();
-
         if (isset($_GET["cod_marca"])) {
+            include "../../app/model/Marca.php";
+            $mar = new Marca();
+
+            include "../../app/model/Produto.php";
+            $prod = new Produto();
+
             $prod->cod_marca = $_GET["cod_marca"];
             $mar->cod_marca = $_GET["cod_marca"];
 
             $dadosProd = $prod->consultarProdutoPorCodMarca();
 
             if (!empty($dadosProd)) {
-                foreach ($dadosProd as $Produto) {
-                    $prod->cod_produto = $Produto->cod_produto;
+                include_once "../../app/model/Imagem.php";
+                $img = new Imagem();
+
+                foreach ($dadosProd as $produto) {
+
+                    $img->cod_produto = $produto->cod_produto;
+                    $dadosImg = $img->consultarImagensCodProd();
+
+                    if (!empty($dadosImg)) {
+                        foreach ($dadosImg as $imagem) {
+                            if (is_file("../assets/images/produtos/$imagem->nome_imagem"))
+                                unlink("../assets//images/produtos/$imagem->nome_imagem");
+
+                            $img->cod_imagem = $imagem->cod_imagem;
+                            $img->excluirImagem();
+                        }
+                    }
+                    $prod->cod_produto = $produto->cod_produto;
                     $prod->excluirProduto();
                 }
             }

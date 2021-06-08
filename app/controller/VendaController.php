@@ -117,7 +117,7 @@ class VendaController
 
         foreach ($_SESSION["produtos"] as $produto) {
             $prod->cod_produto  = $produto;
-            $dadosProd          = $prod->consultarProdutoCod();
+            $dadosProd          = $prod->consultarProdutoCod(false);
 
             $item->cod_venda    = $codVenda;
             $item->cod_produto  = $produto;

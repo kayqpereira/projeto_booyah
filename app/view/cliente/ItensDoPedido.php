@@ -41,7 +41,7 @@
                             $total = 0;
                             foreach ($dadosItem as $item) {
                                 $prod->cod_produto = $item->cod_produto;
-                                $dadosProd = $prod->consultarProdutoCod();
+                                $dadosProd = $prod->consultarProdutoCod(false);
 
                                 $subTotal = $item->preco * $item->quantidade;
                                 $total += $subTotal;

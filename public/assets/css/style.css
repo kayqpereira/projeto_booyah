@@ -618,10 +618,22 @@ td .acao{
 
 /* Nome do Produto */
 .info-product .product-name{
-    font-size: 1.2rem;
-    padding: 10px 0;
-    font-weight: bold;
-    background-color: inherit;
+    margin: 15px 0 10px;
+    font-size: 1rem;
+    line-height: 1.23;
+    -webkit-box-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    height: 38px;
+    display: block;
+    text-align: center;
+    max-height: 38px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 3;
 }
 
 /* Status do estoque. Stock = Estoque */
