@@ -99,14 +99,13 @@ class VendaController
 
         include "../app/model/Venda.php";
         $vend = new Venda();
-
-        $timezone = new DateTimeZone('America/Sao_Paulo');
-        $agora = new DateTime('now', $timezone);
+        $timezone = new DateTimeZone("America/Sao_Paulo");
+        $agora = new DateTime("now", $timezone);
 
         $vend->cod_cliente   = $_SESSION["codCliente"];
         $vend->frete         = 0;
-        $vend->data_venda    = $agora->format('Y-m-d');;
-        $vend->hora          = $agora->format('H:i:');;
+        $vend->data_venda    = $agora->format("Y-m-d");
+        $vend->hora          = $agora->format("H:i:s");
         $vend->forma_pag     = $_POST["forma_pag"];
         $vend->meio_entrega  = $_POST["meio_entrega"];
 
