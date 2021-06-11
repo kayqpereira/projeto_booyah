@@ -16,7 +16,7 @@
 
     <?php include_once "header.php"; ?>
 
-    <main class="container-fluid ">
+    <main class="container-fluid mt-3">
         <section class="container banners">
             <div class="row">
                 <div class="col">
@@ -58,7 +58,7 @@
             </div>
         </section>
 
-        <section class="container mt-3">
+        <section class="container">
             <div class="page-title container">
                 <h1>Produtos para você</h1>
             </div>
