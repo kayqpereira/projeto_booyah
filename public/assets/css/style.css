@@ -828,6 +828,10 @@ span.negative{
     .cli .navbar-menu{
         justify-content: flex-start;
     }
+
+    .cli .navbar-menu .dropdown-toggle{  
+        font-size: .875rem;
+    }
 }
 
 @media screen and (max-width: 270px){
