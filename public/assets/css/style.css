@@ -404,13 +404,35 @@ td .acao{
 }
 
 .cli .dropdown-menu{
-    max-height: 360px;
+    max-height: 300px;
     overflow-y: auto;
+    border-radius: .5rem;
+    font-size: .875rem;
+}
+
+.cli .dropdown-menu::-webkit-scrollbar {
+    width: 9px;
+}
+  
+.cli .dropdown-menu::-webkit-scrollbar-track {
+    background-color: #fff;
+    border-top-right-radius: .5rem;
+    border-bottom-right-radius: .5rem;
+}
+
+.cli .dropdown-menu::-webkit-scrollbar-thumb {
+    background-color: #dee0e1;
+    border-radius: .5rem;
 }
 
 .cli .dropdown-item{
     display: flex;
     align-items: center;
+    padding: .5rem 1.5rem;
+}
+
+.cli .dropdown-item:active {
+    background-color: var(--color-primary);
 }
 
 .cli .dropdown-item svg{
@@ -583,14 +605,14 @@ td .acao{
     width: 265px;
     padding: 10px;
     margin: 5px;
-    border: 1px solid white;
     background-color: white;
-    transition: 200ms ease-in-out;
+    box-shadow: 0 0 2px rgba(0, 0, 0, .33);
+    border: 5px solid rgba(0,0,0,0.035);
+    transition: .1s ease-in-out;
 }
 
 .product:hover{
-    border: 1px solid var(--color-primary) !important;
-    box-shadow: 0px 0px 6px 4px rgba(83, 73, 197,.4);
+    box-shadow: 0 0 10px rgb(0, 0, 0, .28), 0 0 0 1px rgb(0, 0, 0, .1);
 }
 
 /* Imagem do produto */
@@ -618,10 +640,22 @@ td .acao{
 
 /* Nome do Produto */
 .info-product .product-name{
-    font-size: 1.2rem;
-    padding: 10px 0;
-    font-weight: bold;
-    background-color: inherit;
+    margin: 15px 0 10px;
+    font-size: 1rem;
+    line-height: 1.23;
+    -webkit-box-flex: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    height: 38px;
+    display: block;
+    text-align: center;
+    max-height: 38px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 3;
 }
 
 /* Status do estoque. Stock = Estoque */
@@ -779,6 +813,10 @@ span.negative{
 }
 
 @media screen and (max-width: 390px){
+    html {
+        font-size: .87rem;
+    }
+
     .banners .carousel-item{
         height: 150px;
     }
@@ -789,6 +827,10 @@ span.negative{
 
     .cli .navbar-menu{
         justify-content: flex-start;
+    }
+
+    .cli .navbar-menu .dropdown-toggle{  
+        font-size: .875rem;
     }
 }
 

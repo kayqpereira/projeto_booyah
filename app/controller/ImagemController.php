@@ -34,18 +34,16 @@ class ImagemController
         $enviado = false;
 
         if ($_FILES["nome_imagem"]["error"] == 0) {
-            $permitidas = array("png", "gif", "jpeg", "jpg", "jfif");
+            $permitidas = array("png", "gif", "jpeg", "jpg", "jfif", "webp");
             $info = new SplFileInfo($_FILES["nome_imagem"]["name"]);
             $extensao = $info->getExtension();
 
             if (in_array($extensao, $permitidas)) {
-                # fazer upload da imagem
                 $nomeArquivo = md5(microtime()) . ".$extensao";
                 $destino = "../assets/images/produtos/$nomeArquivo";
                 $nome_temp = $_FILES["nome_imagem"]["tmp_name"];
                 move_uploaded_file($nome_temp, $destino);
 
-                # enviar dados para o BD
                 $img->nome_imagem = $nomeArquivo;
                 $img->cadastrarImagem();
                 $enviado = true;

@@ -309,6 +309,30 @@ class ClienteController
             include "../../app/model/Cliente.php";
             $cli = new Cliente();
 
+            include "../../app/model/Venda.php";
+            $vend = new Venda();
+
+            include "../../app/model/Item.php";
+            $item = new Item();
+
+            $vend->cod_cliente = $_GET["cod_cliente"];
+            $dadosVend = $vend->consultarVendaCodCli();
+
+            if (!empty($dadosVend)) {
+                foreach ($dadosVend as $venda) {
+                    $item->cod_venda = $venda->cod_venda;
+                    $dadosItem = $item->consultarItensCodVenda();
+                    if (!empty($dadosItem)) {
+                        foreach ($dadosItem as $itens) {
+                            $item->cod_item = $itens->cod_item;
+                            $item->excluirItem();
+                        }
+                    }
+                    $vend->cod_venda = $venda->cod_venda;
+                    $vend->excluirVenda();
+                }
+            }
+
             $cli->cod_cliente  = $_GET["cod_cliente"];
             $cli->excluirCliente();
 

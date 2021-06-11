@@ -40,7 +40,7 @@
                                     $total = 0;
                                     foreach ($_SESSION["produtos"] as $produto) {
                                         $prod->cod_produto = $produto;
-                                        $dadosProd = $prod->consultarProdutoCod();
+                                        $dadosProd = $prod->consultarProdutoCod(false);
                                         $subTotal = $dadosProd->preco * $_SESSION["quantidade"][$produto];
                                         $total += $subTotal;
 
@@ -128,7 +128,7 @@
                 </div>
             </div>
         <?php } else { ?>
-            <div class="container-fluid">
+            <div class="container">
                 <div class="row justify-content-center align-items-center py-5">
                     <div class="col-auto">
                         <h2 class="carrinho-vazio">Seu carrinho está vazio!</h2>

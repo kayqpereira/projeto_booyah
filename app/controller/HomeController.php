@@ -60,7 +60,7 @@ class HomeController
         include "../app/model/Produto.php";
         $prod = new Produto();
         $prod->cod_produto = $_GET["cod_produto"];
-        $dadosProd = $prod->consultarProdutoCod();
+        $dadosProd = $prod->consultarProdutoCod(false);
 
         include "../app/model/Imagem.php";
         $img = new Imagem();
@@ -84,7 +84,7 @@ class HomeController
 
         include "../app/model/Produto.php";
         $prod = new Produto();
-        $dadosProd = $prod->consultarProdutos();
+        $dadosProd = $prod->consultarProdutos(false);
 
         if (isset($_GET["cod_categoria"])) {
             $prod->cod_categoria = $_GET["cod_categoria"];

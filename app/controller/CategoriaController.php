@@ -151,8 +151,23 @@ class CategoriaController
             $dadosProd = $prod->consultarProdutoPorCategoria();
 
             if (!empty($dadosProd)) {
-                foreach ($dadosProd as $Produto) {
-                    $prod->cod_produto = $Produto->cod_produto;
+                include_once "../../app/model/Imagem.php";
+                $img = new Imagem();
+
+                foreach ($dadosProd as $produto) {
+                    $img->cod_produto = $produto->cod_produto;
+                    $dadosImg = $img->consultarImagensCodProd();
+
+                    if (!empty($dadosImg)) {
+                        foreach ($dadosImg as $imagem) {
+                            if (is_file("../assets/images/produtos/$imagem->nome_imagem"))
+                                unlink("../assets//images/produtos/$imagem->nome_imagem");
+
+                            $img->cod_imagem = $imagem->cod_imagem;
+                            $img->excluirImagem();
+                        }
+                    }
+                    $prod->cod_produto = $produto->cod_produto;
                     $prod->excluirProduto();
                 }
             }

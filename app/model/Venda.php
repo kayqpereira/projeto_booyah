@@ -76,4 +76,17 @@ class Venda
 
         return $cmd->fetchAll(PDO::FETCH_OBJ);
     }
+
+    /**
+     * Excluír uma venda com base no cod
+     */
+    function excluirVenda()
+    {
+        $con = Conexao::conectar();
+
+        $cmd = $con->prepare("DELETE FROM tbvendas WHERE cod_venda = :cod_venda ");
+        $cmd->bindParam(":cod_venda", $this->cod_venda);
+
+        $cmd->execute();
+    }
 }

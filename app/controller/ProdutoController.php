@@ -40,6 +40,7 @@ class ProdutoController
     {
         include "../../app/model/Produto.php";
         $prod = new Produto();
+
         $dadosProd = $prod->consultarProdutos();
 
         include_once "../../app/view/admin/ConsultarProduto.php";
@@ -125,6 +126,45 @@ class ProdutoController
         if (isset($_GET["cod_produto"])) {
             include "../../app/model/Produto.php";
             $prod = new Produto();
+
+            include_once "../../app/model/Item.php";
+            $item = new Item();
+            $item->cod_produto = $_GET["cod_produto"];
+            $dadosItem = $item->consultarItensCodProd();
+
+            if (!empty($dadosItem)) {
+                echo "<body></body>
+                <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css'>
+                <script src='https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js'></script>
+                <script src='//cdn.jsdelivr.net/npm/sweetalert2@10'></script>
+                <script>
+                Swal.fire({
+                    icon: 'error',
+                    iconColor: '#dc3545',
+                    title: 'Ops...',
+                    text: 'Este produto não poode ser excluído porque está vinculado a uma compra.',
+                    confirmButtonColor: '#7166f0',
+                    onClose: () => {
+                        window.history.back();
+                    }
+                });
+                </script>";
+                exit();
+            }
+
+            include_once "../../app/model/Imagem.php";
+            $img = new Imagem();
+
+            $img->cod_produto = $_GET["cod_produto"];
+            $dadosImg = $img->consultarImagensCodProd();
+
+            foreach ($dadosImg as $imagem) {
+                if (is_file("../assets/images/produtos/$imagem->nome_imagem"))
+                    unlink("../assets//images/produtos/$imagem->nome_imagem");
+
+                $img->cod_imagem = $imagem->cod_imagem;
+                $img->excluirImagem();
+            }
 
             $prod->cod_produto = $_GET["cod_produto"];
             $prod->excluirProduto();

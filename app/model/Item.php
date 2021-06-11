@@ -56,9 +56,9 @@ class Item
     }
 
     /**
-     * Consultar um item com base no cod
+     * Consultar um item com base no cod_venda
      */
-    public function consultarItensPorCodVenda()
+    public function consultarItensCodVenda()
     {
         $con = Conexao::conectar();
 
@@ -68,5 +68,33 @@ class Item
         $cmd->execute();
 
         return $cmd->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    /**
+     * Consultar um item com base no cod_proudto
+     */
+    public function consultarItensCodProd()
+    {
+        $con = Conexao::conectar();
+
+        $cmd = $con->prepare("SELECT * FROM tbitens WHERE cod_produto = :cod_produto");
+        $cmd->bindParam(":cod_produto", $this->cod_produto);
+
+        $cmd->execute();
+
+        return $cmd->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    /**
+     * Excluír uma item com base no cod
+     */
+    function excluirItem()
+    {
+        $con = Conexao::conectar();
+
+        $cmd = $con->prepare("DELETE FROM tbitens WHERE cod_item = :cod_item ");
+        $cmd->bindParam(":cod_item", $this->cod_item);
+
+        $cmd->execute();
     }
 }

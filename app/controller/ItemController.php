@@ -18,7 +18,7 @@ class ItemController
         $item = new Item();
 
         $item->cod_venda = $_GET["cod_venda"];
-        $dadosItem = $item->consultarItensPorCodVenda();
+        $dadosItem = $item->consultarItensCodVenda();
 
         include_once "../../app/view/admin/ConsultarItens.php";
     }
@@ -48,7 +48,7 @@ class ItemController
         $item = new Item();
 
         $item->cod_venda = $_GET["cod_venda"];
-        $dadosItem = $item->consultarItensPorCodVenda();
+        $dadosItem = $item->consultarItensCodVenda();
 
         include_once "../app/view/cliente/ItensDoPedido.php";
     }
@@ -68,11 +68,6 @@ class ItemController
         include_once "../app/model/Produto.php";
         $prod = new Produto();
 
-        $itensCarrinho = 0;
-        if (isset($_SESSION["produtos"])) {
-            $itensCarrinho = count($_SESSION["produtos"]);
-        }
-
         include_once "../app/view/cliente/Carrinho.php";
     }
 
@@ -90,7 +85,7 @@ class ItemController
         $prod = new Produto();
 
         $prod->cod_produto = $_GET["cod_produto"];
-        $dadosProd   = $prod->consultarProdutoCod();
+        $dadosProd   = $prod->consultarProdutoCod(false);
         $codProduto  = $_GET["cod_produto"];
         $estoque     = $dadosProd->estoque;
 
