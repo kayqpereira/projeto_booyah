@@ -132,7 +132,11 @@ const validate = {
                     }
                 });
             });
-            return true;
+            if (document.querySelector(".error-cpf").classList.contains("is-active")) {
+                return false;
+            }
+            else
+                return true;
         }
 
         function validaCPF(strCPF) {
@@ -399,9 +403,15 @@ const validate = {
                     }
                 });
             });
+
             if (document.getElementById("confirmar_email").value !== "")
-                validate["confirmar_email"](document.getElementById("confirmar_email"))
-            return true;
+                validate["confirmar_email"](document.getElementById("confirmar_email"));
+
+            if (document.querySelector(".error-email").classList.contains("is-active")) {
+                return false;
+            }
+            else
+                return true;
         }
     },
 

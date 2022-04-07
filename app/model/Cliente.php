@@ -14,10 +14,6 @@ class Cliente
     private $numero;
     private $email;
     private $senha;
-    # Tabela la
-    private $cod_marca;
-
-
 
     public function __get($atributo)
     {
@@ -188,7 +184,6 @@ class Cliente
 
     /**
      * Verificar se o email já foi cadastrado
-     * @return boolean
      */
     public function verificarEmail()
     {
